@@ -6,6 +6,9 @@ import laravel from 'laravel-vite-plugin';
 import { bunny } from 'laravel-vite-plugin/fonts';
 import { defineConfig } from 'vite';
 
+// Deteksi apakah build berjalan di lingkungan Vercel
+const isVercel = process.env.VERCEL === '1' || !!process.env.VERCEL;
+
 export default defineConfig({
     plugins: [
         laravel({
@@ -24,8 +27,7 @@ export default defineConfig({
             },
         }),
         tailwindcss(),
-        wayfinder({
-            formVariants: true,
-        }),
-    ],
+        // Jalankan wayfinder dengan config Anda HANYA jika TIDAK sedang di Vercel
+        !isVercel ? wayfinder({ formVariants: true }) : null,
+    ].filter(Boolean), // Menghapus nilai 'null' dari array agar Vite tidak error
 });
