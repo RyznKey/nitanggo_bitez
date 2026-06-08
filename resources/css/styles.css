@@ -1830,3 +1830,120 @@ footer {
         right: -40px;
     }
 }
+
+/* =========================================
+   FIX TAMPILAN MOBILE (RESPONSIVE) HP
+========================================= */
+
+/* 1. Mencegah layar bocor/bergeser ke kanan (Blank hitam) */
+html, body {
+    overflow-x: hidden !important;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* =========================================
+   HEADER & BURGER MENU STYLES (FIX KLIK)
+========================================= */
+/* Setup awal header */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative; /* Penting untuk z-index */
+    padding: 16px 20px;
+    background-color: transparent;
+    z-index: 9999 !important; /* PAKSA HEADER KE LAPISAN PALING ATAS */
+}
+
+/* Sembunyikan tombol burger di desktop */
+.hamburger-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 10000 !important; /* PAKSA TOMBOL PALING DEPAN */
+    padding: 5px; /* Memperbesar area klik jari di HP */
+    margin: -5px;
+}
+
+.hamburger-line {
+    width: 100%;
+    height: 3px;
+    background-color: #2B2118;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+    transform-origin: left center; /* Ubah origin agar silang X lebih presisi */
+}
+
+/* Animasi perubahan garis menjadi tombol (X) */
+.hamburger-line.open-1 { transform: rotate(45deg); }
+.hamburger-line.open-2 { opacity: 0; width: 0; }
+.hamburger-line.open-3 { transform: rotate(-45deg); }
+
+
+/* =========================================
+   RESPONSIVE KHUSUS LAYAR HP
+========================================= */
+@media (max-width: 768px) {
+    .hamburger-btn {
+        display: flex; /* Tampilkan di HP */
+    }
+
+    nav {
+        position: absolute;
+        top: 100%; 
+        left: 0;
+        width: 100%;
+        background-color: #FAF6EE;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        border-radius: 0 0 16px 16px;
+        z-index: 9998 !important; /* Tepat di bawah header, di atas konten lain */
+        
+        /* Default: Sembunyikan Menu & Matikan fungsi klik */
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none; /* Mencegah elemen gaib terklik */
+        transform: translateY(-20px);
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* Aktif: Tampilkan Menu & Nyalakan fungsi klik */
+    nav.nav-open {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto; /* Izinkan menu diklik kembali */
+        transform: translateY(0);
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: left;
+        border-bottom: 1px solid #EBE3D5;
+        padding-bottom: 12px;
+    }
+
+    .nav-links li:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+}
