@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../wayfinder'
 /**
 * @see \App\Http\Controllers\Teams\TeamInvitationController::accept
  * @see app/Http/Controllers/Teams/TeamInvitationController.php:61
@@ -65,6 +65,42 @@ accept.head = (args: { invitation: string | { code: string } } | [invitation: st
     url: accept.url(args, options),
     method: 'head',
 })
+
+    /**
+* @see \App\Http\Controllers\Teams\TeamInvitationController::accept
+ * @see app/Http/Controllers/Teams/TeamInvitationController.php:61
+ * @route '/invitations/{invitation}/accept'
+ */
+    const acceptForm = (args: { invitation: string | { code: string } } | [invitation: string | { code: string } ] | string | { code: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: accept.url(args, options),
+        method: 'get',
+    })
+
+            /**
+* @see \App\Http\Controllers\Teams\TeamInvitationController::accept
+ * @see app/Http/Controllers/Teams/TeamInvitationController.php:61
+ * @route '/invitations/{invitation}/accept'
+ */
+        acceptForm.get = (args: { invitation: string | { code: string } } | [invitation: string | { code: string } ] | string | { code: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: accept.url(args, options),
+            method: 'get',
+        })
+            /**
+* @see \App\Http\Controllers\Teams\TeamInvitationController::accept
+ * @see app/Http/Controllers/Teams/TeamInvitationController.php:61
+ * @route '/invitations/{invitation}/accept'
+ */
+        acceptForm.head = (args: { invitation: string | { code: string } } | [invitation: string | { code: string } ] | string | { code: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: accept.url(args, {
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    accept.form = acceptForm
 const invitations = {
     accept: Object.assign(accept, accept),
 }
