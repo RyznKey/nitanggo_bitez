@@ -1,4 +1,5 @@
 import type { Auth } from '@/types/auth';
+import type { Team } from '@/types/teams';
 
 declare module 'react' {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -13,6 +14,8 @@ declare module '@inertiajs/core' {
             name: string;
             auth: Auth;
             sidebarOpen: boolean;
+            currentTeam: Team | null;
+            teams: Team[];
             [key: string]: unknown;
         };
     }

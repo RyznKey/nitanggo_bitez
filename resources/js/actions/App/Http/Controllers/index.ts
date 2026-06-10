@@ -1,7 +1,7 @@
-import MembershipController from './MembershipController'
+import Teams from './Teams'
 import Settings from './Settings'
 const Controllers = {
-    MembershipController: Object.assign(MembershipController, MembershipController),
+    Teams: Object.assign(Teams, Teams),
 Settings: Object.assign(Settings, Settings),
 }
 

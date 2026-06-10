@@ -24,9 +24,8 @@ export default defineConfig({
             },
         }),
         tailwindcss(),
-        // Trik SAKTI: Hanya jalankan Wayfinder jika TIDAK sedang di-build di Vercel
-        !process.env.VERCEL && wayfinder({
-            // ... konfigurasi wayfinder kamu yang sudah ada sebelumnya (jika ada)
+        wayfinder({
+            formVariants: true,
         }),
-    ].filter(Boolean),
+    ],
 });
