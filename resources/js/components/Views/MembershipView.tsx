@@ -100,7 +100,7 @@ export default function MembershipView({
                             {/* Logo Top */}
                             <div className="flex items-center gap-2">
                                 <div className="bg-[#2B2118] p-1.5 rounded-lg">
-                                    <img src="/assets/produk.png" className="w-5 h-5 invert" alt="Logo" />
+                                    <img src="/public/assets/tiramisu.png" className="w-5 h-5 invert" alt="Logo" />
                                 </div>
                                 <span className="font-black text-xs tracking-widest">NITANGGO BITEZ</span>
                             </div>

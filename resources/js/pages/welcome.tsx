@@ -108,7 +108,7 @@ export default function Welcome() {
             {/* Komponen Navigasi */}
             <Navbar currentView={currentView} setCurrentView={setCurrentView} />
 
-            <main className="container">
+            <main className="container mox-auto px-4 py-8">
                 {/* Render Views Secara Dinamis berdasarkan State */}
                 <HomeView
                     isActive={currentView === 'view-home'}

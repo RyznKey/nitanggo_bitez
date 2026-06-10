@@ -10,17 +10,17 @@ const daftarMenu = [
     {
         name: 'Nyicheeze Tiramisu',
         price: 'Rp15.000',
-        image: '/assets/produk_tiramisu.png', // Ubah path gambar di sini
+        image: '/assets/tiramisu.jpeg',
     },
     {
         name: 'Nyicheeze Premium Cheese',
         price: 'Rp15.000',
-        image: '/assets/produk.png',  // Ubah path gambar di sini
+        image: '/assets/cheese.jpeg',
     },
     {
         name: 'Creamy Chocolate Fudge',
         price: 'Rp15.000',
-        image: '/assets/produk.png', // Ubah path gambar di sini
+        image: '/assets/chocolate.jpeg',
     },
     // Anda bisa tambah menu baru di sini...
 ];
@@ -47,7 +47,7 @@ export default function MenuView({ isActive, handleOrderItem }: MenuViewProps) {
                                 alt={item.name} 
                                 // Fallback otomatis ke produk.png jika gambar tidak ditemukan
                                 onError={(e) => {
-                                    (e.target as HTMLImageElement).src = '/public/assets/tiramisu.png';
+                                    (e.target as HTMLImageElement).src = '/assets/produk.png';
                                 }}
                             />
                         </div>

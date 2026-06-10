@@ -9,8 +9,8 @@ export default function HomeView({ isActive, setCurrentView }: HomeViewProps) {
     if (!isActive) return null;
 
     return (
-        <div className="page-view active">
-            <section className="home-hero">
+        <div className="page-view active" style={{ backgroundImage: 'url(/assets/hero_dessert.png)', backgroundSize: 'cover', backgroundPosition: 'top' }}>
+            <section className="home-hero" >
                 <div className="home-hero-content">
                     <span className="home-tagline">🍰 DESSERT PREMIUM RASA LOYALITAS</span>
                     <h2>Rasakan Sensasi Dessert Box Terbaik & Creamy</h2>

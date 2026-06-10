@@ -1,6 +1,8 @@
+import MembershipController from './MembershipController'
 import Settings from './Settings'
 const Controllers = {
-    Settings: Object.assign(Settings, Settings),
+    MembershipController: Object.assign(MembershipController, MembershipController),
+Settings: Object.assign(Settings, Settings),
 }
 
 export default Controllers
