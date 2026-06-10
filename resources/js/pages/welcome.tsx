@@ -34,8 +34,8 @@ export default function Welcome() {
 
     const [isHowModalOpen, setIsHowModalOpen] = useState(false);
     const [isCardModalOpen, setIsCardModalOpen] = useState(false);
-    const [orderHistory, setOrderHistory] = useState<OrderHistoryItem[]>([]);
     const [toast, setToast] = useState({ show: false, message: '' });
+    const [orderHistory, setOrderHistory] = useState<OrderHistoryItem[]>([]);
 
     // --- Handlers (Fungsi Logika Tetap Di Sini) ---
     const handleJoinMember = () => {
@@ -44,7 +44,11 @@ export default function Welcome() {
             setMember({
                 name: inputName.trim(),
                 since: 'Hari Ini',
-                id: 'NTG' + Math.floor(1000 + Math.random() * 9000) + '-' + Math.floor(1000 + Math.random() * 9000),
+                id:
+                    'NTG' +
+                    Math.floor(1000 + Math.random() * 9000) +
+                    '-' +
+                    Math.floor(1000 + Math.random() * 9000),
             });
             alert(`Akun Member Anda berhasil diperbarui! 🎉`);
         }
@@ -53,10 +57,14 @@ export default function Welcome() {
     const handleOrder = (productName: string) => {
         if (progressCount < maxProgress) {
             setProgressCount((prev) => prev + 1);
-            const outlets = ['Nitanggo Bitez Margonda', 'Nitanggo Bitez UI Depok'];
-            const randomOutlet = outlets[Math.floor(Math.random() * outlets.length)];
+            const outlets = [
+                'Nitanggo Bitez Margonda',
+                'Nitanggo Bitez UI Depok',
+            ];
+            const randomOutlet =
+                outlets[Math.floor(Math.random() * outlets.length)];
             const now = new Date();
-            
+
             const newOrder = {
                 id: Date.now(),
                 productName: productName,
@@ -69,17 +77,23 @@ export default function Welcome() {
             setOrderHistory((prevHistory) => [newOrder, ...prevHistory].slice(0, 6));
             alert(`Pembelian ${productName} berhasil dicatat!`);
         } else {
-            alert(`Progres reward kamu sudah penuh (5/5)! Silakan klaim reward gratis terlebih dahulu. 🥤`);
+            alert(
+                `Progres reward kamu sudah penuh (5/5)! Silakan klaim reward gratis terlebih dahulu. 🥤`,
+            );
             setCurrentView('view-membership');
         }
     };
 
     const handleClaimReward = () => {
         if (progressCount === maxProgress) {
-            alert('Selamat! Reward gratis sudah berhasil diklaim. Silakan ambil minuman gratis Anda di kasir.');
+            alert(
+                'Selamat! Reward gratis sudah berhasil diklaim. Silakan ambil minuman gratis Anda di kasir.',
+            );
             setProgressCount(0);
         } else {
-            alert(`Reward belum bisa diklaim. Kumpulkan ${maxProgress - progressCount} pembelian lagi.`);
+            alert(
+                `Reward belum bisa diklaim. Kumpulkan ${maxProgress - progressCount} pembelian lagi.`,
+            );
         }
     };
 
@@ -96,9 +110,15 @@ export default function Welcome() {
 
             <main className="container">
                 {/* Render Views Secara Dinamis berdasarkan State */}
-                <HomeView isActive={currentView === 'view-home'} setCurrentView={setCurrentView} />
-                <MenuView isActive={currentView === 'view-menu'} handleOrderItem={handleOrder} />
-                <MembershipView 
+                <HomeView
+                    isActive={currentView === 'view-home'}
+                    setCurrentView={setCurrentView}
+                />
+                <MenuView
+                    isActive={currentView === 'view-menu'}
+                    handleOrderItem={handleOrder}
+                />
+                <MembershipView
                     isActive={currentView === 'view-membership'}
                     member={member}
                     progressCount={progressCount}
@@ -109,6 +129,7 @@ export default function Welcome() {
                     setIsHowModalOpen={setIsHowModalOpen}
                     setIsCardModalOpen={setIsCardModalOpen}
                 />
+                
                 <AboutView isActive={currentView === 'view-about'} />
                 <OrderGuideView isActive={currentView === 'view-order'} />
             </main>
