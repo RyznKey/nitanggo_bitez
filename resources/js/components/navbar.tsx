@@ -18,7 +18,7 @@ export default function Navbar({ currentView, setCurrentView }: NavbarProps) {
     return (
         <header className="main-header">
             <a href="#" className="logo" onClick={(e) => { e.preventDefault(); handleNavClick('view-home'); }}>
-                <img src="/assets/produk.png" alt="Nitanggo Bitez Logo" className="logo-icon" />
+                <img src="/assets/NITANGGO.jpeg" alt="Nitanggo Bitez Logo" className="logo-icon " />
                 <div className="logo-text">NITANGGO <span>BITEZ</span></div>
             </a>
 

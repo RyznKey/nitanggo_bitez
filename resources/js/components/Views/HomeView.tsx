@@ -1,5 +1,6 @@
 import React from 'react';
 import MenuView from './MenuView';
+
 type HomeViewProps = {
     isActive: boolean;
     setCurrentView: (view: string) => void;
@@ -9,7 +10,7 @@ export default function HomeView({ isActive, setCurrentView }: HomeViewProps) {
     if (!isActive) return null;
 
     return (
-        <div className="page-view active" style={{ backgroundImage: 'url(/assets/hero_dessert.png)', backgroundSize: 'cover', backgroundPosition: 'top' }}>
+        <div className="page-view active" style={{ backgroundImage: 'url(/assets/hero_dessert.png)', backgroundSize: 'cover', backgroundPosition: 'top', backgroundColor: 'var(--primary-light)' }}>
             <section className="home-hero" >
                 <div className="home-hero-content">
                     <span className="home-tagline">🍰 DESSERT PREMIUM RASA LOYALITAS</span>
@@ -21,7 +22,10 @@ export default function HomeView({ isActive, setCurrentView }: HomeViewProps) {
                     </div>
                 </div>
             </section>
-            <MenuView isActive={isActive} handleOrderItem={() => {}} />
+            
+            {/* Bagian ini sudah diperbaiki (}} dihapus) */}
+            <MenuView isActive={isActive} handleOrderItem={() => {}} className="text-white" />
+            
             <section className="cta-banner-section">
                 <div className="cta-banner-bg-shape"></div>
                 <div className="cta-banner-content">

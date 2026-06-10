@@ -1628,6 +1628,7 @@ footer {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
+  padding: 0 5%;
 }
 
 @media (max-width: 900px) {
