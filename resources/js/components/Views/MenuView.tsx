@@ -97,7 +97,7 @@ export default function MenuView({
         `Rp${new Intl.NumberFormat('id-ID').format(angka)}`;
 
     // Generate Pesan WhatsApp
-    const waNumber = '6282320816395';
+    const waNumber = '6285700655072';
     const waMessage = `Halo Nitanggo Bitez! Saya ingin memesan:
 
 🛒 *DETAIL PESANAN*
