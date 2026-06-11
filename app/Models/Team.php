@@ -30,6 +30,12 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 #[Fillable(['name', 'slug', 'is_personal'])]
 class Team extends Model
 {
+    protected function isPersonal(): Attribute
+{
+    return Attribute::make(
+        set: fn ($value) => $value ? 'true' : 'false',
+    );
+}
     /** @use HasFactory<TeamFactory> */
     use GeneratesUniqueTeamSlugs, HasFactory, SoftDeletes;
 
