@@ -10,19 +10,22 @@ type MenuViewProps = {
 // Data menu
 const daftarMenu = [
     {
-        name: 'Creamy Chocolate Fudge',
-        price: 'Rp15.000',
+        name: 'choco cheeze',
+        price: 'Rp12.000',
         image: '/assets/chocolate.jpeg',
+        description: 'Perpaduan cokelat dan cream cheese gurih serta biskuit yang lembut.',
     },
     {
-        name: 'Nyicheeze Tiramisu',
-        price: 'Rp15.000',
+        name: 'Tiramisu Cheeze',
+        price: 'Rp12.000',
         image: '/assets/tiramisu.jpeg',
+        description:'kelezatan aroma dan rasa kopi yang dipadukan dengan cream cheese yang gurih.',
     },
     {
-        name: 'Nyicheeze Premium Cheese',
-        price: 'Rp15.000',
+        name: 'Double Cheeze',
+        price: 'Rp12.000',
         image: '/assets/cheese.jpeg',
+        description: 'varian andalan pecinta keju karena rasanya gurih, creamy, dan melimpah parutan keju sampai cheezy level maksimal',
     },
 ];
 
@@ -45,7 +48,7 @@ export default function MenuView({
 
     const [formData, setFormData] = useState({
         namaLengkap: '',
-        whatsapp: Number(''),
+        whatsapp: '',
         statusMember: 'Non-Member',
         jumlah: 1,
         catatan: '',
@@ -68,7 +71,7 @@ export default function MenuView({
         setFormStep(1); // Set kembali ke step 1 saat buka menu baru
         setFormData({
             namaLengkap: '',
-            whatsapp: Number(''),
+            whatsapp: '',
             statusMember: 'Non-Member',
             jumlah: 1,
             catatan: '',
@@ -156,9 +159,11 @@ Saya akan melakukan pembayaran menggunakan QRIS. Mohon konfirmasinya ya!`;
                                         '/assets/produk.png';
                                 }}
                             />
+
                         </div>
                         <div className="menu-card-body">
                             <h4>{item.name}</h4>
+                            <h5>{item.description}</h5>
                             <div className="menu-footer">
                                 <span className="menu-price">{item.price}</span>
                                 <button
