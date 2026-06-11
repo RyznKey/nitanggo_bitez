@@ -24,7 +24,7 @@ export default function HomeView({ isActive, setCurrentView }: HomeViewProps) {
             </section>
             
             {/* Bagian ini sudah diperbaiki (}} dihapus) */}
-            <MenuView isActive={isActive} handleOrderItem={() => {}} className="text-white" />
+            <MenuView isActive={isActive} handleOrderItem={() => {}} />
             
             <section className="cta-banner-section">
                 <div className="cta-banner-bg-shape"></div>
