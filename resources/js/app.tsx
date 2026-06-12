@@ -1,5 +1,7 @@
 import { createInertiaApp } from '@inertiajs/react';
-import { Toaster } from '@/components/ui/sonner';
+import { lazy, Suspense } from 'react';
+import ClientOnly from '@/components/client-only';
+// import { Toaster } from '@/components/ui/sonner';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { initializeTheme } from '@/hooks/use-appearance';
 import AppLayout from '@/layouts/app-layout';
@@ -7,6 +9,11 @@ import AuthLayout from '@/layouts/auth-layout';
 import SettingsLayout from '@/layouts/settings/layout';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+const Toaster = lazy(() =>
+    import('@/components/ui/sonner').then((m) => ({
+        default: m.Toaster,
+    })),
+);
 
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
@@ -28,7 +35,11 @@ createInertiaApp({
         return (
             <TooltipProvider delayDuration={0}>
                 {app}
-                <Toaster />
+                <ClientOnly>
+                    <Suspense fallback={null}>
+                        <Toaster />
+                    </Suspense>
+                </ClientOnly>
             </TooltipProvider>
         );
     },

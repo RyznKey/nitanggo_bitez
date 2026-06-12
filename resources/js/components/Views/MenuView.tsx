@@ -125,13 +125,13 @@ Saya akan melakukan pembayaran menggunakan QRIS. Mohon konfirmasinya ya!`;
     return (
         <div
             className={`/* Base Styles */ w-full flex-col gap-25 transition-all duration-500 ease-in-out ${isActive ? 'flex translate-y-0 opacity-100' : 'hidden translate-y-3.75 opacity-0'} ${className} px-[5%] py-25`}
-            style={{ height: '100%', ...style }}
+            // style={{ height: '100%', ...style }}
         >
             {/* TAMPILAN HEADER */}
             <div className="text-center">
                 <span
-                    className="inline-block rounded-full border border-[rgba(245,185,43,0.25)] bg-(--primary-light) text-center text-3xl font-extrabold tracking-[0.5px] text-(--dark)"
-                    style={{ padding: '0.5rem 1.5rem', marginBottom: '1rem' }}
+                    className="p-2.5 px-6 inline-block rounded-full border border-[rgba(245,185,43,0.25)] bg-(--primary-light) text-center text-3xl font-extrabold tracking-[0.5px] text-(--dark)"
+                    // style={{ padding: '0.5rem 1.5rem', marginBottom: '1rem' }}
                 >
                     DAFTAR MENU
                 </span>
@@ -142,32 +142,45 @@ Saya akan melakukan pembayaran menggunakan QRIS. Mohon konfirmasinya ya!`;
                 </h3>
             </div>
 
-            {/* TAMPILAN GRID & KARTU MENU */}
+            {/* TAMPILAN GRID & KARTU MENU (FULL TAILWIND) */}
             <div
                 className="grid grid-cols-1 gap-7.5 px-[5%] py-0 sm:grid-cols-2 md:grid-cols-3"
-                style={{ maxWidth: '90%', margin: '0 auto' , paddingTop: '1rem', paddingBottom: '1rem' }}
+                // style={{ maxWidth: '90%', margin: '0 auto' , paddingTop: '1rem', paddingBottom: '1rem' }}
             >
                 {daftarMenu.map((item, index) => (
-                    <div className="menu-card" key={index}>
-                        <div className="menu-img-container">
+                    <div 
+                        key={index}
+                        className="group flex flex-col overflow-hidden rounded-(--border-radius-xl) border border-(--border-color) bg-(--bg-card) shadow-(--box-shadow) transition-all duration-300 hover:-translate-y-2 hover:border-[rgba(245,185,43,0.25)] hover:shadow-(--box-shadow-hover)"
+                    >
+                        {/* Img Container */}
+                        <div className="relative h-55 overflow-hidden bg-(--primary-light)">
                             <img
                                 src={item.image}
-                                className="menu-item-img"
+                                className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
                                 alt={item.name}
                                 onError={(e) => {
                                     (e.target as HTMLImageElement).src =
                                         '/assets/produk.png';
                                 }}
                             />
-
                         </div>
-                        <div className="menu-card-body">
-                            <h4>{item.name}</h4>
-                            <h5>{item.description}</h5>
-                            <div className="menu-footer">
-                                <span className="menu-price">{item.price}</span>
+                        
+                        {/* Card Body */}
+                        <div className="flex grow flex-col p-6 m-6">
+                            <h4 className="mb-2 text-[1.25rem] font-extrabold text-(--dark)">
+                                {item.name}
+                            </h4>
+                            <h5 className="mb-5 grow text-[0.85rem] leading-normal text-(--text-muted)">
+                                {item.description}
+                            </h5>
+                            
+                            {/* Card Footer */}
+                            <div className="mt-auto flex items-center justify-between border-t border-[rgba(46,34,28,0.05)] pt-4">
+                                <span className="text-[1.2rem] font-extrabold text-(--dark)">
+                                    {item.price}
+                                </span>
                                 <button
-                                    className="btn-order-item"
+                                    className="cursor-pointer rounded-(--border-radius-md) bg-(--primary-light) px-4.5 py-2 text-[0.85rem] font-bold text-(--dark) transition-all duration-300 hover:-translate-y-0.5 hover:bg-(--primary)"
                                     onClick={() =>
                                         onOrderClick(item.name, item.price)
                                     }
@@ -451,7 +464,7 @@ Saya akan melakukan pembayaran menggunakan QRIS. Mohon konfirmasinya ya!`;
                                 <div className="animate-fade-in space-y-6">
                                     {/* 4. REWARD MEMBERSHIP */}
                                     <div
-                                        className="rounded-2xl border border-purple-200 bg-linear-to-r from-purple-100 to-pink-100 p-5 shadow-sm"
+                                        className="rounded-2xl border border-purple-200 bg-[linear-gradient(to_right,var(--tw-gradient-stops))] from-purple-100 to-pink-100 p-5 shadow-sm"
                                         style={{ padding: '5%' }}
                                     >
                                         <h3 className="mb-2 flex items-center gap-2 font-bold text-purple-800">

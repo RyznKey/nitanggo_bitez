@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Head } from '@inertiajs/react';
-import '../../css/styles.css';
-
+// import '../../css/styles.css';
 // Import Semua Komponen
 import Navbar from '../components/navbar';
 import Footer from '../components/Footer';
@@ -84,61 +83,50 @@ export default function Welcome() {
         }
     };
 
-    const handleClaimReward = () => {
-        if (progressCount === maxProgress) {
-            alert(
-                'Selamat! Reward gratis sudah berhasil diklaim. Silakan ambil minuman gratis Anda di kasir.',
-            );
-            setProgressCount(0);
-        } else {
-            alert(
-                `Reward belum bisa diklaim. Kumpulkan ${maxProgress - progressCount} pembelian lagi.`,
-            );
-        }
-    };
-
     return (
         <>
-            <Head title="Nitanggo Bitez - Member Rewards Dashboard" />
+            <Head title="Nitanggo Bitez" />
 
-            <div className="bg-blob blob-1"></div>
-            <div className="bg-blob blob-2"></div>
-            <div className="bg-blob blob-3"></div>
-
-            {/* Komponen Navigasi */}
-            <Navbar currentView={currentView} setCurrentView={setCurrentView} />
-
-            <main className="container mox-auto px-4 py-8">
-                {/* Render Views Secara Dinamis berdasarkan State */}
-                <HomeView
-                    isActive={currentView === 'view-home'}
-                    setCurrentView={setCurrentView}
-                />
-                <MenuView
-                    isActive={currentView === 'view-menu'}
-                    handleOrderItem={handleOrder}
-                />
-                <MembershipView
-                    isActive={currentView === 'view-membership'}
-                    member={member}
-                    progressCount={progressCount}
-                    maxProgress={maxProgress}
-                    orderHistory={orderHistory}
-                    handleJoinMember={handleJoinMember}
-                    handleClaimReward={handleClaimReward}
-                    setIsHowModalOpen={setIsHowModalOpen}
-                    setIsCardModalOpen={setIsCardModalOpen}
-                />
+            {/* Global Layout Wrapper (Menggantikan styling `body` dari CSS) */}
+            <div className="relative flex flex-col min-h-screen overflow-x-hidden font-sans text-[#3d2f26] bg-[#fcf8f2]">
                 
-                <AboutView isActive={currentView === 'view-about'} />
-                <OrderGuideView isActive={currentView === 'view-order'} />
-            </main>
+                {/* Background Blobs Converted to Tailwind Arbitrary Values */}
+                <div className="absolute w-100 h-100 rounded-full -z-10 blur-[40px] -top-[100px] -left-[100px] bg-[radial-gradient(circle,rgba(245,185,43,0.1)_0%,rgba(252,248,242,0)_70%)] pointer-events-none"></div>
+                <div className="absolute w-100 h-100 rounded-full -z-10 blur-[40px] top-[300px] -right-[100px] bg-[radial-gradient(circle,rgba(245,185,43,0.1)_0%,rgba(252,248,242,0)_70%)] pointer-events-none"></div>
+                <div className="absolute w-100 h-100 rounded-full -z-10 blur-[40px] bottom-[100px] left-[10%] bg-[radial-gradient(circle,rgba(245,185,43,0.1)_0%,rgba(252,248,242,0)_70%)] pointer-events-none"></div>
 
-            {/* Komponen Footer */}
-            <Footer setCurrentView={setCurrentView} />
+                {/* Komponen Navigasi */}
+                <Navbar currentView={currentView} setCurrentView={setCurrentView} />
 
-            {/* Catatan: Untuk Modals (isHowModalOpen dan isCardModalOpen) Anda juga dapat 
-                memisahkannya ke file /Components/Modals/ jika diinginkan menggunakan pola yang sama */}
+                {/* Main Container (Menggantikan kombinasi style .container di css dengan utility grid & flex) */}
+                <main className="grid flex-grow w-full grid-cols-1 mx-auto max-w-none gap-[40px]">
+                    {/* Render Views Secara Dinamis berdasarkan State */}
+                    <HomeView
+                        isActive={currentView === 'view-home'}
+                        setCurrentView={setCurrentView}
+                    />
+                    <MenuView
+                        isActive={currentView === 'view-menu'}
+                        handleOrderItem={handleOrder}
+                    />
+                    <MembershipView
+                        isActive={currentView === 'view-membership'}
+                        member={member}
+                        progressCount={progressCount}
+                        maxProgress={maxProgress}
+                        orderHistory={orderHistory}
+                        handleJoinMember={handleJoinMember}
+                        setIsHowModalOpen={setIsHowModalOpen}
+                        setIsCardModalOpen={setIsCardModalOpen}
+                    />
+                    
+                    <AboutView isActive={currentView === 'view-about'} />
+                    <OrderGuideView isActive={currentView === 'view-order'} />
+                </main>
+
+                {/* Komponen Footer */}
+                <Footer setCurrentView={setCurrentView} />
+            </div>
         </>
     );
 }

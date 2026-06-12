@@ -16,13 +16,12 @@ type MembershipProps = {
     maxProgress: number;
     orderHistory: OrderHistoryItem[];
     handleJoinMember: () => void;
-    handleClaimReward: () => void;
     setIsHowModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
     setIsCardModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function MembershipView({ 
-    isActive, member, progressCount, maxProgress, orderHistory, handleJoinMember, handleClaimReward, setIsHowModalOpen, setIsCardModalOpen
+    isActive, member, progressCount, maxProgress, orderHistory, handleJoinMember, setIsHowModalOpen, setIsCardModalOpen
 }: MembershipProps) {
     if (!isActive) return null;
 
