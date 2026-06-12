@@ -2,25 +2,7 @@
   "version": 2,
   "functions": {
     "api/index.php": {
-      "runtime": "vercel-php@0.8.0",
-      "config": {
-        "maxDuration": 10,
-        "includeFiles": [
-          "app/**",
-          "bootstrap/**",
-          "config/**",
-          "database/**",
-          "public/index.php",
-          "resources/**",
-          "routes/**",
-          "storage/framework/sessions/**",
-          "storage/framework/views/**",
-          "storage/framework/cache/data/**",
-          "vendor/autoload.php",
-          "vendor/composer/**",
-          "vendor/laravel/framework/src/Illuminate/Foundation/helpers.php"
-        ]
-      }
+      "runtime": "vercel-php@0.8.0"
     }
   },
   "routes": [
