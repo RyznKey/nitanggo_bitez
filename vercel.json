@@ -11,7 +11,7 @@
       "dest": "/public/build/$1"
     },
     {
-      "src": "/(assets|images|img|svg|fonts|photos)/(.*)",
+      "src": "/(assets|images|img|svg|fonts|photos|js|css)/(.*)",
       "dest": "/public/$1/$2"
     },
     {
@@ -22,7 +22,7 @@
   "env": {
     "APP_KEY" : "base64:TirKQ2nBq0F7NNZ0H9ypy1zcfmeDuKL6Ti7pg+1v2AM=",
     "APP_ENV": "production",
-    "APP_DEBUG": "false",
+    "APP_DEBUG": "true",
     "LOG_CHANNEL": "stderr",
     "SESSION_DRIVER": "cookie",
     "CACHE_STORE": "array",
