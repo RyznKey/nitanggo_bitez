@@ -20,11 +20,14 @@
     }
   ],
   "env": {
+    "APP_KEY" : "base64:TirKQ2nBq0F7NNZ0H9ypy1zcfmeDuKL6Ti7pg+1v2AM=",
     "APP_ENV": "production",
     "APP_DEBUG": "false",
     "LOG_CHANNEL": "stderr",
     "SESSION_DRIVER": "cookie",
     "CACHE_STORE": "array",
+    "SESSION_SECURE_COOKIE": "true",
+    "DB_CONNECTION": "pgsql",
     "APP_CONFIG_CACHE": "/tmp/config.php",
     "APP_EVENTS_CACHE": "/tmp/events.php",
     "APP_PACKAGES_CACHE": "/tmp/packages.php",
