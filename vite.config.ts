@@ -27,5 +27,5 @@ export default defineConfig({
         wayfinder({
             formVariants: true,
         }),
-    ]
+    ].filter(Boolean)
 });
