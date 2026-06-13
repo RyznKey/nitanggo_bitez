@@ -1,39 +1,41 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-type OrderHistoryItem = {
-    id: number;
-    productName: string;
-    outlet: string;
-    price: string;
-    date: string;
-    time: string;
-};
+// Unused
 
 type MembershipProps = {
     isActive: boolean;
-    member: { name: string; since: string; id: string };
+    member: { name: string; since: string; id: string } | null;
+    orders?: any[];
     progressCount: number;
     maxProgress: number;
-    orderHistory: OrderHistoryItem[];
-    handleJoinMember: () => void;
-    setIsHowModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    setIsCardModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function MembershipView({ 
-    isActive, member, progressCount, maxProgress, orderHistory, handleJoinMember, setIsHowModalOpen, setIsCardModalOpen
+    isActive, member, orders, progressCount, maxProgress
 }: MembershipProps) {
-    if (!isActive) return null;
+    useEffect(() => {
+        if (isActive && !member) {
+            window.location.href = '/login';
+        }
+    }, [isActive, member]);
+
+    if (!isActive) {
+        return null;
+    }
+
+    if (!member) {
+        return null;
+    }
 
     return (
-        <div className="page-view active animate-fadeIn">
+        <div className="w-full max-w-5xl mx-auto px-6 sm:px-8 pt-32 pb-24 animate-fadeIn">
             {/* --- HEADER USER --- */}
-            <div className="flex justify-between items-center mb-8">
+            <div className="flex justify-between items-center mb-10 bg-white/60 backdrop-blur-md p-6 rounded-3xl border border-gray-100 shadow-sm">
                 <div>
-                    <h2 className="text-2xl font-extrabold text-[#2B2118]">Hai, {member.name}! 👋</h2>
-                    <p className="text-gray-500 text-sm">Selamat datang kembali di Nitanggo Bitez</p>
+                    <h2 className="text-3xl sm:text-4xl font-extrabold text-[#2B2118] mb-2">Hai, {member.name}! 👋</h2>
+                    <p className="text-[#7A6A60] text-sm sm:text-base font-medium">Selamat datang kembali di Membership Nitanggo Bitez</p>
                 </div>
-                <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-gray-200">
+                <div className="hidden sm:block w-16 h-16 rounded-full overflow-hidden border-4 border-white shadow-md">
                     <img src="/assets/produk.png" alt="Profile" className="w-full h-full object-cover" />
                 </div>
             </div>
@@ -44,13 +46,25 @@ export default function MembershipView({
                     <div>
                         <h3 className="font-bold text-[#2B2118]">Progress Member Kamu</h3>
                         <p className="text-[#E68A00] text-sm font-semibold mt-1">
-                            {maxProgress - progressCount} pembelian lagi untuk mendapatkan <span className="underline">2 Drinks FREE!</span>
+                            {maxProgress - (progressCount % maxProgress)} pembelian lagi untuk mendapatkan <span className="underline">2 Drinks FREE!</span>
                         </p>
                     </div>
                     <div className="text-right">
-                        <span className="text-gray-400 font-bold">{progressCount} / {maxProgress} Pembelian</span>
+                        <span className="text-gray-400 font-bold">{progressCount % maxProgress} / {maxProgress} Pembelian</span>
                     </div>
                 </div>
+
+                {progressCount > 0 && progressCount % maxProgress === 0 && (
+                    <div className="mb-8 p-4 bg-[#EBF7F6] border border-[#2DD4BF] rounded-2xl flex items-center justify-between">
+                        <div>
+                            <h4 className="font-extrabold text-[#2DD4BF] text-lg">🎉 Selamat! Kupon 2 Drinks FREE</h4>
+                            <p className="text-sm text-[#7A6A60] mt-1">Gunakan kode kupon ini saat menukarkan reward Anda di kasir.</p>
+                        </div>
+                        <div className="bg-white border-2 border-dashed border-[#2DD4BF] px-4 py-2 rounded-lg">
+                            <span className="font-mono font-bold text-xl tracking-wider text-[#4A3B32]">{member.id.replace('NTG-', '')}-FREE</span>
+                        </div>
+                    </div>
+                )}
 
                 {/* Progress Bar Line */}
                 <div className="relative flex items-center justify-between mt-10 mb-4 px-2">
@@ -59,13 +73,13 @@ export default function MembershipView({
                     {/* Active Orange Line */}
                     <div 
                         className="absolute top-1/2 left-0 h-1 bg-[#F8C83B] -translate-y-1/2 z-0 transition-all duration-500" 
-                        style={{ width: `${(progressCount / (maxProgress)) * 100}%` }}
+                        style={{ width: `${((progressCount % maxProgress) / (maxProgress)) * 100}%` }}
                     ></div>
 
                     {/* Step Nodes */}
                     {[1, 2, 3, 4, 5].map((step) => (
                         <div key={step} className="relative z-10">
-                            {step <= progressCount ? (
+                            {step <= (progressCount % maxProgress) || (progressCount > 0 && progressCount % maxProgress === 0) ? (
                                 // Node Selesai (Checkmark)
                                 <div className="w-8 h-8 rounded-full bg-[#F8C83B] flex items-center justify-center border-4 border-white shadow-sm">
                                     {step === 5 ? '🎁' : (
@@ -145,6 +159,39 @@ export default function MembershipView({
                             <p className="text-[10px] text-gray-400 mt-1">Berlaku di seluruh outlet Nitanggo Bitez</p>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            {/* --- SECTION: ORDER HISTORY --- */}
+            <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 mt-6">
+                <div className="flex justify-between items-center mb-6">
+                    <h3 className="font-bold text-[#2B2118]">Riwayat Pesanan</h3>
+                </div>
+                
+                <div className="space-y-4">
+                    {!orders || orders.length === 0 ? (
+                        <p className="text-gray-500 text-sm text-center py-4">Belum ada pesanan.</p>
+                    ) : (
+                        orders.map((order: any, index: number) => (
+                            <div key={index} className="flex justify-between items-center p-4 border border-gray-100 rounded-2xl">
+                                <div>
+                                    <p className="font-bold text-[#2B2118]">
+                                        {new Date(order.created_at).toLocaleDateString('id-ID', {
+                                            day: 'numeric', month: 'short', year: 'numeric'
+                                        })}
+                                    </p>
+                                    <p className="text-xs text-gray-500 mt-1">
+                                        {Array.isArray(order.items) ? order.items.map((i:any) => `${i.quantity}x ${i.name}`).join(', ') : 'Pesanan'}
+                                    </p>
+                                </div>
+                                <div className="text-right">
+                                    <p className="font-bold text-[#E07A72]">
+                                        Rp{new Intl.NumberFormat('id-ID').format(order.total_amount)}
+                                    </p>
+                                </div>
+                            </div>
+                        ))
+                    )}
                 </div>
             </div>
         </div>

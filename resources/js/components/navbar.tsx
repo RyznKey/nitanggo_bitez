@@ -1,12 +1,23 @@
+import { Link } from '@inertiajs/react';
 import React, { useState } from 'react';
 
 type NavbarProps = {
     currentView: string;
     setCurrentView: (view: string) => void;
+    user?: any;
 };
 
-export default function Navbar({ currentView, setCurrentView }: NavbarProps) {
+export default function Navbar({ currentView, setCurrentView, user }: NavbarProps) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+
+    React.useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 20);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const handleNavClick = (view: string) => {
         setCurrentView(view);
@@ -14,10 +25,13 @@ export default function Navbar({ currentView, setCurrentView }: NavbarProps) {
     };
 
     return (
-        <header className="flex justify-between items-center relative py-4 px-5 bg-transparent z-[9999] w-full max-w-[1440px] mx-auto">
+        <header className={`fixed top-0 left-0 right-0 z-[9999] w-full transition-all duration-300 ${scrolled ? 'bg-[#fcf8f2]/90 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-4'}`}>
+            <div className="max-w-[1440px] mx-auto px-5 flex justify-between items-center">
             {/* Logo */}
-            <a href="#" className="flex items-center gap-3 no-underline text-espresso" onClick={(e) => { e.preventDefault(); handleNavClick('view-home'); }}>
-                <img src="/assets/NITANGGO.jpeg" alt="Nitanggo Bitez Logo" className="w-[44px] h-[44px] rounded-full object-cover bg-honey-light border-2 border-espresso" />
+            <a href="#" className="flex items-center gap-3 no-underline text-espresso" onClick={(e) => {
+ e.preventDefault(); handleNavClick('view-home'); 
+}}>
+                <img src="/assets/NITANGGO.png" alt="Nitanggo Bitez Logo" className="w-[44px] h-[44px] rounded-full object-cover border border-espresso" />
                 <div className="font-extrabold text-[1.4rem] tracking-[0.5px] uppercase leading-none">
                     NITANGGO <span className="block text-[0.85rem] font-medium text-text-muted mt-1">BITEZ</span>
                 </div>
@@ -44,43 +58,65 @@ export default function Navbar({ currentView, setCurrentView }: NavbarProps) {
                     <li className="w-full text-left border-b border-[#EBE3D5] pb-3 last:border-none last:pb-0 md:w-auto md:border-none md:pb-0">
                         <a href="#" 
                            className={`no-underline text-text-main font-medium text-[0.95rem] transition-all duration-300 py-2 inline-block relative hover:text-espresso ${currentView === 'view-home' ? 'text-espresso font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[3px] after:bg-honey after:rounded-full' : ''}`} 
-                           onClick={(e) => { e.preventDefault(); handleNavClick('view-home'); }}>
+                           onClick={(e) => {
+ e.preventDefault(); handleNavClick('view-home'); 
+}}>
                            Beranda
                         </a>
                     </li>
                     <li className="w-full text-left border-b border-[#EBE3D5] pb-3 last:border-none last:pb-0 md:w-auto md:border-none md:pb-0">
                         <a href="#" 
                            className={`no-underline text-text-main font-medium text-[0.95rem] transition-all duration-300 py-2 inline-block relative hover:text-espresso ${currentView === 'view-menu' ? 'text-espresso font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[3px] after:bg-honey after:rounded-full' : ''}`} 
-                           onClick={(e) => { e.preventDefault(); handleNavClick('view-menu'); }}>
+                           onClick={(e) => {
+ e.preventDefault(); handleNavClick('view-menu'); 
+}}>
                            Menu
                         </a>
                     </li>
-                    <li className="w-full text-left border-b border-[#EBE3D5] pb-3 last:border-none last:pb-0 md:w-auto md:border-none md:pb-0 relative">
-                        <a href="#" 
-                           className={`no-underline text-text-main font-medium text-[0.95rem] transition-all duration-300 py-2 inline-block relative hover:text-espresso ${currentView === 'view-membership' ? 'text-espresso font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[3px] after:bg-honey after:rounded-full' : ''}`} 
-                           onClick={(e) => { e.preventDefault(); handleNavClick('view-membership'); }}>
-                           Membership 
-                           <span className="absolute -top-[8px] -right-[32px] bg-honey text-white text-[0.6rem] font-bold py-[2px] px-[7px] rounded-l-[10px] rounded-tr-[10px] leading-none whitespace-nowrap shadow-[0_4px_8px_rgba(245,185,43,0.25)] animate-bounce pointer-events-none">
-                               Baru!
-                           </span>
-                        </a>
-                    </li>
+
                     <li className="w-full text-left border-b border-[#EBE3D5] pb-3 last:border-none last:pb-0 md:w-auto md:border-none md:pb-0">
                         <a href="#" 
                            className={`no-underline text-text-main font-medium text-[0.95rem] transition-all duration-300 py-2 inline-block relative hover:text-espresso ${currentView === 'view-about' ? 'text-espresso font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[3px] after:bg-honey after:rounded-full' : ''}`} 
-                           onClick={(e) => { e.preventDefault(); handleNavClick('view-about'); }}>
+                           onClick={(e) => {
+                               e.preventDefault(); handleNavClick('view-about'); 
+                           }}>
                            Tentang Kami
                         </a>
                     </li>
-                    <li className="w-full text-left border-b border-[#EBE3D5] pb-3 last:border-none last:pb-0 md:w-auto md:border-none md:pb-0">
-                        <a href="#" 
-                           className={`no-underline text-text-main font-medium text-[0.95rem] transition-all duration-300 py-2 inline-block relative hover:text-espresso ${currentView === 'view-order' ? 'text-espresso font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[3px] after:bg-honey after:rounded-full' : ''}`} 
-                           onClick={(e) => { e.preventDefault(); handleNavClick('view-order'); }}>
-                           Cara Order
-                        </a>
+                    
+                    {/* User Auth Links */}
+                    <li className="w-full text-left md:w-auto md:ml-4 flex flex-col md:flex-row gap-3 pt-2 md:pt-0 border-t border-[#EBE3D5] md:border-t-0">
+                        {user ? (
+                            <div className="flex items-center gap-3 flex-wrap">
+                                {!!user.is_admin && (
+                                    <Link href="/admin/dashboard" className="text-sm font-semibold text-white bg-[#2B2118] px-4 py-2 rounded-full transition hover:bg-[#4A3B32]">
+                                        Admin Panel
+                                    </Link>
+                                )}
+                                <button 
+                                    onClick={() => handleNavClick('view-membership')} 
+                                    className="text-sm font-semibold text-[#E07A72] bg-[#FDE8E7] px-4 py-2 rounded-full transition hover:bg-[#FBC6C1] cursor-pointer border-none"
+                                >
+                                    Halo, {user.name.split(' ')[0]}
+                                </button>
+                                <Link href="/logout" method="post" as="button" className="text-sm font-medium text-[#7A6A60] hover:text-[#4A3B32]">
+                                    Logout
+                                </Link>
+                            </div>
+                        ) : (
+                            <div className="flex items-center gap-3">
+                                <Link href="/login" className="text-sm font-medium text-[#4A3B32] hover:text-[#E07A72]">
+                                    Log in
+                                </Link>
+                                <Link href="/register" className="text-sm font-semibold text-white bg-[#E07A72] px-4 py-2 rounded-full transition hover:bg-[#C9645D]">
+                                    Daftar Member
+                                </Link>
+                            </div>
+                        )}
                     </li>
                 </ul>
             </nav>
+            </div>
         </header>
     );
 }

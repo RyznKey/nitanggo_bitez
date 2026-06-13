@@ -2,82 +2,71 @@ import React, { useState } from 'react';
 
 type MenuViewProps = {
     isActive: boolean;
-    handleOrderItem: (productName: string) => void;
     className?: string;
-    style?: React.CSSProperties;
+    user?: any;
+    products?: any[];
+    promo?: any;
 };
 
-// Data menu
-const daftarMenu = [
-    {
-        name: 'choco cheeze',
-        price: 'Rp12.000',
-        image: '/assets/chocolate.jpeg',
-        description: 'Perpaduan cokelat dan cream cheese gurih serta biskuit yang lembut.',
-    },
-    {
-        name: 'Tiramisu Cheeze',
-        price: 'Rp12.000',
-        image: '/assets/tiramisu.jpeg',
-        description:'kelezatan aroma dan rasa kopi yang dipadukan dengan cream cheese yang gurih.',
-    },
-    {
-        name: 'Double Cheeze',
-        price: 'Rp12.000',
-        image: '/assets/cheese.jpeg',
-        description: 'varian andalan pecinta keju karena rasanya gurih, creamy, dan melimpah parutan keju sampai cheezy level maksimal',
-    },
-];
-
+    // Menampilkan menu dinamis dari database
 export default function MenuView({
     isActive,
-    handleOrderItem,
     className,
-    style,
+    user,
+    products = [],
+    promo
 }: MenuViewProps) {
-    // State Modal & Form
     const [isFormOpen, setIsFormOpen] = useState(false);
-    const [selectedItem, setSelectedItem] = useState<{
+    const [cart, setCart] = useState<{
         name: string;
         priceNumber: number;
-    } | null>(null);
+        quantity: number;
+    }[]>([]);
     const [showQRIS, setShowQRIS] = useState(false);
 
     // STATE BARU UNTUK MULTI-STEP FORM (1 = Isi Data, 2 = Estimasi Harga)
     const [formStep, setFormStep] = useState(1);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     const [formData, setFormData] = useState({
-        namaLengkap: '',
+        namaLengkap: user ? user.name : '',
         whatsapp: '',
-        statusMember: 'Non-Member',
-        jumlah: 1,
         catatan: '',
         metodePengambilan: 'Ambil di Kantin',
         alamatPengiriman: '',
     });
 
-    if (!isActive) return null;
+    if (!isActive) {
+        return null;
+    }
 
-    // Handler klik pesan
-    const onOrderClick = (name: string, priceString: string) => {
-        // MATIKAN TRIGGER REWARD AGAR ALERT TIDAK MUNCUL
-        // handleOrderItem(name);
+    const isMember = !!user;
+    const isEligibleForDiscount = isMember && !!promo?.is_active;
+    
+    const formatRupiah = (angka: number) =>
+        `Rp${new Intl.NumberFormat('id-ID').format(angka)}`;
 
-        const priceNumber = parseInt(priceString.replace(/[^0-9]/g, ''), 10);
+    // Handler klik pesan (Tambah ke Keranjang)
+    const onOrderClick = (name: string, priceNumber: number) => {
+        let finalPrice = priceNumber;
+        if (isEligibleForDiscount && promo?.discount) {
+            finalPrice -= (priceNumber * (promo.discount / 100));
+        }
 
-        setSelectedItem({ name, priceNumber });
+        setCart((prev) => {
+            const existing = prev.find(item => item.name === name);
+            if (existing) {
+                return prev.map(item => item.name === name ? { ...item, quantity: item.quantity + 1 } : item);
+            }
+            return [...prev, { name, priceNumber: finalPrice, quantity: 1 }];
+        });
+    };
+
+    const handleCartOpen = () => {
+        if (cart.length === 0) return;
         setIsFormOpen(true);
         setShowQRIS(false);
-        setFormStep(1); // Set kembali ke step 1 saat buka menu baru
-        setFormData({
-            namaLengkap: '',
-            whatsapp: '',
-            statusMember: 'Non-Member',
-            jumlah: 1,
-            catatan: '',
-            metodePengambilan: 'Ambil di Kantin',
-            alamatPengiriman: '',
-        });
+        setFormStep(1);
     };
 
     const handleInputChange = (
@@ -89,26 +78,23 @@ export default function MenuView({
 
     // Kalkulasi Harga
     const ongkir = formData.metodePengambilan === 'Delivery' ? 4000 : 0;
-    const subtotal = selectedItem
-        ? selectedItem.priceNumber * formData.jumlah
-        : 0;
+    const subtotal = cart.reduce((total, item) => total + (item.priceNumber * item.quantity), 0);
     const totalPembayaran = subtotal + ongkir;
-    const formatRupiah = (angka: number) =>
-        `Rp${new Intl.NumberFormat('id-ID').format(angka)}`;
 
     // Generate Pesan WhatsApp
     const waNumber = '6285700655072';
+    const cartItemsText = cart.map(item => `- ${item.name} (${item.quantity} pcs) - ${formatRupiah(item.priceNumber * item.quantity)}`).join('\n');
     const waMessage = `Halo Nitanggo Bitez! Saya ingin memesan:
 
 🛒 *DETAIL PESANAN*
-Produk: ${selectedItem?.name}
-Jumlah: ${formData.jumlah} pcs
+${cartItemsText}
+
 Catatan: ${formData.catatan || '-'}
 
 👤 *INFORMASI PEMESAN*
 Nama: ${formData.namaLengkap}
 WA: ${formData.whatsapp}
-Status: ${formData.statusMember}
+Status: ${isMember ? 'Member' : 'Non-Member'}
 
 🚚 *PENGIRIMAN*
 Metode: ${formData.metodePengambilan}
@@ -124,7 +110,7 @@ Saya akan melakukan pembayaran menggunakan QRIS. Mohon konfirmasinya ya!`;
 
     return (
         <div
-            className={`/* Base Styles */ w-full flex-col gap-25 transition-all duration-500 ease-in-out ${isActive ? 'flex translate-y-0 opacity-100' : 'hidden translate-y-3.75 opacity-0'} ${className} px-[5%] py-25`}
+            className={`/* Base Styles */ w-full flex-col gap-10 transition-all duration-500 ease-in-out ${isActive ? 'flex translate-y-0 opacity-100' : 'hidden translate-y-4 opacity-0'} ${className} px-[5%] pt-32 pb-20`}
             // style={{ height: '100%', ...style }}
         >
             {/* TAMPILAN HEADER */}
@@ -138,8 +124,13 @@ Saya akan melakukan pembayaran menggunakan QRIS. Mohon konfirmasinya ya!`;
                 <h3
                     className={`text-[2.2rem] font-extrabold text-espresso ${className} text-shadow-xl`}
                 >
-                    Varian Best Seller Nitanggo Bitez ✨
+                    Varian Best Seller Nitanggo Bitez
                 </h3>
+                {isEligibleForDiscount && (
+                    <div className="mt-2 text-sm md:text-base font-semibold text-[#E07A72] bg-[#FDE8E7] inline-block px-4 py-1.5 rounded-full">
+                        Yeay! {promo?.name || 'Promo Spesial'} aktif untuk Member. Diskon {promo?.discount}%! 🎉
+                    </div>
+                )}
             </div>
 
             {/* TAMPILAN GRID & KARTU MENU (FULL TAILWIND) */}
@@ -147,45 +138,81 @@ Saya akan melakukan pembayaran menggunakan QRIS. Mohon konfirmasinya ya!`;
                 className="grid grid-cols-1 gap-7.5 px-[5%] py-0 sm:grid-cols-2 md:grid-cols-3"
                 // style={{ maxWidth: '90%', margin: '0 auto' , paddingTop: '1rem', paddingBottom: '1rem' }}
             >
-                {daftarMenu.map((item, index) => (
+                {products.length === 0 ? (
+                    <div className="col-span-full text-center text-gray-500">Belum ada menu yang tersedia.</div>
+                ) : products.map((item, index) => (
                     <div 
                         key={index}
-                        className="group flex flex-col overflow-hidden rounded-(--border-radius-xl) border border-(--border-color) bg-(--bg-card) shadow-(--box-shadow) transition-all duration-300 hover:-translate-y-2 hover:border-[rgba(245,185,43,0.25)] hover:shadow-(--box-shadow-hover)"
+                        className="group relative flex flex-col overflow-hidden rounded-3xl border border-white/60 bg-white/70 backdrop-blur-xl shadow-lg transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl hover:border-yellow-200"
                     >
+                        {/* Tag/Badge (contoh: BEST SELLER) */}
+                        {index === 0 && (
+                            <div className="absolute top-4 right-4 z-10 bg-gradient-to-r from-red-500 to-orange-500 text-white text-[0.7rem] font-bold px-3 py-1.5 rounded-full shadow-md uppercase tracking-wider">
+                                Best Seller
+                            </div>
+                        )}
+                        {index === 1 && (
+                            <div className="absolute top-4 right-4 z-10 bg-gradient-to-r from-blue-500 to-indigo-500 text-white text-[0.7rem] font-bold px-3 py-1.5 rounded-full shadow-md uppercase tracking-wider">
+                                New
+                            </div>
+                        )}
+
                         {/* Img Container */}
-                        <div className="relative h-55 overflow-hidden bg-(--primary-light)">
-                            <img
-                                src={item.image}
-                                className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                                alt={item.name}
-                                onError={(e) => {
-                                    (e.target as HTMLImageElement).src =
-                                        '/assets/produk.png';
-                                }}
-                            />
+                        <div className="relative h-60 w-full overflow-hidden bg-gray-100 p-2">
+                            <div className="w-full h-full rounded-2xl overflow-hidden shadow-inner">
+                                <img
+                                    src={item.image}
+                                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                    alt={item.name}
+                                    onError={(e) => {
+                                        (e.target as HTMLImageElement).src = '/assets/produk.png';
+                                    }}
+                                />
+                            </div>
+                            {/* Overlay Gradient for Image Bottom */}
+                            <div className="absolute bottom-2 left-2 right-2 h-1/2 bg-gradient-to-t from-black/50 to-transparent rounded-b-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                         </div>
                         
                         {/* Card Body */}
-                        <div className="flex grow flex-col p-6 m-6">
-                            <h4 className="mb-2 text-[1.25rem] font-extrabold text-(--dark)">
+                        <div className="flex grow flex-col p-6 pt-5">
+                            <h4 className="mb-2 text-xl font-extrabold text-[#3d2f26] capitalize">
                                 {item.name}
                             </h4>
-                            <h5 className="mb-5 grow text-[0.85rem] leading-normal text-(--text-muted)">
+                            <p className="mb-6 grow text-sm leading-relaxed text-gray-500 line-clamp-3">
                                 {item.description}
-                            </h5>
+                            </p>
                             
                             {/* Card Footer */}
-                            <div className="mt-auto flex items-center justify-between border-t border-[rgba(46,34,28,0.05)] pt-4">
-                                <span className="text-[1.2rem] font-extrabold text-(--dark)">
-                                    {item.price}
-                                </span>
+                            <div className="mt-auto flex items-end justify-between border-t border-gray-100 pt-5">
+                                <div className="flex flex-col">
+                                    {isEligibleForDiscount ? (
+                                        <>
+                                            <span className="text-xs text-gray-400 line-through mb-0.5">
+                                                {formatRupiah(Number(item.price))}
+                                            </span>
+                                            <span className="text-xl font-black text-[#E07A72]">
+                                                {formatRupiah(Number(item.price) - (Number(item.price) * (promo?.discount || 0) / 100))}
+                                            </span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <span className="text-xs text-gray-400 mb-0.5">Harga</span>
+                                            <span className="text-xl font-black text-[#3d2f26]">
+                                                {formatRupiah(Number(item.price))}
+                                            </span>
+                                        </>
+                                    )}
+                                </div>
                                 <button
-                                    className="cursor-pointer rounded-(--border-radius-md) bg-(--primary-light) px-4.5 py-2 text-[0.85rem] font-bold text-(--dark) transition-all duration-300 hover:-translate-y-0.5 hover:bg-(--primary)"
-                                    onClick={() =>
-                                        onOrderClick(item.name, item.price)
-                                    }
+                                    className="relative overflow-hidden cursor-pointer rounded-xl bg-gradient-to-r from-yellow-400 to-yellow-500 px-6 py-2.5 text-sm font-bold text-yellow-950 shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:scale-105 active:scale-95"
+                                    onClick={() => onOrderClick(item.name, Number(item.price))}
                                 >
-                                    Pesan
+                                    <span className="relative z-10 flex items-center gap-2">
+                                        Pesan
+                                        <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                        </svg>
+                                    </span>
                                 </button>
                             </div>
                         </div>
@@ -194,478 +221,189 @@ Saya akan melakukan pembayaran menggunakan QRIS. Mohon konfirmasinya ya!`;
             </div>
 
             {/* ============================================================== */}
-            {/* MODAL CHECKOUT BESAR (MULTI-STEP) */}
             {/* ============================================================== */}
-            {isFormOpen && selectedItem && (
+            {isFormOpen && (
                 <div
-                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm sm:p-6"
-                    style={{ paddingTop: '8px', paddingBottom: '8px' }}
+                    className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm sm:p-6"
                 >
-                    <div className="bg-gray-50 w-full max-w-2xl max-h-full overflow-y-auto rounded-3xl shadow-2xl relative flex flex-col" style={{ margin: '2%' }}>
-                        <div
-                            className="sticky top-0 z-10 flex items-center justify-between rounded-t-3xl border-b border-gray-200 bg-white px-6 py-4 shadow-sm"
-                            style={{ padding: '5%' }}
-                        >
+                    <div className="bg-white w-full max-w-lg max-h-full overflow-y-auto rounded-3xl shadow-2xl relative flex flex-col mx-auto">
+                        <div className="sticky top-0 z-10 flex items-center justify-between rounded-t-3xl border-b border-gray-100 bg-white px-5 py-4">
+                            <h2 className="text-lg font-extrabold text-gray-800">Checkout</h2>
+                            <button onClick={() => setIsFormOpen(false)} className="text-2xl text-gray-400 hover:text-red-500 leading-none">&times;</button>
+                        </div>
+
+                        <div className="flex-1 overflow-y-auto p-5 custom-scrollbar space-y-6">
+                            {/* CART SUMMARY */}
                             <div>
-                                <h2 className="text-2xl font-bold text-gray-800">
-                                    {formStep === 1
-                                        ? '🛒 Isi Data Pesanan'
-                                        : '🧾 Estimasi & Pembayaran'}
-                                </h2>
-                                <p className="text-sm text-gray-500">
-                                    {formStep === 1
-                                        ? 'Lengkapi detail pesanan dan pengirimanmu di bawah ini.'
-                                        : 'Periksa kembali pesananmu sebelum lanjut ke WhatsApp.'}
-                                </p>
+                                <div className="space-y-3">
+                                    {cart.map((item, index) => (
+                                        <div key={index} className="flex justify-between items-center bg-gray-50 p-3 rounded-xl border border-gray-100">
+                                            <div className="flex items-center gap-3">
+                                                <div className="w-6 h-6 flex items-center justify-center rounded bg-yellow-100 text-yellow-700 font-bold text-xs">{item.quantity}x</div>
+                                                <span className="font-semibold text-gray-800 capitalize text-sm">{item.name}</span>
+                                            </div>
+                                            <span className="font-bold text-gray-700 text-sm">{formatRupiah(item.priceNumber * item.quantity)}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="mt-4 flex justify-between items-center text-sm px-1">
+                                    <span className="text-gray-500 font-medium">Subtotal</span>
+                                    <span className="font-bold text-gray-800">{formatRupiah(subtotal)}</span>
+                                </div>
                             </div>
-                            <button
-                                onClick={() => setIsFormOpen(false)}
-                                className="text-3xl font-bold text-gray-400 hover:text-red-500"
+
+                            {/* DATA PEMESAN */}
+                            <div className="border-t border-gray-100 pt-5">
+                                <h3 className="mb-4 text-xs font-bold text-gray-400 uppercase tracking-wider">Informasi Pemesan</h3>
+                                <div className="space-y-3">
+                                    <input
+                                        type="text" name="namaLengkap" placeholder="Nama Lengkap"
+                                        value={formData.namaLengkap} onChange={handleInputChange}
+                                        className="w-full h-11 rounded-xl border border-gray-200 px-4 text-sm outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 transition-all bg-gray-50 focus:bg-white placeholder-gray-400 font-medium text-gray-800"
+                                    />
+                                    <input
+                                        type="text" name="whatsapp" placeholder="Nomor WhatsApp"
+                                        value={formData.whatsapp} onChange={handleInputChange}
+                                        className="w-full h-11 rounded-xl border border-gray-200 px-4 text-sm outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 transition-all bg-gray-50 focus:bg-white placeholder-gray-400 font-medium text-gray-800"
+                                    />
+                                    <textarea
+                                        name="catatan" placeholder="Catatan Pesanan (Opsional)"
+                                        value={formData.catatan} onChange={handleInputChange} rows={2}
+                                        className="w-full rounded-xl border border-gray-200 p-4 text-sm outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 transition-all bg-gray-50 focus:bg-white placeholder-gray-400 font-medium text-gray-800"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* PENGAMBILAN */}
+                            <div className="border-t border-gray-100 pt-5 pb-2">
+                                <h3 className="mb-4 text-xs font-bold text-gray-400 uppercase tracking-wider">Metode Pengambilan</h3>
+                                <div className="flex gap-3 mb-4">
+                                    {['Ambil di Kantin', 'Delivery'].map(method => (
+                                        <button
+                                            key={method}
+                                            onClick={() => setFormData(prev => ({ ...prev, metodePengambilan: method }))}
+                                            className={`flex-1 py-3 rounded-xl text-sm font-bold border transition-all ${formData.metodePengambilan === method ? 'border-yellow-400 bg-yellow-50 text-yellow-700 shadow-sm' : 'border-gray-200 text-gray-500 hover:bg-gray-50'}`}
+                                        >
+                                            {method}
+                                        </button>
+                                    ))}
+                                </div>
+                                
+                                {formData.metodePengambilan === 'Delivery' && (
+                                    <div className="animate-fadeIn mt-2">
+                                        <textarea
+                                            name="alamatPengiriman" placeholder="Alamat Pengiriman Lengkap"
+                                            value={formData.alamatPengiriman} onChange={handleInputChange} rows={2}
+                                            className="w-full rounded-xl border border-gray-200 p-4 text-sm outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 transition-all bg-gray-50 focus:bg-white placeholder-gray-400 font-medium text-gray-800"
+                                        />
+                                        <div className="mt-3 flex justify-between items-center text-sm px-1">
+                                            <span className="text-gray-500 font-medium">Estimasi Ongkir</span>
+                                            <span className="font-bold text-gray-800">{formatRupiah(ongkir)}</span>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+
+                        <div className="sticky bottom-0 z-10 border-t border-gray-100 bg-white rounded-b-3xl p-5 shadow-[0_-10px_20px_rgba(0,0,0,0.03)]">
+                            <div className="flex justify-between items-end mb-4 px-1">
+                                <span className="text-sm font-bold text-gray-500">Total Pembayaran</span>
+                                <span className="text-2xl font-black text-yellow-600 leading-none">{formatRupiah(totalPembayaran)}</span>
+                            </div>
+                            <a
+                                href={(!formData.namaLengkap || !formData.whatsapp) ? '#' : waLink}
+                                target={(!formData.namaLengkap || !formData.whatsapp) ? '_self' : '_blank'}
+                                rel="noopener noreferrer"
+                                className={`w-full flex justify-center py-3.5 rounded-xl font-bold text-yellow-950 transition-all ${
+                                    (!formData.namaLengkap || !formData.whatsapp) 
+                                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
+                                        : 'bg-gradient-to-r from-yellow-400 to-yellow-500 hover:shadow-[0_8px_20px_rgba(250,204,21,0.4)] hover:-translate-y-0.5'
+                                }`}
+                                onClick={(e) => {
+                                    if (!formData.namaLengkap || !formData.whatsapp) {
+                                        e.preventDefault();
+                                        return;
+                                    }
+                                    setIsFormOpen(false);
+                                    import('@inertiajs/react').then(({ router }) => {
+                                        router.post('/checkout', {
+                                            amount: totalPembayaran,
+                                            customer_name: formData.namaLengkap,
+                                            whatsapp: formData.whatsapp,
+                                            items: cart,
+                                            pickup_method: formData.metodePengambilan,
+                                            delivery_address: formData.alamatPengiriman,
+                                            notes: formData.catatan
+                                        }, { 
+                                            preserveScroll: true, 
+                                            preserveState: true,
+                                            onSuccess: () => {
+                                                setCart([]);
+                                                setShowSuccessModal(true);
+                                            }
+                                        });
+                                    });
+                                }}
                             >
-                                &times;
-                            </button>
+                                Bayar Sekarang
+                            </a>
                         </div>
+                    </div>
+                </div>
+            )}
 
-                        <div className="flex-1 space-y-6 p-6">
-                            {/* ================= STEP 1: ISI DATA ================= */}
-                            {formStep === 1 && (
-                                <div
-                                    className="animate-fade-in space-y-6 px-4 py-0"
-                                    style={{
-                                        maxWidth: '90%',
-                                        margin: '0 auto',
-                                    }}
-                                >
-                                    {/* 1. INFORMASI PEMESAN */}
-                                    <div
-                                        className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm"
-                                        style={{ padding: '5%' }}
-                                    >
-                                        <h3 className="mb-4 flex items-center justify-center gap-2 text-lg font-bold text-gray-800">
-                                            Informasi Pemesan
-                                        </h3>
-                                        <div className="space-y-4">
-                                            <div>
-                                                <label className="mb-1 block text-sm font-semibold text-gray-600">
-                                                    Nama Lengkap *
-                                                </label>
-                                                <input
-                                                    type="text"
-                                                    name="namaLengkap"
-                                                    value={formData.namaLengkap}
-                                                    onChange={handleInputChange}
-                                                    className="w-full h-10 rounded-xl border border-gray-300 p-3 text-base outline-none focus:ring-2 focus:ring-yellow-400"
-                                                    placeholder="Masukkan nama..."
-                                                />
-                                            </div>
-                                            <div>
-                                                <label className="mb-1 block text-sm font-semibold text-gray-600">
-                                                    Nomor WhatsApp *
-                                                </label>
-                                                <input
-                                                    type="text"
-                                                    name="whatsapp"
-                                                    value={formData.whatsapp}
-                                                    onChange={handleInputChange}
-                                                    className="w-full h-10 rounded-xl border border-gray-300 p-3 text-base outline-none focus:ring-2 focus:ring-yellow-400"
-                                                    placeholder="Contoh: 08123456789"
-                                                />
-                                            </div>
-                                            <div>
-                                                <label className="mb-2 block text-sm font-semibold text-gray-600">
-                                                    Status Member
-                                                </label>
-                                                <div className="flex gap-4">
-                                                    <label className="flex cursor-pointer items-center gap-2">
-                                                        <input
-                                                            type="radio"
-                                                            name="statusMember"
-                                                            value="Member"
-                                                            checked={
-                                                                formData.statusMember ===
-                                                                'Member'
-                                                            }
-                                                            onChange={
-                                                                handleInputChange
-                                                            }
-                                                            className="h-4 w-4 text-yellow-500"
-                                                        />
-                                                        <span>Member</span>
-                                                    </label>
-                                                    <label className="flex cursor-pointer items-center gap-2">
-                                                        <input
-                                                            type="radio"
-                                                            name="statusMember"
-                                                            value="Non-Member"
-                                                            checked={
-                                                                formData.statusMember ===
-                                                                'Non-Member'
-                                                            }
-                                                            onChange={
-                                                                handleInputChange
-                                                            }
-                                                            className="h-4 w-4 text-yellow-500"
-                                                        />
-                                                        <span>Non-Member</span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {/* 2. DETAIL PESANAN */}
-                                    <div
-                                        className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm"
-                                        style={{ padding: '5%' }}
-                                    >
-                                        <h3 className="mb-4 text-lg font-bold text-gray-800">
-                                            Detail Pesanan
-                                        </h3>
-                                        <div className="space-y-4">
-                                            <div className="flex items-center justify-between rounded-xl border border-gray-200 bg-gray-50 p-3">
-                                                <span className="font-medium text-gray-700">
-                                                    {selectedItem.name}
-                                                </span>
-                                                <span className="font-bold text-yellow-600">
-                                                    {formatRupiah(
-                                                        selectedItem.priceNumber,
-                                                    )}
-                                                </span>
-                                            </div>
-                                            <div>
-                                                <label className="mb-2 block text-sm font-semibold text-gray-600">
-                                                    Jumlah Pesanan *
-                                                </label>
-                                                <div className="flex items-center gap-4">
-                                                    <button
-                                                        onClick={() =>
-                                                            setFormData(
-                                                                (p) => ({
-                                                                    ...p,
-                                                                    jumlah: Math.max(
-                                                                        1,
-                                                                        p.jumlah -
-                                                                            1,
-                                                                    ),
-                                                                }),
-                                                            )
-                                                        }
-                                                        className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200 text-xl font-bold hover:bg-gray-300"
-                                                    >
-                                                        -
-                                                    </button>
-                                                    <span className="w-8 text-center text-xl font-bold">
-                                                        {formData.jumlah}
-                                                    </span>
-                                                    <button
-                                                        onClick={() =>
-                                                            setFormData(
-                                                                (p) => ({
-                                                                    ...p,
-                                                                    jumlah:
-                                                                        p.jumlah +
-                                                                        1,
-                                                                }),
-                                                            )
-                                                        }
-                                                        className="flex h-10 w-10 items-center justify-center rounded-full bg-yellow-400 text-xl font-bold hover:bg-yellow-500"
-                                                    >
-                                                        +
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <label className="mb-1 block text-sm font-semibold text-gray-600">
-                                                    Catatan Tambahan
-                                                </label>
-                                                <textarea
-                                                    name="catatan"
-                                                    value={formData.catatan}
-                                                    onChange={handleInputChange}
-                                                    className="w-full rounded-xl border border-gray-300 p-3 outline-none focus:ring-2 focus:ring-yellow-400"
-                                                    rows={2}
-                                                    placeholder="Opsional (Misal: Jangan terlalu manis)"
-                                                ></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {/* 3. METODE PENGAMBILAN */}
-                                    <div
-                                        className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm"
-                                        style={{ padding: '5%' }}
-                                    >
-                                        <h3 className="mb-4 text-lg font-bold text-gray-800">
-                                            Metode Pengambilan
-                                        </h3>
-                                        <div className="mb-4 flex gap-4">
-                                            <label className="flex flex-1 cursor-pointer items-center gap-2 rounded-xl border border-gray-200 bg-gray-50 p-3">
-                                                <input
-                                                    type="radio"
-                                                    name="metodePengambilan"
-                                                    value="Ambil di Kantin"
-                                                    checked={
-                                                        formData.metodePengambilan ===
-                                                        'Ambil di Kantin'
-                                                    }
-                                                    onChange={handleInputChange}
-                                                    className="h-4 w-4 text-yellow-500"
-                                                />
-                                                <span className="font-medium">
-                                                    Ambil di Kantin
-                                                </span>
-                                            </label>
-                                            <label className="flex flex-1 cursor-pointer items-center gap-2 rounded-xl border border-gray-200 bg-gray-50 p-3">
-                                                <input
-                                                    type="radio"
-                                                    name="metodePengambilan"
-                                                    value="Delivery"
-                                                    checked={
-                                                        formData.metodePengambilan ===
-                                                        'Delivery'
-                                                    }
-                                                    onChange={handleInputChange}
-                                                    className="h-4 w-4 text-yellow-500"
-                                                />
-                                                <span className="font-medium">
-                                                    Delivery
-                                                </span>
-                                            </label>
-                                        </div>
-
-                                        {formData.metodePengambilan ===
-                                            'Delivery' && (
-                                            <div className="animate-fade-in space-y-4">
-                                                <div>
-                                                    <label className="mb-1 block text-sm font-semibold text-gray-600">
-                                                        Alamat Pengiriman *
-                                                    </label>
-                                                    <textarea
-                                                        name="alamatPengiriman"
-                                                        value={
-                                                            formData.alamatPengiriman
-                                                        }
-                                                        onChange={
-                                                            handleInputChange
-                                                        }
-                                                        className="w-full rounded-xl border border-gray-300 p-3 outline-none focus:ring-2 focus:ring-yellow-400"
-                                                        rows={2}
-                                                        placeholder="Masukkan alamat lengkap pengiriman..."
-                                                    ></textarea>
-                                                </div>
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                            )}
-
-                            {/* ================= STEP 2: ESTIMASI & PEMBAYARAN ================= */}
-                            {formStep === 2 && (
-                                <div className="animate-fade-in space-y-6">
-                                    {/* 4. REWARD MEMBERSHIP */}
-                                    <div
-                                        className="rounded-2xl border border-purple-200 bg-[linear-gradient(to_right,var(--tw-gradient-stops))] from-purple-100 to-pink-100 p-5 shadow-sm"
-                                        style={{ padding: '5%' }}
-                                    >
-                                        <h3 className="mb-2 flex items-center gap-2 font-bold text-purple-800">
-                                            🎁 Nitanggo Member Reward
-                                        </h3>
-                                        <p className="mb-3 text-sm text-purple-700">
-                                            Kumpulkan 5 stamp dan dapatkan 2
-                                            minuman GRATIS!
-                                        </p>
-                                        <div className="rounded-xl bg-white/60 p-3">
-                                            <div className="mb-2 text-xs font-bold text-purple-800 uppercase">
-                                                Progress Saat Ini
-                                            </div>
-                                            <div className="mb-1 flex gap-2 text-2xl">
-                                                🧀 🧀 🧀 ⬜ ⬜
-                                            </div>
-                                            <div className="text-sm font-bold text-purple-900">
-                                                3/5 Stamp
-                                            </div>
-                                            <p className="mt-1 text-xs text-purple-600">
-                                                Tinggal 2 pembelian lagi untuk
-                                                mendapatkan reward.
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    {/* 5. PEMBAYARAN & RINGKASAN */}
-                                    <div
-                                        className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm"
-                                        style={{ padding: '5%' }}
-                                    >
-                                        <h3 className="mb-4 text-lg font-bold text-gray-800">
-                                            Ringkasan Pesanan
-                                        </h3>
-                                        <div className="mb-4 space-y-2 text-sm text-gray-600">
-                                            <div className="flex justify-between">
-                                                <span>Produk:</span>{' '}
-                                                <span>{selectedItem.name}</span>
-                                            </div>
-                                            <div className="flex justify-between">
-                                                <span>Harga:</span>{' '}
-                                                <span>
-                                                    {formatRupiah(
-                                                        selectedItem.priceNumber,
-                                                    )}
-                                                </span>
-                                            </div>
-                                            <div className="flex justify-between">
-                                                <span>Jumlah:</span>{' '}
-                                                <span>
-                                                    {formData.jumlah} pcs
-                                                </span>
-                                            </div>
-                                            <div className="mt-2 flex justify-between font-medium">
-                                                <span>Subtotal:</span>{' '}
-                                                <span>
-                                                    {formatRupiah(subtotal)}
-                                                </span>
-                                            </div>
-
-                                            {/* Info Ongkir hanya muncul jika Delivery */}
-                                            {formData.metodePengambilan ===
-                                                'Delivery' && (
-                                                <>
-                                                    <div className="flex justify-between font-medium">
-                                                        <span>
-                                                            Ongkir (Estimasi
-                                                            2km):
-                                                        </span>{' '}
-                                                        <span>
-                                                            {formatRupiah(
-                                                                ongkir,
-                                                            )}
-                                                        </span>
-                                                    </div>
-                                                </>
-                                            )}
-
-                                            <div className="mt-2 flex justify-between border-t border-gray-200 pt-3 text-lg font-bold text-gray-900">
-                                                <span>Total Pembayaran:</span>{' '}
-                                                <span className="text-yellow-600">
-                                                    {formatRupiah(
-                                                        totalPembayaran,
-                                                    )}
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                        <div className="mb-4 rounded-xl border border-gray-200 bg-gray-50 p-4">
-                                            <h4 className="mb-2 flex items-center gap-2 font-bold text-gray-800">
-                                                💳 Metode Pembayaran: QRIS
-                                            </h4>
-                                            <p className="mb-3 text-xs leading-relaxed text-gray-600">
-                                                Seluruh pesanan dibayarkan
-                                                melalui QRIS. Setelah pembayaran
-                                                berhasil, sistem akan
-                                                mengirimkan kode pesanan
-                                                digital.
-                                            </p>
-                                            <button
-                                                onClick={() =>
-                                                    setShowQRIS(!showQRIS)
-                                                }
-                                                className="w-full rounded-lg border border-gray-300 bg-white py-2 text-sm font-bold transition hover:bg-gray-100"
-                                            >
-                                                {showQRIS
-                                                    ? 'Sembunyikan QRIS'
-                                                    : 'Tampilkan QRIS'}
-                                            </button>
-                                            {showQRIS && (
-                                                <div className="mt-4 flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-white p-4">
-                                                    <div className="mb-2 flex h-40 w-40 items-center justify-center bg-gray-200 text-gray-400">
-                                                        [ Gambar QRIS ]
-                                                    </div>
-                                                    <span className="text-xs font-bold text-gray-500">
-                                                        Scan untuk membayar{' '}
-                                                        {formatRupiah(
-                                                            totalPembayaran,
-                                                        )}
-                                                    </span>
-                                                </div>
-                                            )}
-                                        </div>
-
-                                        <div className="space-y-1 text-xs text-gray-500">
-                                            <p className="font-bold text-gray-700">
-                                                Ketentuan Delivery:
-                                            </p>
-                                            <p>• Tarif pengiriman Rp2.000/km</p>
-                                            <p>
-                                                • Jarak dihitung dari lokasi
-                                                Nitanggo Bitez
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
+            {/* FLOATING CART BUTTON */}
+            {!isFormOpen && cart.length > 0 && (
+                <div className="fixed bottom-6 left-0 right-0 z-40 flex justify-center px-4 animate-fade-in pointer-events-none">
+                    <button 
+                        onClick={handleCartOpen}
+                        className="pointer-events-auto flex items-center gap-4 bg-gray-900 text-white px-6 py-4 rounded-full shadow-[0_10px_25px_rgba(0,0,0,0.3)] hover:scale-105 hover:bg-gray-800 transition-all duration-300"
+                    >
+                        <div className="flex -space-x-2">
+                            <div className="bg-yellow-400 text-yellow-950 font-bold w-8 h-8 rounded-full flex items-center justify-center text-sm border-2 border-gray-900 z-10">
+                                {cart.reduce((total, item) => total + item.quantity, 0)}
+                            </div>
+                            <div className="bg-white/20 w-8 h-8 rounded-full flex items-center justify-center text-sm border-2 border-gray-900">
+                                🛒
+                            </div>
                         </div>
+                        <div className="flex flex-col items-start border-l border-white/20 pl-4">
+                            <span className="text-xs text-gray-300 font-medium">Total Pesanan</span>
+                            <span className="font-bold text-yellow-400 leading-none mt-1">
+                                {formatRupiah(cart.reduce((total, item) => total + (item.priceNumber * item.quantity), 0))}
+                            </span>
+                        </div>
+                        <div className="ml-2 bg-white/10 rounded-full p-2">
+                            <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                        </div>
+                    </button>
+                </div>
+            )}
 
-                        {/* FOOTER MULTI-STEP */}
-                        <div
-                            className="sticky bottom-0 z-10 mt-auto flex items-center justify-between rounded-b-3xl border-t border-gray-100 bg-white/90 p-4 shadow-[0_-4px_20px_rgba(0,0,0,0.04)] backdrop-blur-md"
-                            style={{ padding: '4% 5%' }}
+            {/* CUSTOM SUCCESS MODAL */}
+            {showSuccessModal && (
+                <div className="fixed inset-0 z-[10010] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-fadeIn">
+                    <div className="bg-white w-full max-w-sm rounded-[2rem] p-8 text-center shadow-2xl relative animate-scaleIn transform transition-all">
+                        {/* Ikon Sukses */}
+                        <div className="w-20 h-20 mx-auto bg-green-100 rounded-full flex items-center justify-center mb-6">
+                            <svg className="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+                        
+                        <h3 className="text-2xl font-extrabold text-[#2B2118] mb-2">Hore! Pesanan Tercatat 🎉</h3>
+                        <p className="text-gray-500 text-sm mb-8 leading-relaxed">
+                            Pesanan Anda telah berhasil masuk ke sistem kami. Silakan cek jendela obrolan WhatsApp Anda untuk melakukan pembayaran dan mengirimkan bukti QRIS.
+                        </p>
+                        
+                        <button
+                            onClick={() => setShowSuccessModal(false)}
+                            className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 text-yellow-950 font-bold py-3.5 rounded-2xl hover:scale-105 transition-transform shadow-md"
                         >
-                            {formStep === 1 ? (
-                                <>
-                                    {/* Tombol Kiri (Batal) */}
-                                    <button
-                                        onClick={() => setIsFormOpen(false)}
-                                        className="group flex items-center justify-center gap-2 rounded-2xl bg-gray-50 px-5 py-3.5 font-bold text-gray-500 transition-all duration-300 hover:bg-red-50 hover:text-red-500"
-                                    >
-                                        <span className="m-4-1 text-xl leading-none transition-transform duration-300 group-hover:rotate-45">
-                                            &times;
-                                        </span>{' '}
-                                        Batal
-                                    </button>
-
-                                    {/* Tombol Kanan (Selanjutnya) */}
-                                    <button
-                                        onClick={() => setFormStep(2)}
-                                        className="group flex items-center justify-center gap-2 rounded-2xl bg-yellow-400 px-8 py-3.5 font-extrabold text-gray-900 shadow-[0_4px_15px_rgba(250,204,21,0.4)] transition-all duration-300 group-hover:translate-x-1 hover:-translate-y-0.5 hover:bg-yellow-500 hover:shadow-[0_6px_20px_rgba(250,204,21,0.6)] disabled:cursor-not-allowed disabled:opacity-50"
-                                        disabled={
-                                            !formData.namaLengkap ||
-                                            !formData.whatsapp ||
-                                            !formData.metodePengambilan
-                                        }
-                                        style={{ padding: '12px 32px' }}
-                                    >
-                                        Selanjutnya
-                                        <span className="transition-transform duration-300 group-hover:translate-x-1">
-                                            &rarr;
-                                        </span>
-                                    </button>
-                                </>
-                            ) : (
-                                <>
-                                    {/* Tombol Kiri (Kembali) */}
-                                    <button
-                                        onClick={() => setFormStep(1)}
-                                        className="group flex items-center justify-center gap-2 rounded-2xl bg-gray-50 px-5 py-3.5 font-bold text-gray-600 transition-all duration-300 hover:bg-gray-100 hover:text-gray-900"
-                                    >
-                                        <span className="transition-transform duration-300 group-hover:-translate-x-1">
-                                            &larr;
-                                        </span>{' '}
-                                        Kembali
-                                    </button>
-
-                                    {/* Tombol Kanan (Bayar Sekarang) */}
-                                    <a
-                                        href={waLink}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="group flex items-center justify-center gap-2 rounded-2xl bg-yellow-400 px-8 py-3.5 font-extrabold text-gray-900 shadow-[0_4px_15px_rgba(250,204,21,0.4)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-yellow-500 hover:shadow-[0_6px_20px_rgba(250,204,21,0.6)]"
-                                        onClick={() => setIsFormOpen(false)}
-                                    >
-                                        Bayar Sekarang
-                                        <span className="text-lg">💳</span>
-                                    </a>
-                                </>
-                            )}
-                        </div>
+                            Tutup Notifikasi
+                        </button>
                     </div>
                 </div>
             )}

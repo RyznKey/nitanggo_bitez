@@ -6,7 +6,9 @@ type HomeViewProps = {
 };
 
 export default function HomeView({ isActive, setCurrentView }: HomeViewProps) {
-    if (!isActive) return null;
+    if (!isActive) {
+        return null;
+    }
 
     return (
         <div className="relative min-h-screen bg-[#FFF5ED] overflow-hidden text-[#4A3B32] font-sans">
@@ -37,8 +39,8 @@ export default function HomeView({ isActive, setCurrentView }: HomeViewProps) {
             <div className="hidden sm:block absolute top-1/2 right-12 w-4 h-4 bg-[#FBC6C1] rounded-full opacity-70 animate-float-1"></div>
 
             {/* ====== 1. HERO SECTION ====== */}
-            {/* Menggunakan padding kecil di mobile (pt-8 pb-12) dan membesar di desktop (lg:pt-16 lg:pb-24) */}
-            <section className="relative max-w-7xl mx-auto px-4 sm:px-6 pt-8 pb-12 lg:pt-16 lg:pb-24 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center z-10">
+            {/* Menggunakan padding kecil di mobile (pt-24 pb-12) dan membesar di desktop (lg:pt-32 lg:pb-24) untuk kompensasi fixed navbar */}
+            <section className="relative max-w-7xl mx-auto px-4 sm:px-6 pt-24 pb-12 lg:pt-32 lg:pb-24 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center z-10">
                 
                 {/* Visual Utama: Di HP tampil di ATAS (order-1), di Desktop pindah ke KANAN (lg:order-2) */}
                 <div className="relative flex justify-center items-center order-1 lg:order-2 animate-float-1 w-full">
@@ -67,12 +69,18 @@ export default function HomeView({ isActive, setCurrentView }: HomeViewProps) {
                         Nitanggo Bitez menyajikan aneka Nyicheeze, cake, dan minuman segar berkualitas tinggi yang dibuat dengan cinta untuk menemani momen manismu.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-2">
-                        <Link href="/menu" className="w-full sm:w-auto text-center px-8 py-3.5 bg-[#E07A72] text-white font-bold rounded-2xl shadow-md shadow-[#E07A72]/20 transition-all duration-300 hover:bg-[#CC665E] hover:-translate-y-0.5">
+                        <button 
+                            onClick={() => setCurrentView('view-menu')}
+                            className="w-full sm:w-auto text-center px-8 py-3.5 bg-[#E07A72] text-white font-bold rounded-2xl shadow-md shadow-[#E07A72]/20 transition-all duration-300 hover:bg-[#CC665E] hover:-translate-y-0.5 cursor-pointer"
+                        >
                             Lihat Menu Populer
-                        </Link>
-                        <Link href="/membership" className="w-full sm:w-auto text-center px-8 py-3.5 bg-white text-[#E07A72] font-bold rounded-2xl border-2 border-[#FBC6C1] shadow-sm transition-all duration-300 hover:bg-[#FDE8E7] hover:-translate-y-0.5">
+                        </button>
+                        <button 
+                            onClick={() => setCurrentView('view-membership')}
+                            className="w-full sm:w-auto text-center px-8 py-3.5 bg-white text-[#E07A72] font-bold rounded-2xl border-2 border-[#FBC6C1] shadow-sm transition-all duration-300 hover:bg-[#FDE8E7] hover:-translate-y-0.5 cursor-pointer"
+                        >
                             Gabung Membership
-                        </Link>
+                        </button>
                     </div>
                 </div>
             </section>
@@ -149,9 +157,12 @@ export default function HomeView({ isActive, setCurrentView }: HomeViewProps) {
                             Kumpulkan progres poin otomatis setiap kali Anda berbelanja. Dapatkan bonus langsung berupa <span className="font-bold text-[#E07A72]">2 Minuman Gratis</span> setelah melakukan 5 pembelian pertama!
                         </p>
                         <div className="pt-2">
-                            <Link href="/membership" className="w-full sm:w-auto inline-block bg-[#2C211A] text-white font-bold px-6 py-3 rounded-xl transition-colors hover:bg-[#1A130E]">
+                            <button 
+                                onClick={() => setCurrentView('view-membership')}
+                                className="w-full sm:w-auto inline-block bg-[#2C211A] text-white font-bold px-6 py-3 rounded-xl transition-colors hover:bg-[#1A130E] cursor-pointer"
+                            >
                                 Gabung Member Gratis Sekarang
-                            </Link>
+                            </button>
                         </div>
                     </div>
                 </section>
@@ -169,6 +180,64 @@ export default function HomeView({ isActive, setCurrentView }: HomeViewProps) {
                         <p className="text-sm sm:text-base text-[#7A6A60] leading-relaxed">
                             Nitanggo Bitez siap memeriahkan hari ulang tahun, pesta pernikahan, atau kumpul keluarga Anda melalui paket hampers dan box kustom yang didesain cantik penuh estetika.
                         </p>
+                    </div>
+                </section>
+                
+                {/* ====== NEW SECTION: CARA ORDER ====== */}
+                <section id="cara-order" className="max-w-7xl mx-auto px-4 sm:px-6 pt-10 lg:pt-16 pb-10">
+                    <div className="text-center mb-12 sm:mb-16">
+                        <span className="inline-block bg-[#FFF9E6] border border-[#FCD34D] text-[#D97706] text-xs font-bold px-4 py-1.5 rounded-full tracking-wider uppercase mb-3">
+                            MUDAH & CEPAT
+                        </span>
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#4A3B32]">
+                            Langkah Mudah Menikmati <br className="hidden sm:block" />
+                            <span className="text-[#E07A72]">Manisnya Kuliner Kami</span>
+                        </h2>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-10">
+                        {/* Step 1 */}
+                        <div className="group relative bg-[#FFF5ED] rounded-[32px] p-8 sm:p-10 text-center transition-all duration-500 hover:-translate-y-3 hover:shadow-xl hover:shadow-[#FBC6C1]/30 border border-transparent hover:border-[#FBC6C1]">
+                            <div className="absolute top-6 left-6 w-12 h-12 bg-white rounded-full flex items-center justify-center text-xl font-black text-[#E07A72] shadow-sm">1</div>
+                            <div className="w-24 h-24 sm:w-28 sm:h-28 mx-auto bg-white rounded-full flex items-center justify-center text-5xl sm:text-6xl mb-6 shadow-inner group-hover:scale-110 transition-transform duration-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 sm:w-12 sm:h-12 text-[#E07A72]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
+                            </div>
+                            <h3 className="text-xl sm:text-2xl font-bold text-[#4A3B32] mb-3">Pilih Varian</h3>
+                            <p className="text-sm sm:text-base text-[#7A6A60] leading-relaxed">
+                                Telusuri halaman <strong>Menu</strong> kami dan temukan dessert box atau minuman segar favorit Anda.
+                            </p>
+                        </div>
+
+                        {/* Step 2 */}
+                        <div className="group relative bg-[#FDE8E7] rounded-[32px] p-8 sm:p-10 text-center transition-all duration-500 hover:-translate-y-3 hover:shadow-xl hover:shadow-[#E07A72]/20 border border-transparent hover:border-[#E07A72]">
+                            <div className="absolute top-6 left-6 w-12 h-12 bg-white rounded-full flex items-center justify-center text-xl font-black text-[#E07A72] shadow-sm">2</div>
+                            <div className="w-24 h-24 sm:w-28 sm:h-28 mx-auto bg-white rounded-full flex items-center justify-center text-5xl sm:text-6xl mb-6 shadow-inner group-hover:scale-110 transition-transform duration-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 sm:w-12 sm:h-12 text-[#E07A72]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                                </svg>
+                            </div>
+                            <h3 className="text-xl sm:text-2xl font-bold text-[#4A3B32] mb-3">Pesan & Bayar</h3>
+                            <p className="text-sm sm:text-base text-[#7A6A60] leading-relaxed">
+                                Klik tombol <strong>Pesan</strong>, isi data, dan selesaikan pembayaran dengan mudah menggunakan QRIS.
+                            </p>
+                        </div>
+
+                        {/* Step 3 */}
+                        <div className="group relative bg-[#FFF9E6] rounded-[32px] p-8 sm:p-10 text-center transition-all duration-500 hover:-translate-y-3 hover:shadow-xl hover:shadow-[#FCD34D]/30 border border-transparent hover:border-[#FCD34D]">
+                            <div className="absolute top-6 left-6 w-12 h-12 bg-white rounded-full flex items-center justify-center text-xl font-black text-[#E07A72] shadow-sm">3</div>
+                            <div className="w-24 h-24 sm:w-28 sm:h-28 mx-auto bg-white rounded-full flex items-center justify-center text-5xl sm:text-6xl mb-6 shadow-inner group-hover:scale-110 transition-transform duration-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 sm:w-12 sm:h-12 text-[#E07A72]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                            </div>
+                            <h3 className="text-xl sm:text-2xl font-bold text-[#4A3B32] mb-3">Nikmati Langsung</h3>
+                            <p className="text-sm sm:text-base text-[#7A6A60] leading-relaxed">
+                                Kunjungi outlet kami di <strong>Margonda atau UI Depok</strong> untuk menikmati pesanan Anda, atau tunggu di rumah!
+                            </p>
+                        </div>
                     </div>
                 </section>
             </div>

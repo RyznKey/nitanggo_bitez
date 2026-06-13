@@ -211,8 +211,7 @@ register.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     
     register.form = registerForm
 /**
-* @see \Inertia\Controller::__invoke
- * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+ * @see routes/web.php:7
  * @route '/'
  */
 export const home = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -226,8 +225,7 @@ home.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \Inertia\Controller::__invoke
- * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+ * @see routes/web.php:7
  * @route '/'
  */
 home.url = (options?: RouteQueryOptions) => {
@@ -235,8 +233,7 @@ home.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \Inertia\Controller::__invoke
- * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+ * @see routes/web.php:7
  * @route '/'
  */
 home.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -244,8 +241,7 @@ home.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     method: 'get',
 })
 /**
-* @see \Inertia\Controller::__invoke
- * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+ * @see routes/web.php:7
  * @route '/'
  */
 home.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -254,8 +250,7 @@ home.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
     /**
-* @see \Inertia\Controller::__invoke
- * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+ * @see routes/web.php:7
  * @route '/'
  */
     const homeForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -264,8 +259,7 @@ home.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     })
 
             /**
-* @see \Inertia\Controller::__invoke
- * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+ * @see routes/web.php:7
  * @route '/'
  */
         homeForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -273,8 +267,7 @@ home.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
             method: 'get',
         })
             /**
-* @see \Inertia\Controller::__invoke
- * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+ * @see routes/web.php:7
  * @route '/'
  */
         homeForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -385,3 +378,53 @@ dashboard.head = (args: { current_team: string | number } | [current_team: strin
         })
     
     dashboard.form = dashboardForm
+/**
+ * @see routes/web.php:50
+ * @route '/checkout'
+ */
+export const checkout = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: checkout.url(options),
+    method: 'post',
+})
+
+checkout.definition = {
+    methods: ["post"],
+    url: '/checkout',
+} satisfies RouteDefinition<["post"]>
+
+/**
+ * @see routes/web.php:50
+ * @route '/checkout'
+ */
+checkout.url = (options?: RouteQueryOptions) => {
+    return checkout.definition.url + queryParams(options)
+}
+
+/**
+ * @see routes/web.php:50
+ * @route '/checkout'
+ */
+checkout.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: checkout.url(options),
+    method: 'post',
+})
+
+    /**
+ * @see routes/web.php:50
+ * @route '/checkout'
+ */
+    const checkoutForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        action: checkout.url(options),
+        method: 'post',
+    })
+
+            /**
+ * @see routes/web.php:50
+ * @route '/checkout'
+ */
+        checkoutForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: checkout.url(options),
+            method: 'post',
+        })
+    
+    checkout.form = checkoutForm

@@ -20,7 +20,9 @@ class EnsureTeamMembership
     {
         [$user, $team] = [$request->user(), $this->team($request)];
 
-        abort_if(! $user || ! $team || ! $user->belongsToTeam($team), 403);
+        if (! $user || ! $team || ! $user->belongsToTeam($team)) {
+            dd('EnsureTeamMembership failed', compact('user', 'team'));
+        }
 
         $this->ensureTeamMemberHasRequiredRole($user, $team, $minimumRole);
 
