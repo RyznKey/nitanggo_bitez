@@ -21,7 +21,7 @@ export default function AdminLayout({ children, title }: { children: React.React
             {/* Desktop Sidebar */}
             <aside className="hidden md:flex flex-col w-64 bg-white border-r border-[#FDE8E7] shadow-sm z-20">
                 <div className="p-6 border-b border-[#FDE8E7] flex items-center gap-3">
-                    <div className="w-10 h-10 bg-[#E07A72] text-white flex items-center justify-center rounded-xl font-bold shadow-md shadow-[#E07A72]/20">NB</div>
+                    <div className="w-10 h-10 bg-[#F8C83B] text-white flex items-center justify-center rounded-xl font-bold shadow-md shadow-[#F8C83B]/20">NB</div>
                     <span className="text-xl font-extrabold text-[#4A3B32]">Admin Panel</span>
                 </div>
                 
@@ -32,7 +32,7 @@ export default function AdminLayout({ children, title }: { children: React.React
                             href={link.href}
                             className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${
                                 link.active 
-                                ? 'bg-[#FDE8E7] text-[#E07A72]' 
+                                ? 'bg-[#FDE8E7] text-[#D49800]' 
                                 : 'text-[#7A6A60] hover:bg-[#FFF5ED] hover:text-[#4A3B32]'
                             }`}
                         >
@@ -57,7 +57,7 @@ export default function AdminLayout({ children, title }: { children: React.React
                 {/* Mobile Header */}
                 <header className="bg-white shadow-sm border-b border-[#FDE8E7] flex items-center justify-between p-4 fixed top-0 left-0 right-0 z-30">
                     <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 bg-[#E07A72] text-white flex items-center justify-center rounded-lg font-bold">NB</div>
+                        <div className="w-8 h-8 bg-[#F8C83B] text-white flex items-center justify-center rounded-lg font-bold">NB</div>
                         <span className="font-extrabold text-[#4A3B32]">Admin</span>
                     </div>
                     <button onClick={() => setSidebarOpen(true)} className="p-2 text-[#4A3B32] bg-[#FFF5ED] rounded-lg">
@@ -87,7 +87,7 @@ export default function AdminLayout({ children, title }: { children: React.React
                                 onClick={() => setSidebarOpen(false)}
                                 className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${
                                     link.active 
-                                    ? 'bg-[#FDE8E7] text-[#E07A72]' 
+                                    ? 'bg-[#FDE8E7] text-[#D49800]' 
                                     : 'text-[#7A6A60] hover:bg-[#FFF5ED]'
                                 }`}
                             >

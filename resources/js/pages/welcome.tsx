@@ -10,10 +10,10 @@ import MembershipView from '../components/Views/MembershipView';
 import MenuView from '../components/Views/MenuView';
 
 export default function Welcome() {
-    const { auth, products, promo, orders } = usePage<any>().props;
+    const { auth, products, promo, orders, defaultView } = usePage<any>().props;
     const user = auth?.user;
     
-    const [currentView, setCurrentView] = useState('view-home');
+    const [currentView, setCurrentView] = useState(defaultView || 'view-home');
     const progressCount = user?.purchases_count || 0;
     const maxProgress = 5;
 

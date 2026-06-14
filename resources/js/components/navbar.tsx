@@ -77,11 +77,46 @@ export default function Navbar({ currentView, setCurrentView, user }: NavbarProp
 
                     <li className="w-full text-left border-b border-[#EBE3D5] pb-3 last:border-none last:pb-0 md:w-auto md:border-none md:pb-0">
                         <a href="#" 
+                           className={`no-underline text-text-main font-medium text-[0.95rem] transition-all duration-300 py-2 inline-block relative hover:text-espresso ${currentView === 'view-membership' ? 'text-espresso font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[3px] after:bg-[#F8C83B] after:rounded-full' : ''}`} 
+                           onClick={(e) => {
+                               e.preventDefault(); handleNavClick('view-membership'); 
+                           }}>
+                           Membership
+                           <span className="absolute -top-2 -right-6 bg-[#F8C83B] text-white text-[9px] font-black px-1.5 py-0.5 rounded-full shadow-sm rotate-6">Baru!</span>
+                        </a>
+                    </li>
+
+                    <li className="w-full text-left border-b border-[#EBE3D5] pb-3 last:border-none last:pb-0 md:w-auto md:border-none md:pb-0">
+                        <a href="#" 
                            className={`no-underline text-text-main font-medium text-[0.95rem] transition-all duration-300 py-2 inline-block relative hover:text-espresso ${currentView === 'view-about' ? 'text-espresso font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[3px] after:bg-[#F8C83B] after:rounded-full' : ''}`} 
                            onClick={(e) => {
                                e.preventDefault(); handleNavClick('view-about'); 
                            }}>
                            Tentang Kami
+                        </a>
+                    </li>
+                    
+                    <li className="w-full text-left border-b border-[#EBE3D5] pb-3 last:border-none last:pb-0 md:w-auto md:border-none md:pb-0 hidden lg:block">
+                        <a href="#cara-order" 
+                           className="no-underline text-text-main font-medium text-[0.95rem] transition-all duration-300 py-2 inline-block relative hover:text-espresso" 
+                           onClick={(e) => {
+                               e.preventDefault(); 
+                               setCurrentView('view-home');
+                               setTimeout(() => {
+                                   document.getElementById('cara-order')?.scrollIntoView({ behavior: 'smooth' });
+                               }, 100);
+                           }}>
+                           Cara Order
+                        </a>
+                    </li>
+                    
+                    <li className="w-full text-left border-b border-[#EBE3D5] pb-3 last:border-none last:pb-0 md:w-auto md:border-none md:pb-0 hidden lg:block">
+                        <a href="#" 
+                           className="no-underline text-text-main font-medium text-[0.95rem] transition-all duration-300 py-2 inline-block relative hover:text-espresso" 
+                           onClick={(e) => {
+                               e.preventDefault(); 
+                           }}>
+                           Kontak
                         </a>
                     </li>
                     

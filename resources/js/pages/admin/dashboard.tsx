@@ -12,7 +12,7 @@ export default function Dashboard({ stats }: { stats: any }) {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 space-y-8">
                 {/* Promo Status Banner */}
                 {!!stats.promo_active && (
-                    <div className="bg-gradient-to-r from-[#FBC6C1] to-[#E07A72] p-4 rounded-2xl shadow-lg shadow-[#E07A72]/20 text-white flex justify-between items-center">
+                    <div className="bg-gradient-to-r from-[#FDF1D5] to-[#F8C83B] p-4 rounded-2xl shadow-lg shadow-[#F8C83B]/20 text-white flex justify-between items-center">
                         <div className="flex items-center gap-3">
                             <Gift size={32} />
                             <div>
@@ -20,7 +20,7 @@ export default function Dashboard({ stats }: { stats: any }) {
                                 <p className="text-white/80 text-sm">Semua harga member mendapatkan diskon otomatis.</p>
                             </div>
                         </div>
-                        <Link href="/admin/settings/promo" className="bg-white text-[#E07A72] px-4 py-2 rounded-xl font-bold hover:bg-[#FFF5ED] transition-colors shadow-sm">
+                        <Link href="/admin/settings/promo" className="bg-white text-[#D49800] px-4 py-2 rounded-xl font-bold hover:bg-[#FFF5ED] transition-colors shadow-sm">
                             Kelola Promo
                         </Link>
                     </div>
@@ -28,12 +28,12 @@ export default function Dashboard({ stats }: { stats: any }) {
 
                 {/* Main Stats */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <Card className="bg-white border-none shadow-xl shadow-[#E07A72]/5 bg-gradient-to-br from-white to-[#FFF9E6] rounded-3xl overflow-hidden relative">
+                    <Card className="bg-white border-none shadow-xl shadow-[#F8C83B]/5 bg-gradient-to-br from-white to-[#FFF9E6] rounded-3xl overflow-hidden relative">
                         <div className="absolute top-0 right-0 p-4 opacity-10 text-[#2B2118]">
                             <Wallet size={48} />
                         </div>
                         <CardHeader className="pb-2">
-                            <CardTitle className="text-sm font-bold text-[#E07A72] uppercase tracking-wider">Saldo Kas</CardTitle>
+                            <CardTitle className="text-sm font-bold text-[#D49800] uppercase tracking-wider">Saldo Kas</CardTitle>
                         </CardHeader>
                         <CardContent>
                             <div className="text-3xl font-extrabold text-[#2B2118]">
@@ -43,7 +43,7 @@ export default function Dashboard({ stats }: { stats: any }) {
                         </CardContent>
                     </Card>
 
-                    <Card className="bg-white border-none shadow-xl shadow-[#FBC6C1]/10 rounded-3xl relative overflow-hidden">
+                    <Card className="bg-white border-none shadow-xl shadow-[#F8C83B]/10 rounded-3xl relative overflow-hidden">
                         <div className="absolute top-0 right-0 p-4 opacity-5 text-[#2B2118]">
                             <TrendingUp size={48} />
                         </div>

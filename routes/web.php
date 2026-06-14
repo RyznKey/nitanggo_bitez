@@ -62,7 +62,18 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::prefix('{current_team}')
     ->middleware(['auth', 'verified', EnsureTeamMembership::class])
     ->group(function () {
-        Route::inertia('dashboard', 'dashboard')->name('dashboard');
+        Route::get('dashboard', function () {
+            return inertia('welcome', [
+                'products' => \App\Models\Product::where('is_active', 'true')->latest()->get(),
+                'orders' => request()->user() ? \App\Models\Order::where('user_id', request()->user()->id)->latest()->get() : [],
+                'promo' => [
+                    'is_active' => \App\Models\Setting::where('key', 'promo_active')->value('value') === 'true',
+                    'name' => \App\Models\Setting::where('key', 'promo_name')->value('value'),
+                    'discount' => (int) \App\Models\Setting::where('key', 'promo_discount')->value('value'),
+                ],
+                'defaultView' => 'view-membership'
+            ]);
+        })->name('dashboard');
     });
 
 Route::middleware(['auth'])->group(function () {
