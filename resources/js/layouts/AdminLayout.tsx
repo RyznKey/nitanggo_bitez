@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { Menu, X, LayoutDashboard, Package, Wallet, Users, Gift, ShoppingCart } from 'lucide-react';
+import { Menu, X, LayoutDashboard, Package, Wallet, Users, Gift, ShoppingCart, Settings } from 'lucide-react';
 import React, { useState } from 'react';
 
 export default function AdminLayout({ children, title }: { children: React.ReactNode, title?: string }) {
@@ -14,6 +14,7 @@ export default function AdminLayout({ children, title }: { children: React.React
         { name: 'Pelanggan', href: '/admin/customers', active: url.startsWith('/admin/customers'), icon: <Users size={20} /> },
         { name: 'Promo', href: '/admin/settings/promo', active: url.startsWith('/admin/settings/promo'), icon: <Gift size={20} /> },
         { name: 'Tampilan', href: '/admin/settings/homepage', active: url.startsWith('/admin/settings/homepage'), icon: <LayoutDashboard size={20} /> },
+        { name: 'Pengaturan Umum', href: '/admin/settings/general', active: url.startsWith('/admin/settings/general'), icon: <Settings size={20} /> },
     ];
 
     return (

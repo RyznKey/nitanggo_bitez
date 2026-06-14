@@ -39,6 +39,7 @@ Route::get('/', function () {
         'signatureImage' => Setting::where('key', 'signature_image')->value('value') ?? '/assets/menu_nyicheeze.png',
         'membershipImage' => Setting::where('key', 'membership_image')->value('value') ?? '/assets/membership_banner.png',
         'hampersImage' => Setting::where('key', 'hampers_image')->value('value') ?? '/assets/catering_dessert.png',
+        'deliveryFee' => (int) (Setting::where('key', 'delivery_fee')->value('value') ?? '4000'),
     ]);
 })->name('home');
 
@@ -61,6 +62,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('settings/promo', [SettingController::class, 'updatePromo']);
         Route::get('settings/homepage', [SettingController::class, 'homepage'])->name('settings.homepage');
         Route::post('settings/homepage', [SettingController::class, 'updateHomepage']);
+        Route::get('settings/general', [SettingController::class, 'general'])->name('settings.general');
+        Route::post('settings/general', [SettingController::class, 'updateGeneral']);
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     });
 });
@@ -81,6 +84,7 @@ Route::prefix('{current_team}')
                 'signatureImage' => \App\Models\Setting::where('key', 'signature_image')->value('value') ?? '/assets/menu_nyicheeze.png',
                 'membershipImage' => \App\Models\Setting::where('key', 'membership_image')->value('value') ?? '/assets/membership_banner.png',
                 'hampersImage' => \App\Models\Setting::where('key', 'hampers_image')->value('value') ?? '/assets/catering_dessert.png',
+                'deliveryFee' => (int) (\App\Models\Setting::where('key', 'delivery_fee')->value('value') ?? '4000'),
                 'defaultView' => 'view-membership'
             ]);
         })->name('dashboard');

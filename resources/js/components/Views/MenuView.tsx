@@ -6,6 +6,7 @@ type MenuViewProps = {
     user?: any;
     products?: any[];
     promo?: any;
+    deliveryFee?: number;
 };
 
     // Menampilkan menu dinamis dari database
@@ -14,7 +15,8 @@ export default function MenuView({
     className,
     user,
     products = [],
-    promo
+    promo,
+    deliveryFee = 4000
 }: MenuViewProps) {
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [cart, setCart] = useState<{
@@ -94,7 +96,7 @@ return;
     };
 
     // Kalkulasi Harga
-    const ongkir = formData.metodePengambilan === 'Delivery' ? 4000 : 0;
+    const ongkir = formData.metodePengambilan === 'Delivery' ? deliveryFee : 0;
     const subtotal = cart.reduce((total, item) => total + (item.priceNumber * item.quantity), 0);
     const totalPembayaran = subtotal + ongkir;
 

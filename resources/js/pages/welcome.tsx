@@ -10,7 +10,7 @@ import MembershipView from '../components/Views/MembershipView';
 import MenuView from '../components/Views/MenuView';
 
 export default function Welcome() {
-    const { auth, products, promo, orders, defaultView, heroImage, signatureImage, membershipImage, hampersImage } = usePage<any>().props;
+    const { auth, products, promo, orders, defaultView, heroImage, signatureImage, membershipImage, hampersImage, deliveryFee } = usePage<any>().props;
     const user = auth?.user;
     
     const [currentView, setCurrentView] = useState(defaultView || 'view-home');
@@ -56,6 +56,7 @@ export default function Welcome() {
                         user={user}
                         products={products}
                         promo={promo}
+                        deliveryFee={deliveryFee}
                     />
                     <AboutView isActive={currentView === 'view-about'} />
                     <MembershipView

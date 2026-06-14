@@ -76,4 +76,32 @@ class SettingController extends Controller
 
         return redirect()->back()->with('success', 'Pengaturan Beranda berhasil disimpan.');
     }
+
+    public function general()
+    {
+        $deliveryFee = Setting::where('key', 'delivery_fee')->value('value');
+
+        // Jika belum ada di database, gunakan default 4000
+        if ($deliveryFee === null) {
+            $deliveryFee = '4000';
+        }
+
+        return Inertia::render('admin/settings/general', [
+            'deliveryFee' => (int) $deliveryFee,
+        ]);
+    }
+
+    public function updateGeneral(Request $request)
+    {
+        $request->validate([
+            'delivery_fee' => 'required|numeric|min:0',
+        ]);
+
+        Setting::updateOrCreate(
+            ['key' => 'delivery_fee'],
+            ['value' => (string) $request->delivery_fee]
+        );
+
+        return redirect()->back()->with('success', 'Pengaturan Umum berhasil disimpan.');
+    }
 }
