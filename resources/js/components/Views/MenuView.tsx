@@ -127,7 +127,7 @@ Saya akan melakukan pembayaran menggunakan QRIS. Mohon konfirmasinya ya!`;
 
     return (
         <div
-            className={`/* Base Styles */ w-full flex-col gap-10 transition-all duration-500 ease-in-out ${isActive ? 'flex translate-y-0 opacity-100' : 'hidden translate-y-4 opacity-0'} ${className} px-[5%] pt-32 pb-20`}
+            className={`/* Base Styles */ w-full flex-col gap-10 transition-all duration-500 ease-in-out ${isActive ? 'flex translate-y-0 opacity-100' : 'hidden translate-y-4 opacity-0'} ${className} px-[5%] pt-32 pb-20 ${isFormOpen ? 'relative z-[10000]' : ''}`}
             // style={{ height: '100%', ...style }}
         >
             {/* TAMPILAN HEADER */}
