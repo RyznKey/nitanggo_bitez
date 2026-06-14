@@ -77,6 +77,22 @@ return;
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
+    const updateQuantity = (name: string, delta: number) => {
+        setCart((prev) => {
+            const updated = prev.map(item => {
+                if (item.name === name) {
+                    return { ...item, quantity: item.quantity + delta };
+                }
+                return item;
+            }).filter(item => item.quantity > 0);
+
+            if (updated.length === 0) {
+                setIsFormOpen(false);
+            }
+            return updated;
+        });
+    };
+
     // Kalkulasi Harga
     const ongkir = formData.metodePengambilan === 'Delivery' ? 4000 : 0;
     const subtotal = cart.reduce((total, item) => total + (item.priceNumber * item.quantity), 0);
@@ -240,7 +256,11 @@ Saya akan melakukan pembayaran menggunakan QRIS. Mohon konfirmasinya ya!`;
                                     {cart.map((item, index) => (
                                         <div key={index} className="flex justify-between items-center bg-gray-50 p-3 rounded-xl border border-gray-100">
                                             <div className="flex items-center gap-3">
-                                                <div className="w-6 h-6 flex items-center justify-center rounded bg-yellow-100 text-yellow-700 font-bold text-xs">{item.quantity}x</div>
+                                                <div className="flex items-center gap-1 bg-white border border-gray-200 rounded-lg p-0.5">
+                                                    <button type="button" onClick={() => updateQuantity(item.name, -1)} className="w-6 h-6 flex items-center justify-center text-gray-500 hover:bg-gray-100 rounded-md font-bold text-lg leading-none">-</button>
+                                                    <span className="w-5 text-center text-xs font-bold text-gray-800">{item.quantity}</span>
+                                                    <button type="button" onClick={() => updateQuantity(item.name, 1)} className="w-6 h-6 flex items-center justify-center text-gray-500 hover:bg-gray-100 rounded-md font-bold text-lg leading-none">+</button>
+                                                </div>
                                                 <span className="font-semibold text-gray-800 capitalize text-sm">{item.name}</span>
                                             </div>
                                             <span className="font-bold text-gray-700 text-sm">{formatRupiah(item.priceNumber * item.quantity)}</span>
