@@ -1,9 +1,9 @@
 import { Head, useForm, Link } from '@inertiajs/react';
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../../../components/ui/card';
+import { Checkbox } from '../../../components/ui/checkbox';
 import { Input } from '../../../components/ui/input';
 import { Label } from '../../../components/ui/label';
-import { Checkbox } from '../../../components/ui/checkbox';
 import { Spinner } from '../../../components/ui/spinner';
 
 export default function AdminLogin() {

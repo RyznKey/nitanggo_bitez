@@ -1,8 +1,8 @@
 import { Head, usePage } from '@inertiajs/react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { ShoppingCart, DollarSign, Users, Utensils, ArrowUpRight, Flame, Coffee, Drumstick, CupSoda } from 'lucide-react';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { ShoppingCart, DollarSign, Users, Utensils, TrendingUp, Clock, CreditCard, ArrowUpRight, Flame, Coffee, Drumstick, CupSoda } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { dashboard } from '@/routes';
 
 export default function Dashboard() {

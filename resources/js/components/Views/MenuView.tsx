@@ -49,21 +49,27 @@ export default function MenuView({
     // Handler klik pesan (Tambah ke Keranjang)
     const onOrderClick = (name: string, priceNumber: number) => {
         let finalPrice = priceNumber;
+
         if (isEligibleForDiscount && promo?.discount) {
             finalPrice -= (priceNumber * (promo.discount / 100));
         }
 
         setCart((prev) => {
             const existing = prev.find(item => item.name === name);
+
             if (existing) {
                 return prev.map(item => item.name === name ? { ...item, quantity: item.quantity + 1 } : item);
             }
+
             return [...prev, { name, priceNumber: finalPrice, quantity: 1 }];
         });
     };
 
     const handleCartOpen = () => {
-        if (cart.length === 0) return;
+        if (cart.length === 0) {
+return;
+}
+
         setIsFormOpen(true);
         setShowQRIS(false);
         setFormStep(1);
@@ -339,8 +345,10 @@ Saya akan melakukan pembayaran menggunakan QRIS. Mohon konfirmasinya ya!`;
                                 onClick={(e) => {
                                     if (!formData.namaLengkap || !formData.whatsapp) {
                                         e.preventDefault();
+
                                         return;
                                     }
+
                                     setIsFormOpen(false);
                                     import('@inertiajs/react').then(({ router }) => {
                                         router.post('/checkout', {

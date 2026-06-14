@@ -1,12 +1,12 @@
-import { Head, Link, router, useForm } from '@inertiajs/react';
+import { Head, router, useForm } from '@inertiajs/react';
 import React from 'react';
+import AdminLayout from '@/Layouts/AdminLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
 
-import AdminLayout from '@/Layouts/AdminLayout';
 
 export default function Form({ product }: { product?: any }) {
     const isEdit = !!product;
-    const { data, setData, post, put, processing, errors } = useForm({
+    const { data, setData, post, processing, errors } = useForm({
         name: product?.name || '',
         description: product?.description || '',
         price: product?.price || '',
@@ -16,6 +16,7 @@ export default function Form({ product }: { product?: any }) {
 
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
+
         if (isEdit) {
             router.post(`/admin/products/${product.id}`, {
                 _method: 'put',

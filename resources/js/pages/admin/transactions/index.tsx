@@ -1,8 +1,8 @@
 import { Head, Link, useForm } from '@inertiajs/react';
-import React, { useState } from 'react';
+import React from 'react';
+import AdminLayout from '@/Layouts/AdminLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
 
-import AdminLayout from '@/Layouts/AdminLayout';
 
 export default function Transactions({ transactions, stats }: { transactions: any[], stats: any }) {
     const { data, setData, post, processing, errors, reset } = useForm({

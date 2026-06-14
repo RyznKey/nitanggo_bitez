@@ -1,19 +1,10 @@
-import { Head, useForm, router } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import React from 'react';
+import AdminLayout from '@/Layouts/AdminLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
 
-import AdminLayout from '@/Layouts/AdminLayout';
 
 export default function Orders({ orders }: { orders: any[] }) {
-    
-    const handleStatusChange = (orderId: number, status: string) => {
-        if (confirm(`Apakah Anda yakin ingin mengubah status pesanan ini menjadi ${status}?`)) {
-            router.put(`/admin/orders/${orderId}`, { status }, {
-                preserveScroll: true
-            });
-        }
-    };
-
     return (
         <AdminLayout title="Kelola Pesanan">
             <Head title="Kelola Pesanan" />

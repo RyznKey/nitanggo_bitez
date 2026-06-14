@@ -1,7 +1,7 @@
 import { Head, Link, router } from '@inertiajs/react';
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
 import AdminLayout from '@/Layouts/AdminLayout';
+import { Card } from '../../../components/ui/card';
 
 export default function Index({ products }: { products: any[] }) {
     const handleDelete = (id: number) => {

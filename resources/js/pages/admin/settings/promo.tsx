@@ -1,8 +1,8 @@
-import { Head, Link, useForm } from '@inertiajs/react';
-import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
+import { Head, useForm } from '@inertiajs/react';
 import { Gift, Lightbulb } from 'lucide-react';
+import React from 'react';
 import AdminLayout from '@/Layouts/AdminLayout';
+import { Card, CardContent, CardTitle } from '../../../components/ui/card';
 
 export default function PromoSettings({ promo }: { promo: any }) {
     const { data, setData, post, processing, errors } = useForm({

@@ -16,6 +16,7 @@ export default function Navbar({ currentView, setCurrentView, user }: NavbarProp
             setScrolled(window.scrollY > 20);
         };
         window.addEventListener('scroll', handleScroll);
+
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 

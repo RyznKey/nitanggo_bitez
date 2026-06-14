@@ -1,6 +1,6 @@
 import { Link, usePage } from '@inertiajs/react';
-import React, { useState } from 'react';
 import { Menu, X, LayoutDashboard, Package, Wallet, Users, Gift, ShoppingCart } from 'lucide-react';
+import React, { useState } from 'react';
 
 export default function AdminLayout({ children, title }: { children: React.ReactNode, title?: string }) {
     const { url } = usePage();

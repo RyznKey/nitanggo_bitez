@@ -10,7 +10,7 @@ import MembershipView from '../components/Views/MembershipView';
 import MenuView from '../components/Views/MenuView';
 
 export default function Welcome() {
-    const { auth, products, promo } = usePage<any>().props;
+    const { auth, products, promo, orders } = usePage<any>().props;
     const user = auth?.user;
     
     const [currentView, setCurrentView] = useState('view-home');
@@ -57,7 +57,7 @@ export default function Welcome() {
                     <MembershipView
                         isActive={currentView === 'view-membership'}
                         user={user}
-                        orders={auth?.orders || usePage<any>().props.orders}
+                        orders={auth?.orders || orders}
                         member={member}
                         progressCount={progressCount}
                         maxProgress={maxProgress}
