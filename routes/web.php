@@ -1,5 +1,10 @@
 <?php
 
+Route::get('/migrate-db-force', function () {
+    \Illuminate\Support\Facades\Artisan::call('migrate:fresh', ['--force' => true, '--seed' => true]);
+    return 'Migrated and seeded successfully!';
+});
+
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
