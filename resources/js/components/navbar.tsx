@@ -58,7 +58,7 @@ export default function Navbar({ currentView, setCurrentView, user }: NavbarProp
                 <ul className="flex flex-col gap-5 w-full m-0 p-0 md:flex-row md:gap-8 md:items-center">
                     <li className="w-full text-left border-b border-[#EBE3D5] pb-3 last:border-none last:pb-0 md:w-auto md:border-none md:pb-0">
                         <a href="#" 
-                           className={`no-underline text-text-main font-medium text-[0.95rem] transition-all duration-300 py-2 inline-block relative hover:text-espresso ${currentView === 'view-home' ? 'text-espresso font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[3px] after:bg-honey after:rounded-full' : ''}`} 
+                           className={`no-underline text-text-main font-medium text-[0.95rem] transition-all duration-300 py-2 inline-block relative hover:text-espresso ${currentView === 'view-home' ? 'text-espresso font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[3px] after:bg-[#F8C83B] after:rounded-full' : ''}`} 
                            onClick={(e) => {
  e.preventDefault(); handleNavClick('view-home'); 
 }}>
@@ -67,7 +67,7 @@ export default function Navbar({ currentView, setCurrentView, user }: NavbarProp
                     </li>
                     <li className="w-full text-left border-b border-[#EBE3D5] pb-3 last:border-none last:pb-0 md:w-auto md:border-none md:pb-0">
                         <a href="#" 
-                           className={`no-underline text-text-main font-medium text-[0.95rem] transition-all duration-300 py-2 inline-block relative hover:text-espresso ${currentView === 'view-menu' ? 'text-espresso font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[3px] after:bg-honey after:rounded-full' : ''}`} 
+                           className={`no-underline text-text-main font-medium text-[0.95rem] transition-all duration-300 py-2 inline-block relative hover:text-espresso ${currentView === 'view-menu' ? 'text-espresso font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[3px] after:bg-[#F8C83B] after:rounded-full' : ''}`} 
                            onClick={(e) => {
  e.preventDefault(); handleNavClick('view-menu'); 
 }}>
@@ -77,7 +77,7 @@ export default function Navbar({ currentView, setCurrentView, user }: NavbarProp
 
                     <li className="w-full text-left border-b border-[#EBE3D5] pb-3 last:border-none last:pb-0 md:w-auto md:border-none md:pb-0">
                         <a href="#" 
-                           className={`no-underline text-text-main font-medium text-[0.95rem] transition-all duration-300 py-2 inline-block relative hover:text-espresso ${currentView === 'view-about' ? 'text-espresso font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[3px] after:bg-honey after:rounded-full' : ''}`} 
+                           className={`no-underline text-text-main font-medium text-[0.95rem] transition-all duration-300 py-2 inline-block relative hover:text-espresso ${currentView === 'view-about' ? 'text-espresso font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[3px] after:bg-[#F8C83B] after:rounded-full' : ''}`} 
                            onClick={(e) => {
                                e.preventDefault(); handleNavClick('view-about'); 
                            }}>
@@ -96,7 +96,7 @@ export default function Navbar({ currentView, setCurrentView, user }: NavbarProp
                                 )}
                                 <button 
                                     onClick={() => handleNavClick('view-membership')} 
-                                    className="text-sm font-semibold text-[#E07A72] bg-[#FDE8E7] px-4 py-2 rounded-full transition hover:bg-[#FBC6C1] cursor-pointer border-none"
+                                    className="text-sm font-semibold text-[#D49800] bg-[#FDF1D5] px-4 py-2 rounded-full transition hover:bg-[#F8C83B] hover:text-[#2B2118] cursor-pointer border-none"
                                 >
                                     Halo, {user.name.split(' ')[0]}
                                 </button>
@@ -106,10 +106,10 @@ export default function Navbar({ currentView, setCurrentView, user }: NavbarProp
                             </div>
                         ) : (
                             <div className="flex items-center gap-3">
-                                <Link href="/login" className="text-sm font-medium text-[#4A3B32] hover:text-[#E07A72]">
+                                <Link href="/login" className="text-sm font-medium text-[#4A3B32] hover:text-[#D49800]">
                                     Log in
                                 </Link>
-                                <Link href="/register" className="text-sm font-semibold text-white bg-[#E07A72] px-4 py-2 rounded-full transition hover:bg-[#C9645D]">
+                                <Link href="/register" className="text-sm font-semibold text-[#2B2118] bg-[#F8C83B] px-4 py-2 rounded-full transition hover:bg-[#eab308]">
                                     Daftar Member
                                 </Link>
                             </div>

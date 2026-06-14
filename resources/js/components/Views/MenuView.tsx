@@ -128,7 +128,7 @@ Saya akan melakukan pembayaran menggunakan QRIS. Mohon konfirmasinya ya!`;
                     Varian Best Seller Nitanggo Bitez
                 </h3>
                 {isEligibleForDiscount && (
-                    <div className="mt-2 text-sm md:text-base font-semibold text-[#E07A72] bg-[#FDE8E7] inline-block px-4 py-1.5 rounded-full">
+                    <div className="mt-2 text-sm md:text-base font-semibold text-[#D49800] bg-[#FDF1D5] inline-block px-4 py-1.5 rounded-full">
                         Yeay! {promo?.name || 'Promo Spesial'} aktif untuk Member. Diskon {promo?.discount}%! 🎉
                     </div>
                 )}
@@ -191,7 +191,7 @@ Saya akan melakukan pembayaran menggunakan QRIS. Mohon konfirmasinya ya!`;
                                             <span className="text-xs text-gray-400 line-through mb-0.5">
                                                 {formatRupiah(Number(item.price))}
                                             </span>
-                                            <span className="text-xl font-black text-[#E07A72]">
+                                            <span className="text-xl font-black text-[#D49800]">
                                                 {formatRupiah(Number(item.price) - (Number(item.price) * (promo?.discount || 0) / 100))}
                                             </span>
                                         </>

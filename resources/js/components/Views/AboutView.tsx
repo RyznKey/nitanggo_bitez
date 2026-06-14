@@ -6,7 +6,7 @@ export default function AboutView({ isActive }: { isActive: boolean }) {
     }
 
     return (
-        <div className="relative min-h-screen bg-[#FFF5ED] overflow-hidden text-[#4A3B32] font-sans pb-20">
+        <div className="relative min-h-screen bg-[#fcf8f2] overflow-hidden text-[#4A3B32] font-sans pb-20">
             
             {/* ====== KUSTOM ANIMASI ====== */}
             <style>{`
@@ -23,7 +23,7 @@ export default function AboutView({ isActive }: { isActive: boolean }) {
             `}</style>
 
             {/* ====== TABURAN SPRINKLES (Disembunyikan di HP kecil) ====== */}
-            <div className="hidden sm:block absolute top-20 left-10 w-4 h-4 bg-[#FBC6C1] rounded-full opacity-70 animate-float-1"></div>
+            <div className="hidden sm:block absolute top-20 left-10 w-4 h-4 bg-[#F8C83B] rounded-full opacity-70 animate-float-1"></div>
             <div className="hidden md:block absolute top-40 right-20 w-3 h-3 bg-[#FCD34D] rounded-full opacity-60 animate-float-1"></div>
             <div className="hidden lg:block absolute bottom-1/3 left-1/4 w-5 h-5 bg-[#C2E9E6] rounded-full opacity-50 animate-float-1"></div>
 
@@ -35,7 +35,7 @@ export default function AboutView({ isActive }: { isActive: boolean }) {
                         DESSERT PREMIUM YANG CREAMY
                     </span>
                     <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-[#4A3B32] mb-6 tracking-tight">
-                        Tentang <span className="text-[#E07A72]">Nyicheeze</span>
+                        Tentang <span className="text-[#D49800]">Nyicheeze</span>
                     </h2>
                     <p className="text-lg sm:text-xl text-[#7A6A60] leading-relaxed">
                         Nyicheeze adalah dessert yang memadukan gurihnya cream cheese premium dengan kelembutan biskuit, 
@@ -93,15 +93,15 @@ export default function AboutView({ isActive }: { isActive: boolean }) {
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-5">
                             
                             {/* Varian 01 */}
-                            <div className="group relative bg-white/70 backdrop-blur-md rounded-[24px] p-6 sm:p-8 flex items-center gap-6 overflow-hidden border border-white/60 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-[#FBC6C1]/20 hover:bg-white">
-                                <div className="absolute -right-4 top-1/2 -translate-y-1/2 text-[120px] font-black text-[#FDE8E7]/40 z-0 group-hover:text-[#FBC6C1]/30 transition-colors duration-300 pointer-events-none">01</div>
-                                <div className="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 bg-[#FDE8E7] rounded-2xl flex items-center justify-center relative z-10 group-hover:scale-110 transition-transform duration-300">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 sm:w-10 sm:h-10 text-[#E07A72]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <div className="group relative bg-white/70 backdrop-blur-md rounded-[24px] p-6 sm:p-8 flex items-center gap-6 overflow-hidden border border-white/60 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-[#F8C83B]/20 hover:bg-white">
+                                <div className="absolute -right-4 top-1/2 -translate-y-1/2 text-[120px] font-black text-[#FDF1D5]/40 z-0 group-hover:text-[#F8C83B]/30 transition-colors duration-300 pointer-events-none">01</div>
+                                <div className="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 bg-[#FDF1D5] rounded-2xl flex items-center justify-center relative z-10 group-hover:scale-110 transition-transform duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 sm:w-10 sm:h-10 text-[#D49800]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                                     </svg>
                                 </div>
                                 <div className="relative z-10">
-                                    <h5 className="text-xl font-bold text-[#4A3B32] mb-2 group-hover:text-[#E07A72] transition-colors duration-300">Choco Cheeze</h5>
+                                    <h5 className="text-xl font-bold text-[#4A3B32] mb-2 group-hover:text-[#D49800] transition-colors duration-300">Choco Cheeze</h5>
                                     <p className="text-sm sm:text-base text-[#7A6A60] leading-relaxed m-0">Perpaduan cokelat dan cream cheese gurih serta biskuit yang lembut.</p>
                                 </div>
                             </div>
