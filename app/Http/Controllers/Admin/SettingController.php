@@ -38,4 +38,31 @@ class SettingController extends Controller
 
         return redirect()->back()->with('success', 'Pengaturan Promo berhasil disimpan.');
     }
+
+    public function homepage()
+    {
+        $hampersImage = Setting::where('key', 'hampers_image')->value('value');
+
+        return Inertia::render('admin/settings/homepage', [
+            'hampersImage' => $hampersImage,
+        ]);
+    }
+
+    public function updateHomepage(Request $request)
+    {
+        $request->validate([
+            'hampers_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+        ]);
+
+        if ($request->hasFile('hampers_image')) {
+            $file = $request->file('hampers_image');
+            $cloudinary = new \Cloudinary\Cloudinary(env('CLOUDINARY_URL'));
+            $result = $cloudinary->uploadApi()->upload($file->getRealPath(), [
+                'folder' => 'nitanggo_settings'
+            ]);
+            Setting::updateOrCreate(['key' => 'hampers_image'], ['value' => $result['secure_url']]);
+        }
+
+        return redirect()->back()->with('success', 'Pengaturan Beranda berhasil disimpan.');
+    }
 }

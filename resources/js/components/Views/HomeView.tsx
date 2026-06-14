@@ -3,9 +3,10 @@
 type HomeViewProps = {
     isActive: boolean;
     setCurrentView: (view: string) => void;
+    hampersImage?: string;
 };
 
-export default function HomeView({ isActive, setCurrentView }: HomeViewProps) {
+export default function HomeView({ isActive, setCurrentView, hampersImage }: HomeViewProps) {
     if (!isActive) {
         return null;
     }
@@ -172,7 +173,7 @@ export default function HomeView({ isActive, setCurrentView }: HomeViewProps) {
                     <div className="relative flex justify-center order-1">
                         <div className="absolute w-56 h-56 sm:w-72 sm:h-72 bg-[#EBF7F6] rounded-full -left-2 top-0 -z-0 animate-pulse-soft"></div>
                         <div className="relative w-48 h-48 sm:w-64 sm:h-64 rounded-full overflow-hidden border-4 sm:border-8 border-[#D1F0ED] shadow-md z-10">
-                            <img src="/assets/catering_dessert.png" alt="Custom Hampers" className="w-full h-full object-cover" />
+                            <img src={hampersImage || "/assets/catering_dessert.png"} alt="Custom Hampers" className="w-full h-full object-cover" />
                         </div>
                     </div>
                     <div className="space-y-3 text-center md:text-left order-2">

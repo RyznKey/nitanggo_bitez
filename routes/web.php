@@ -35,6 +35,7 @@ Route::get('/', function () {
             'name' => Setting::where('key', 'promo_name')->value('value'),
             'discount' => (int) Setting::where('key', 'promo_discount')->value('value'),
         ],
+        'hampersImage' => Setting::where('key', 'hampers_image')->value('value') ?? '/assets/catering_dessert.png',
     ]);
 })->name('home');
 
@@ -55,6 +56,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('customers', [CustomerController::class, 'index'])->name('customers.index');
         Route::get('settings/promo', [SettingController::class, 'promo'])->name('settings.promo');
         Route::post('settings/promo', [SettingController::class, 'updatePromo']);
+        Route::get('settings/homepage', [SettingController::class, 'homepage'])->name('settings.homepage');
+        Route::post('settings/homepage', [SettingController::class, 'updateHomepage']);
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     });
 });
@@ -71,6 +74,7 @@ Route::prefix('{current_team}')
                     'name' => \App\Models\Setting::where('key', 'promo_name')->value('value'),
                     'discount' => (int) \App\Models\Setting::where('key', 'promo_discount')->value('value'),
                 ],
+                'hampersImage' => \App\Models\Setting::where('key', 'hampers_image')->value('value') ?? '/assets/catering_dessert.png',
                 'defaultView' => 'view-membership'
             ]);
         })->name('dashboard');

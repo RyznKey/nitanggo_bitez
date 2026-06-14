@@ -13,6 +13,7 @@ export default function AdminLayout({ children, title }: { children: React.React
         { name: 'Arus Kas', href: '/admin/transactions', active: url.startsWith('/admin/transactions'), icon: <Wallet size={20} /> },
         { name: 'Pelanggan', href: '/admin/customers', active: url.startsWith('/admin/customers'), icon: <Users size={20} /> },
         { name: 'Promo', href: '/admin/settings/promo', active: url.startsWith('/admin/settings/promo'), icon: <Gift size={20} /> },
+        { name: 'Tampilan', href: '/admin/settings/homepage', active: url.startsWith('/admin/settings/homepage'), icon: <LayoutDashboard size={20} /> },
     ];
 
     return (
