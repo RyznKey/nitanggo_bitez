@@ -303,6 +303,23 @@ Saya akan melakukan pembayaran menggunakan QRIS. Mohon konfirmasinya ya!`;
                                     </div>
                                 )}
                             </div>
+
+                            {/* PEMBAYARAN QRIS */}
+                            <div className="border-t border-gray-100 pt-5 pb-2 text-center">
+                                <h3 className="mb-4 text-xs font-bold text-gray-400 uppercase tracking-wider">Scan QRIS</h3>
+                                <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 w-full shadow-sm">
+                                    <p className="text-xs text-gray-500 mb-3">Silakan scan kode QRIS di bawah ini untuk membayar pesanan Anda.</p>
+                                    <img 
+                                        src="/assets/qris.jpeg" 
+                                        alt="QRIS Nitanggo Bitez" 
+                                        className="w-full max-w-[200px] h-auto mx-auto rounded-lg"
+                                        onError={(e) => {
+                                            (e.target as HTMLImageElement).src = '/assets/produk.png';
+                                        }}
+                                    />
+                                    <p className="text-xs text-gray-500 mt-3 font-semibold tracking-wide">a.n. NITANGGO, HIBURAN</p>
+                                </div>
+                            </div>
                         </div>
 
                         <div className="sticky bottom-0 z-10 border-t border-gray-100 bg-white rounded-b-3xl p-5 shadow-[0_-10px_20px_rgba(0,0,0,0.03)]">
@@ -395,7 +412,7 @@ Saya akan melakukan pembayaran menggunakan QRIS. Mohon konfirmasinya ya!`;
                         
                         <h3 className="text-2xl font-extrabold text-[#2B2118] mb-2">Hore! Pesanan Tercatat 🎉</h3>
                         <p className="text-gray-500 text-sm mb-8 leading-relaxed">
-                            Pesanan Anda telah berhasil masuk ke sistem kami. Silakan cek jendela obrolan WhatsApp Anda untuk melakukan pembayaran dan mengirimkan bukti QRIS.
+                            Pesanan Anda telah berhasil masuk ke sistem kami. Silakan cek jendela obrolan WhatsApp Anda untuk mengirimkan bukti QRIS.
                         </p>
                         
                         <button
