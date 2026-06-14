@@ -60,8 +60,8 @@ export default function MembershipView({
                     </div>
 
                     {/* Dessert Image Placement */}
-                    <div className="hidden md:block absolute -right-10 top-0 w-[450px] pointer-events-none z-[-1]">
-                        <img src="/assets/hero_dessert.png" alt="Dessert Banner" className="w-full h-auto drop-shadow-2xl" onError={(e) => (e.currentTarget.style.display = 'none')} />
+                    <div className="hidden md:block absolute -right-20 top-0 w-[550px] pointer-events-none z-[-1]">
+                        <img src="/assets/hero_dessert.png" alt="Dessert Banner" className="w-full h-auto rounded-[32px] mix-blend-multiply opacity-95 transition-all duration-700 hover:scale-105" onError={(e) => (e.currentTarget.style.display = 'none')} />
                         {/* Fallback floating elements if image fails */}
                         <div className="absolute top-10 right-20 text-4xl opacity-20">🍰</div>
                         <div className="absolute bottom-20 left-20 text-5xl opacity-20">🧋</div>
