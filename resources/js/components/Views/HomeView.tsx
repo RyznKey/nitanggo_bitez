@@ -45,12 +45,12 @@ export default function HomeView({ isActive, setCurrentView }: HomeViewProps) {
                 {/* Visual Utama: Di HP tampil di ATAS (order-1), di Desktop pindah ke KANAN (lg:order-2) */}
                 <div className="relative flex justify-center items-center order-1 lg:order-2 animate-float-1 w-full">
                     {/* Piring diatur menggunakan max-w bertahap agar mengikuti lebar layar smartphone */}
-                    <div className="relative w-full max-w-[280px] sm:max-w-[420px] lg:max-w-[480px] aspect-[4/3] bg-[#F8C83B] rounded-[40px/30px] sm:rounded-[100px/60px] rotate-[-4deg] shadow-xl shadow-[#4A3B32]/5 flex items-center justify-center p-3 sm:p-4 transition-transform duration-500 hover:scale-105">
-                        <div className="absolute inset-1.5 sm:inset-2 border border-white/40 rounded-[35px/25px] sm:rounded-[90px/50px]"></div>
+                    <div className="relative w-full max-w-[280px] sm:max-w-[420px] lg:max-w-[480px] aspect-[4/3] bg-[#F8C83B] rounded-[40px] sm:rounded-[80px] rotate-[-4deg] shadow-xl shadow-[#4A3B32]/5 flex items-center justify-center p-3 sm:p-4 transition-transform duration-500 hover:scale-105">
+                        <div className="absolute inset-1.5 sm:inset-2 border border-white/40 rounded-[32px] sm:rounded-[70px]"></div>
                         <img 
-                            src="/assets/hero_dessert.png" 
+                            src="/assets/hero.png" 
                             alt="Cupcake Premium" 
-                            className="w-[85%] h-auto drop-shadow-[0_10px_20px_rgba(0,0,0,0.12)] transform rotate-[4deg]" 
+                            className="w-[85%] h-auto rounded-[24px] sm:rounded-[40px] drop-shadow-[0_10px_20px_rgba(0,0,0,0.12)] transform rotate-[4deg] object-cover" 
                         />
                     </div>
                 </div>

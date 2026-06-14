@@ -44,24 +44,10 @@ export default function MembershipView({
                         <span className="text-[#F8C83B]">FREE!</span>
                     </h1>
                     
-                    <p className="text-[#7A6A60] text-lg font-medium mt-6 mb-8 max-w-md leading-relaxed">
-                        Gabung menjadi member dan dapatkan reward spesial setiap pembelian! <span className="text-[#F8C83B]">♡</span>
-                    </p>
-
-                    <div className="flex flex-wrap items-center gap-4">
-                        <button className="bg-[#F8C83B] hover:bg-[#eab308] text-[#2B2118] font-bold py-3.5 px-8 rounded-xl shadow-lg shadow-[#F8C83B]/30 transition-transform hover:-translate-y-1 flex items-center gap-2">
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                            Gabung Member Sekarang
-                        </button>
-                        <button className="bg-white border-2 border-gray-200 text-[#2B2118] font-bold py-3.5 px-8 rounded-xl hover:bg-gray-50 transition-colors flex items-center gap-2">
-                            <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            Lihat Cara Kerja
-                        </button>
-                    </div>
 
                     {/* Dessert Image Placement */}
-                    <div className="hidden md:block absolute -right-20 top-0 w-[550px] pointer-events-none z-[-1]">
-                        <img src="/assets/hero_dessert.png" alt="Dessert Banner" className="w-full h-auto rounded-[32px] mix-blend-multiply opacity-95 transition-all duration-700 hover:scale-105" onError={(e) => (e.currentTarget.style.display = 'none')} />
+                    <div className="hidden md:block absolute -right-10 top-0 w-[550px] pointer-events-none z-[-1]">
+                        <img src="/assets/hero.png" alt="Dessert Banner" className="w-full h-auto drop-shadow-2xl transition-transform duration-700 hover:scale-105" onError={(e) => (e.currentTarget.style.display = 'none')} />
                         {/* Fallback floating elements if image fails */}
                         <div className="absolute top-10 right-20 text-4xl opacity-20">🍰</div>
                         <div className="absolute bottom-20 left-20 text-5xl opacity-20">🧋</div>
@@ -156,18 +142,7 @@ export default function MembershipView({
                                 <div className="absolute bottom-2 right-2 text-3xl opacity-80 mix-blend-overlay">🍰</div>
                             </div>
                             
-                            {/* Barcode Area */}
-                            <div className="w-1/3 bg-gray-50 rounded-2xl p-3 flex flex-col items-center justify-center border border-gray-100 text-center">
-                                <p className="text-[9px] font-bold text-gray-500 mb-2 leading-tight">Tunjukkan barcode ini saat pembayaran</p>
-                                {/* Fake Barcode */}
-                                <div className="flex items-center w-full h-10 mb-2">
-                                    {[2, 1, 3, 1, 2, 2, 1, 3, 2, 1].map((w, i) => (
-                                        <div key={i} className="bg-black h-full flex-1 mx-[0.5px]" style={{ flexGrow: w }}></div>
-                                    ))}
-                                </div>
-                                <p className="font-mono text-[10px] font-bold text-[#2B2118] tracking-widest">{member.id.replace('NTG-', '')}</p>
-                                <p className="text-[7px] text-gray-400 mt-1 leading-tight">Berlaku di semua outlet Nitanggo Bitez</p>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -282,11 +257,23 @@ export default function MembershipView({
                     <div className="absolute bottom-0 left-0 w-32 h-32 bg-yellow-500/20 rounded-full blur-2xl -ml-10 -mb-10 pointer-events-none"></div>
                     
                     <div className="relative z-10 text-center">
-                        <h3 className="text-3xl font-extrabold text-[#2B2118] mb-2 leading-tight">Yeaayy! 🎉</h3>
+                        <h3 className="text-3xl font-extrabold text-[#2B2118] mb-2 leading-tight">
+                            {currentProgress === 0 && progressCount > 0 ? 'Selamat! 🎁' : 'Yeaayy! 🎉'}
+                        </h3>
                         <p className="text-[#2B2118] text-sm font-medium">
-                            Kamu tinggal<br/>
-                            <span className="text-xl font-black">1 pembelian lagi</span><br/>
-                            untuk dapat 2 Drinks FREE!
+                            {currentProgress === 0 && progressCount > 0 ? (
+                                <>
+                                    Saatnya menukarkan<br/>
+                                    <span className="text-xl font-black">Reward Kamu!</span><br/>
+                                    Dapatkan 2 Drinks FREE!
+                                </>
+                            ) : (
+                                <>
+                                    Kamu tinggal<br/>
+                                    <span className="text-xl font-black">{remaining} pembelian lagi</span><br/>
+                                    untuk dapat 2 Drinks FREE!
+                                </>
+                            )}
                         </p>
                     </div>
                     
@@ -302,6 +289,28 @@ export default function MembershipView({
                         Pesan Sekarang 
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
                     </button>
+                </div>
+
+                {/* ========================================= */}
+                {/* FULL WIDTH: SYARAT & KETENTUAN (COL SPAN 12) */}
+                {/* ========================================= */}
+                <div className="lg:col-span-12 bg-white rounded-[2rem] p-8 sm:p-10 shadow-sm border border-gray-100 mt-2">
+                    <h3 className="font-bold text-[#2B2118] mb-6 text-xl flex items-center gap-2">
+                        <svg className="w-6 h-6 text-[#D49800]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        Syarat & Ketentuan
+                    </h3>
+                    <ul className="space-y-3 text-[#7A6A60] text-sm md:text-base leading-relaxed pl-5 list-decimal marker:font-bold marker:text-[#F8C83B]">
+                        <li className="pl-2">Setiap pembelian produk mendapatkan 1 stamp.</li>
+                        <li className="pl-2">Reward dapat diklaim setelah mencapai 5 stamp.</li>
+                        <li className="pl-2">Reward berupa 2 minuman GRATIS.</li>
+                        <li className="pl-2">Stamp berlaku selama 30 hari sejak stamp pertama diperoleh.</li>
+                        <li className="pl-2">Setelah reward diklaim, jumlah stamp akan kembali ke 0.</li>
+                        <li className="pl-2">Reward tidak dapat diuangkan atau dipindahtangankan.</li>
+                        <li className="pl-2">Jenis minuman mengikuti ketersediaan menu Nitanggo Bitez.</li>
+                        <li className="pl-2">Nitanggo Bitez berhak mengubah program membership sewaktu-waktu dengan pemberitahuan sebelumnya.</li>
+                    </ul>
                 </div>
 
             </div>

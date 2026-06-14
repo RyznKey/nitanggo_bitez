@@ -1,4 +1,4 @@
-import { Form, Head } from '@inertiajs/react';
+import { Form, Head, Link } from '@inertiajs/react';
 import InputError from '@/components/input-error';
 import PasswordInput from '@/components/password-input';
 import TextLink from '@/components/text-link';
@@ -27,7 +27,7 @@ export default function Register({ passwordRules }: Props) {
                     <>
                         <div className="grid gap-6">
                             <div className="grid gap-2">
-                                <Label htmlFor="name">Name</Label>
+                                <Label htmlFor="name">Nama Lengkap</Label>
                                 <Input
                                     id="name"
                                     type="text"
@@ -36,7 +36,7 @@ export default function Register({ passwordRules }: Props) {
                                     tabIndex={1}
                                     autoComplete="name"
                                     name="name"
-                                    placeholder="Full name"
+                                    placeholder="Nama Lengkap"
                                 />
                                 <InputError
                                     message={errors.name}
@@ -45,7 +45,7 @@ export default function Register({ passwordRules }: Props) {
                             </div>
 
                             <div className="grid gap-2">
-                                <Label htmlFor="email">Email address</Label>
+                                <Label htmlFor="email">Email</Label>
                                 <Input
                                     id="email"
                                     type="email"
@@ -59,11 +59,26 @@ export default function Register({ passwordRules }: Props) {
                             </div>
 
                             <div className="grid gap-2">
+                                <Label htmlFor="phone">Nomor HP</Label>
+                                <Input
+                                    id="phone"
+                                    type="tel"
+                                    required
+                                    tabIndex={3}
+                                    autoComplete="tel"
+                                    name="phone"
+                                    placeholder="081234567890"
+                                />
+                                {/* Assuming errors.phone exists if validation fails */}
+                                <InputError message={(errors as any).phone} />
+                            </div>
+
+                            <div className="grid gap-2">
                                 <Label htmlFor="password">Password</Label>
                                 <PasswordInput
                                     id="password"
                                     required
-                                    tabIndex={3}
+                                    tabIndex={4}
                                     autoComplete="new-password"
                                     name="password"
                                     placeholder="Password"
@@ -74,15 +89,15 @@ export default function Register({ passwordRules }: Props) {
 
                             <div className="grid gap-2">
                                 <Label htmlFor="password_confirmation">
-                                    Confirm password
+                                    Konfirmasi Password
                                 </Label>
                                 <PasswordInput
                                     id="password_confirmation"
                                     required
-                                    tabIndex={4}
+                                    tabIndex={5}
                                     autoComplete="new-password"
                                     name="password_confirmation"
-                                    placeholder="Confirm password"
+                                    placeholder="Konfirmasi Password"
                                     passwordrules={passwordRules}
                                 />
                                 <InputError
@@ -93,19 +108,20 @@ export default function Register({ passwordRules }: Props) {
                             <Button
                                 type="submit"
                                 className="mt-2 w-full"
-                                tabIndex={5}
+                                tabIndex={6}
                                 data-test="register-user-button"
                             >
                                 {processing && <Spinner />}
-                                Create account
+                                Daftar Sekarang
                             </Button>
                         </div>
 
-                        <div className="text-center text-sm text-muted-foreground">
-                            Already have an account?{' '}
-                            <TextLink href={login()} tabIndex={6}>
-                                Log in
-                            </TextLink>
+                        <div className="text-center mt-2">
+                            <Button variant="outline" className="w-full text-muted-foreground" asChild>
+                                <Link href={login()} tabIndex={6}>
+                                    Already have an account? Log in
+                                </Link>
+                            </Button>
                         </div>
                     </>
                 )}
@@ -115,6 +131,6 @@ export default function Register({ passwordRules }: Props) {
 }
 
 Register.layout = {
-    title: 'Create an account',
-    description: 'Enter your details below to create your account',
+    title: 'Pendaftaran Member',
+    description: 'Isi formulir di bawah ini untuk membuat akun member',
 };
