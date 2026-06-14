@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class ProductController extends Controller
@@ -42,9 +43,11 @@ class ProductController extends Controller
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = time().'_'.$file->getClientOriginalName();
-            $file->move(public_path('assets/uploads'), $filename);
-            $validated['image'] = '/assets/uploads/'.$filename;
+            $cloudinary = new \Cloudinary\Cloudinary(env('CLOUDINARY_URL'));
+            $result = $cloudinary->uploadApi()->upload($file->getRealPath(), [
+                'folder' => 'products'
+            ]);
+            $validated['image'] = $result['secure_url'];
         }
 
         Product::create($validated);
@@ -90,9 +93,11 @@ class ProductController extends Controller
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = time().'_'.$file->getClientOriginalName();
-            $file->move(public_path('assets/uploads'), $filename);
-            $validated['image'] = '/assets/uploads/'.$filename;
+            $cloudinary = new \Cloudinary\Cloudinary(env('CLOUDINARY_URL'));
+            $result = $cloudinary->uploadApi()->upload($file->getRealPath(), [
+                'folder' => 'products'
+            ]);
+            $validated['image'] = $result['secure_url'];
         } else {
             // Keep the old image if no new file is uploaded
             unset($validated['image']);
