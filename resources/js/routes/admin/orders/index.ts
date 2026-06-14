@@ -79,7 +79,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     index.form = indexForm
 /**
 * @see \App\Http\Controllers\Admin\OrderController::update
- * @see app/Http/Controllers/Admin/OrderController.php:21
+ * @see app/Http/Controllers/Admin/OrderController.php:22
  * @route '/admin/orders/{order}'
  */
 export const update = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -94,7 +94,7 @@ update.definition = {
 
 /**
 * @see \App\Http\Controllers\Admin\OrderController::update
- * @see app/Http/Controllers/Admin/OrderController.php:21
+ * @see app/Http/Controllers/Admin/OrderController.php:22
  * @route '/admin/orders/{order}'
  */
 update.url = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -127,7 +127,7 @@ update.url = (args: { order: number | { id: number } } | [order: number | { id: 
 
 /**
 * @see \App\Http\Controllers\Admin\OrderController::update
- * @see app/Http/Controllers/Admin/OrderController.php:21
+ * @see app/Http/Controllers/Admin/OrderController.php:22
  * @route '/admin/orders/{order}'
  */
 update.put = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -136,7 +136,7 @@ update.put = (args: { order: number | { id: number } } | [order: number | { id: 
 })
 /**
 * @see \App\Http\Controllers\Admin\OrderController::update
- * @see app/Http/Controllers/Admin/OrderController.php:21
+ * @see app/Http/Controllers/Admin/OrderController.php:22
  * @route '/admin/orders/{order}'
  */
 update.patch = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -146,7 +146,7 @@ update.patch = (args: { order: number | { id: number } } | [order: number | { id
 
     /**
 * @see \App\Http\Controllers\Admin\OrderController::update
- * @see app/Http/Controllers/Admin/OrderController.php:21
+ * @see app/Http/Controllers/Admin/OrderController.php:22
  * @route '/admin/orders/{order}'
  */
     const updateForm = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -161,7 +161,7 @@ update.patch = (args: { order: number | { id: number } } | [order: number | { id
 
             /**
 * @see \App\Http\Controllers\Admin\OrderController::update
- * @see app/Http/Controllers/Admin/OrderController.php:21
+ * @see app/Http/Controllers/Admin/OrderController.php:22
  * @route '/admin/orders/{order}'
  */
         updateForm.put = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -175,7 +175,7 @@ update.patch = (args: { order: number | { id: number } } | [order: number | { id
         })
             /**
 * @see \App\Http\Controllers\Admin\OrderController::update
- * @see app/Http/Controllers/Admin/OrderController.php:21
+ * @see app/Http/Controllers/Admin/OrderController.php:22
  * @route '/admin/orders/{order}'
  */
         updateForm.patch = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

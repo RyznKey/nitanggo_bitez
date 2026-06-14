@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Inertia\Inertia;
 use App\Models\Product;
-use App\Models\User;
-
 use App\Models\Setting;
 use App\Models\Transaction;
+use App\Models\User;
+use Inertia\Inertia;
 
 class DashboardController extends Controller
 {
@@ -17,7 +15,7 @@ class DashboardController extends Controller
     {
         $totalIncome = Transaction::where('type', 'income')->sum('amount');
         $totalExpense = Transaction::where('type', 'expense')->sum('amount');
-        
+
         $promoActive = Setting::where('key', 'promo_active')->value('value') === 'true';
 
         $stats = [
@@ -26,11 +24,11 @@ class DashboardController extends Controller
             'active_products' => Product::where('is_active', true)->count(),
             'balance' => $totalIncome - $totalExpense,
             'income' => $totalIncome,
-            'promo_active' => $promoActive
+            'promo_active' => $promoActive,
         ];
 
         return Inertia::render('admin/dashboard', [
-            'stats' => $stats
+            'stats' => $stats,
         ]);
     }
 }

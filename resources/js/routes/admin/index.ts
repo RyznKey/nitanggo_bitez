@@ -84,7 +84,7 @@ login.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     login.form = loginForm
 /**
 * @see \App\Http\Controllers\Admin\DashboardController::dashboard
- * @see app/Http/Controllers/Admin/DashboardController.php:16
+ * @see app/Http/Controllers/Admin/DashboardController.php:14
  * @route '/admin/dashboard'
  */
 export const dashboard = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -99,7 +99,7 @@ dashboard.definition = {
 
 /**
 * @see \App\Http\Controllers\Admin\DashboardController::dashboard
- * @see app/Http/Controllers/Admin/DashboardController.php:16
+ * @see app/Http/Controllers/Admin/DashboardController.php:14
  * @route '/admin/dashboard'
  */
 dashboard.url = (options?: RouteQueryOptions) => {
@@ -108,7 +108,7 @@ dashboard.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Admin\DashboardController::dashboard
- * @see app/Http/Controllers/Admin/DashboardController.php:16
+ * @see app/Http/Controllers/Admin/DashboardController.php:14
  * @route '/admin/dashboard'
  */
 dashboard.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -117,7 +117,7 @@ dashboard.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\Admin\DashboardController::dashboard
- * @see app/Http/Controllers/Admin/DashboardController.php:16
+ * @see app/Http/Controllers/Admin/DashboardController.php:14
  * @route '/admin/dashboard'
  */
 dashboard.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -127,7 +127,7 @@ dashboard.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\Admin\DashboardController::dashboard
- * @see app/Http/Controllers/Admin/DashboardController.php:16
+ * @see app/Http/Controllers/Admin/DashboardController.php:14
  * @route '/admin/dashboard'
  */
     const dashboardForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -137,7 +137,7 @@ dashboard.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\Admin\DashboardController::dashboard
- * @see app/Http/Controllers/Admin/DashboardController.php:16
+ * @see app/Http/Controllers/Admin/DashboardController.php:14
  * @route '/admin/dashboard'
  */
         dashboardForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -146,7 +146,7 @@ dashboard.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\Admin\DashboardController::dashboard
- * @see app/Http/Controllers/Admin/DashboardController.php:16
+ * @see app/Http/Controllers/Admin/DashboardController.php:14
  * @route '/admin/dashboard'
  */
         dashboardForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -162,7 +162,7 @@ dashboard.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     dashboard.form = dashboardForm
 /**
 * @see \App\Http\Controllers\Admin\AuthController::logout
- * @see app/Http/Controllers/Admin/AuthController.php:57
+ * @see app/Http/Controllers/Admin/AuthController.php:58
  * @route '/admin/logout'
  */
 export const logout = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -177,7 +177,7 @@ logout.definition = {
 
 /**
 * @see \App\Http\Controllers\Admin\AuthController::logout
- * @see app/Http/Controllers/Admin/AuthController.php:57
+ * @see app/Http/Controllers/Admin/AuthController.php:58
  * @route '/admin/logout'
  */
 logout.url = (options?: RouteQueryOptions) => {
@@ -186,7 +186,7 @@ logout.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Admin\AuthController::logout
- * @see app/Http/Controllers/Admin/AuthController.php:57
+ * @see app/Http/Controllers/Admin/AuthController.php:58
  * @route '/admin/logout'
  */
 logout.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -196,7 +196,7 @@ logout.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
     /**
 * @see \App\Http\Controllers\Admin\AuthController::logout
- * @see app/Http/Controllers/Admin/AuthController.php:57
+ * @see app/Http/Controllers/Admin/AuthController.php:58
  * @route '/admin/logout'
  */
     const logoutForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -206,7 +206,7 @@ logout.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
             /**
 * @see \App\Http\Controllers\Admin\AuthController::logout
- * @see app/Http/Controllers/Admin/AuthController.php:57
+ * @see app/Http/Controllers/Admin/AuthController.php:58
  * @route '/admin/logout'
  */
         logoutForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

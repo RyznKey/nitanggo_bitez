@@ -13,15 +13,16 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::latest()->get();
+
         return Inertia::render('admin/orders/index', [
-            'orders' => $orders
+            'orders' => $orders,
         ]);
     }
 
     public function update(Request $request, Order $order)
     {
         $request->validate([
-            'status' => 'required|in:pending,completed,cancelled'
+            'status' => 'required|in:pending,completed,cancelled',
         ]);
 
         $order->update(['status' => $request->status]);
@@ -31,7 +32,7 @@ class OrderController extends Controller
             Transaction::create([
                 'type' => 'income',
                 'amount' => $order->total_amount,
-                'description' => 'Pesanan Selesai: ' . $order->customer_name,
+                'description' => 'Pesanan Selesai: '.$order->customer_name,
                 'date' => now()->toDateString(),
             ]);
         }

@@ -17,7 +17,7 @@ class CustomerController extends Controller
             ->get();
 
         return Inertia::render('admin/customers/index', [
-            'customers' => $customers
+            'customers' => $customers,
         ]);
     }
 }

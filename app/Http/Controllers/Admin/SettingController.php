@@ -20,7 +20,7 @@ class SettingController extends Controller
                 'is_active' => $promoActive,
                 'name' => $promoName,
                 'discount' => (int) $promoDiscount,
-            ]
+            ],
         ]);
     }
 

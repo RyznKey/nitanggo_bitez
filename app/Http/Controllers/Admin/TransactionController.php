@@ -12,7 +12,7 @@ class TransactionController extends Controller
     public function index()
     {
         $transactions = Transaction::latest('date')->latest('id')->get();
-        
+
         $totalIncome = Transaction::where('type', 'income')->sum('amount');
         $totalExpense = Transaction::where('type', 'expense')->sum('amount');
         $balance = $totalIncome - $totalExpense;
@@ -22,8 +22,8 @@ class TransactionController extends Controller
             'stats' => [
                 'income' => $totalIncome,
                 'expense' => $totalExpense,
-                'balance' => $balance
-            ]
+                'balance' => $balance,
+            ],
         ]);
     }
 
@@ -44,6 +44,7 @@ class TransactionController extends Controller
     public function destroy(Transaction $transaction)
     {
         $transaction->delete();
+
         return redirect()->route('admin.transactions.index')->with('success', 'Transaksi berhasil dihapus.');
     }
 }

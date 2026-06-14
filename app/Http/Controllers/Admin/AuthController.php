@@ -29,10 +29,11 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $user = Auth::user();
-            
+
             // Periksa apakah user adalah admin
             if ($user->is_admin) {
                 $request->session()->regenerate();
+
                 return redirect()->intended('/admin/dashboard');
             }
 

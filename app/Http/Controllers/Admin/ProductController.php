@@ -15,7 +15,7 @@ class ProductController extends Controller
     public function index()
     {
         return Inertia::render('admin/products/index', [
-            'products' => Product::latest()->get()
+            'products' => Product::latest()->get(),
         ]);
     }
 
@@ -42,9 +42,9 @@ class ProductController extends Controller
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = time() . '_' . $file->getClientOriginalName();
+            $filename = time().'_'.$file->getClientOriginalName();
             $file->move(public_path('assets/uploads'), $filename);
-            $validated['image'] = '/assets/uploads/' . $filename;
+            $validated['image'] = '/assets/uploads/'.$filename;
         }
 
         Product::create($validated);
@@ -66,7 +66,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         return Inertia::render('admin/products/form', [
-            'product' => $product
+            'product' => $product,
         ]);
     }
 
@@ -90,9 +90,9 @@ class ProductController extends Controller
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = time() . '_' . $file->getClientOriginalName();
+            $filename = time().'_'.$file->getClientOriginalName();
             $file->move(public_path('assets/uploads'), $filename);
-            $validated['image'] = '/assets/uploads/' . $filename;
+            $validated['image'] = '/assets/uploads/'.$filename;
         } else {
             // Keep the old image if no new file is uploaded
             unset($validated['image']);
@@ -109,6 +109,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
+
         return redirect()->route('admin.products.index')->with('success', 'Produk berhasil dihapus.');
     }
 }

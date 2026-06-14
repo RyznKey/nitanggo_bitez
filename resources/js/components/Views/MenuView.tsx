@@ -22,10 +22,7 @@ export default function MenuView({
         priceNumber: number;
         quantity: number;
     }[]>([]);
-    const [showQRIS, setShowQRIS] = useState(false);
 
-    // STATE BARU UNTUK MULTI-STEP FORM (1 = Isi Data, 2 = Estimasi Harga)
-    const [formStep, setFormStep] = useState(1);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     const [formData, setFormData] = useState({
@@ -71,8 +68,6 @@ return;
 }
 
         setIsFormOpen(true);
-        setShowQRIS(false);
-        setFormStep(1);
     };
 
     const handleInputChange = (
