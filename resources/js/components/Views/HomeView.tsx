@@ -3,10 +3,13 @@
 type HomeViewProps = {
     isActive: boolean;
     setCurrentView: (view: string) => void;
+    heroImage?: string;
+    signatureImage?: string;
+    membershipImage?: string;
     hampersImage?: string;
 };
 
-export default function HomeView({ isActive, setCurrentView, hampersImage }: HomeViewProps) {
+export default function HomeView({ isActive, setCurrentView, heroImage, signatureImage, membershipImage, hampersImage }: HomeViewProps) {
     if (!isActive) {
         return null;
     }
@@ -49,7 +52,7 @@ export default function HomeView({ isActive, setCurrentView, hampersImage }: Hom
                     <div className="relative w-full max-w-[280px] sm:max-w-[420px] lg:max-w-[480px] aspect-[4/3] bg-[#F8C83B] rounded-[40px] sm:rounded-[80px] rotate-[-4deg] shadow-xl shadow-[#4A3B32]/5 flex items-center justify-center p-3 sm:p-4 transition-transform duration-500 hover:scale-105">
                         <div className="absolute inset-1.5 sm:inset-2 border border-white/40 rounded-[32px] sm:rounded-[70px]"></div>
                         <img 
-                            src="/assets/hero.png" 
+                            src={heroImage || "/assets/hero.png"} 
                             alt="Cupcake Premium" 
                             className="w-[85%] h-auto rounded-[24px] sm:rounded-[40px] drop-shadow-[0_10px_20px_rgba(0,0,0,0.12)] transform rotate-[4deg] object-cover" 
                         />
@@ -130,7 +133,7 @@ export default function HomeView({ isActive, setCurrentView, hampersImage }: Hom
                     <div className="relative flex justify-center order-1">
                         <div className="absolute w-56 h-56 sm:w-72 sm:h-72 bg-[#FDF1D5] rounded-full -left-2 top-0 -z-0 animate-pulse-soft"></div>
                         <div className="relative w-48 h-48 sm:w-64 sm:h-64 rounded-full overflow-hidden border-4 sm:border-8 border-[#FDF1D5] shadow-md z-10">
-                            <img src="/assets/menu_nyicheeze.png" alt="Signature Nyicheeze" className="w-full h-full object-cover" />
+                            <img src={signatureImage || "/assets/menu_nyicheeze.png"} alt="Signature Nyicheeze" className="w-full h-full object-cover" />
                         </div>
                     </div>
                     {/* Teks di bawah pada mobile (order-2) */}
@@ -148,7 +151,7 @@ export default function HomeView({ isActive, setCurrentView, hampersImage }: Hom
                     <div className="relative flex justify-center order-1 md:order-2">
                         <div className="absolute w-56 h-56 sm:w-72 sm:h-72 bg-[#FFF9E6] rounded-full -right-2 top-0 -z-0 animate-pulse-soft"></div>
                         <div className="relative w-48 h-48 sm:w-64 sm:h-64 rounded-full overflow-hidden border-4 sm:border-8 border-[#FFF2CC] shadow-md z-10 animate-float-2">
-                            <img src="/assets/membership_banner.png" alt="Reward Membership" className="w-full h-full object-cover" />
+                            <img src={membershipImage || "/assets/membership_banner.png"} alt="Reward Membership" className="w-full h-full object-cover" />
                         </div>
                     </div>
                     {/* Teks tampil di bawah gambar pada mobile (order-2), tapi di kiri pada desktop (md:order-1) */}

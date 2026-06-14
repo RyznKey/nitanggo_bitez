@@ -41,26 +41,37 @@ class SettingController extends Controller
 
     public function homepage()
     {
-        $hampersImage = Setting::where('key', 'hampers_image')->value('value');
+        $images = [
+            'heroImage' => Setting::where('key', 'hero_image')->value('value'),
+            'signatureImage' => Setting::where('key', 'signature_image')->value('value'),
+            'membershipImage' => Setting::where('key', 'membership_image')->value('value'),
+            'hampersImage' => Setting::where('key', 'hampers_image')->value('value'),
+        ];
 
-        return Inertia::render('admin/settings/homepage', [
-            'hampersImage' => $hampersImage,
-        ]);
+        return Inertia::render('admin/settings/homepage', $images);
     }
 
     public function updateHomepage(Request $request)
     {
         $request->validate([
+            'hero_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'signature_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'membership_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
             'hampers_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
         ]);
 
-        if ($request->hasFile('hampers_image')) {
-            $file = $request->file('hampers_image');
-            $cloudinary = new \Cloudinary\Cloudinary(env('CLOUDINARY_URL'));
-            $result = $cloudinary->uploadApi()->upload($file->getRealPath(), [
-                'folder' => 'nitanggo_settings'
-            ]);
-            Setting::updateOrCreate(['key' => 'hampers_image'], ['value' => $result['secure_url']]);
+        $cloudinary = new \Cloudinary\Cloudinary(env('CLOUDINARY_URL'));
+
+        $keys = ['hero_image', 'signature_image', 'membership_image', 'hampers_image'];
+
+        foreach ($keys as $key) {
+            if ($request->hasFile($key)) {
+                $file = $request->file($key);
+                $result = $cloudinary->uploadApi()->upload($file->getRealPath(), [
+                    'folder' => 'nitanggo_settings'
+                ]);
+                Setting::updateOrCreate(['key' => $key], ['value' => $result['secure_url']]);
+            }
         }
 
         return redirect()->back()->with('success', 'Pengaturan Beranda berhasil disimpan.');

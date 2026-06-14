@@ -35,6 +35,9 @@ Route::get('/', function () {
             'name' => Setting::where('key', 'promo_name')->value('value'),
             'discount' => (int) Setting::where('key', 'promo_discount')->value('value'),
         ],
+        'heroImage' => Setting::where('key', 'hero_image')->value('value') ?? '/assets/hero.png',
+        'signatureImage' => Setting::where('key', 'signature_image')->value('value') ?? '/assets/menu_nyicheeze.png',
+        'membershipImage' => Setting::where('key', 'membership_image')->value('value') ?? '/assets/membership_banner.png',
         'hampersImage' => Setting::where('key', 'hampers_image')->value('value') ?? '/assets/catering_dessert.png',
     ]);
 })->name('home');
@@ -74,6 +77,9 @@ Route::prefix('{current_team}')
                     'name' => \App\Models\Setting::where('key', 'promo_name')->value('value'),
                     'discount' => (int) \App\Models\Setting::where('key', 'promo_discount')->value('value'),
                 ],
+                'heroImage' => \App\Models\Setting::where('key', 'hero_image')->value('value') ?? '/assets/hero.png',
+                'signatureImage' => \App\Models\Setting::where('key', 'signature_image')->value('value') ?? '/assets/menu_nyicheeze.png',
+                'membershipImage' => \App\Models\Setting::where('key', 'membership_image')->value('value') ?? '/assets/membership_banner.png',
                 'hampersImage' => \App\Models\Setting::where('key', 'hampers_image')->value('value') ?? '/assets/catering_dessert.png',
                 'defaultView' => 'view-membership'
             ]);
