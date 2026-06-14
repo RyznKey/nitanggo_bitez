@@ -20,8 +20,8 @@ class DashboardController extends Controller
 
         $stats = [
             'total_products' => Product::count(),
-            'total_users' => User::where('is_admin', false)->count(),
-            'active_products' => Product::where('is_active', true)->count(),
+            'total_users' => User::where('is_admin', 'false')->count(),
+            'active_products' => Product::where('is_active', 'true')->count(),
             'balance' => $totalIncome - $totalExpense,
             'income' => $totalIncome,
             'promo_active' => $promoActive,

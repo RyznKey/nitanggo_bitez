@@ -11,7 +11,7 @@ class CustomerController extends Controller
     public function index()
     {
         // Get all non-admin users
-        $customers = User::where('is_admin', false)
+        $customers = User::where('is_admin', 'false')
             ->orderBy('purchases_count', 'desc')
             ->latest()
             ->get();

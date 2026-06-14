@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return inertia('welcome', [
-        'products' => Product::where('is_active', true)->latest()->get(),
+        'products' => Product::where('is_active', 'true')->latest()->get(),
         'orders' => request()->user() ? Order::where('user_id', request()->user()->id)->latest()->get() : [],
         'promo' => [
             'is_active' => Setting::where('key', 'promo_active')->value('value') === 'true',

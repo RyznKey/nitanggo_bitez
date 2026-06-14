@@ -72,7 +72,7 @@ trait HasTeams
     public function personalTeam(): ?Team
     {
         return $this->teams()
-            ->where('is_personal', true)
+            ->where('is_personal', 'true')
             ->first();
     }
 
