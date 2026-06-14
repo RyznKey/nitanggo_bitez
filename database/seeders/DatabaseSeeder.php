@@ -28,11 +28,8 @@ class DatabaseSeeder extends Seeder
 
         // Create a personal team for the user
         $team = \App\Models\Team::firstOrCreate(
-            ['user_id' => $user->id],
-            [
-                'name' => $user->name . "'s Team",
-                'personal_team' => true,
-            ]
+            ['name' => $user->name . "'s Team"],
+            ['is_personal' => 'true']
         );
 
         // Attach the user to the team as an owner if not already attached
