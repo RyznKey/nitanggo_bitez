@@ -1,7 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import { Wallet, TrendingUp, Users, Package, Gift } from 'lucide-react';
 import React from 'react';
-import AdminLayout from '@/Layouts/AdminLayout';
+import AdminLayout from '@/layouts/AdminLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
 
 export default function Dashboard({ stats }: { stats: any }) {

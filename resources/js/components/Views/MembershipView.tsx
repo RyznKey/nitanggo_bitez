@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 
 type MembershipProps = {
     isActive: boolean;
+    user?: any;
     member: { name: string; since: string; id: string } | null;
     orders?: any[];
     progressCount: number;

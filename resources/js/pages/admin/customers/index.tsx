@@ -1,7 +1,7 @@
 import { Head } from '@inertiajs/react';
 import { Gift } from 'lucide-react';
 import React from 'react';
-import AdminLayout from '@/Layouts/AdminLayout';
+import AdminLayout from '@/layouts/AdminLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
 
 export default function Customers({ customers }: { customers: any[] }) {

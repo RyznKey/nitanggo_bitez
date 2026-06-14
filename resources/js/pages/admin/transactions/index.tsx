@@ -1,6 +1,6 @@
 import { Head, Link, useForm } from '@inertiajs/react';
 import React from 'react';
-import AdminLayout from '@/Layouts/AdminLayout';
+import AdminLayout from '@/layouts/AdminLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
 
 

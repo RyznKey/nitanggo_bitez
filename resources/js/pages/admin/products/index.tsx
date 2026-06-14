@@ -1,6 +1,6 @@
 import { Head, Link, router } from '@inertiajs/react';
 import React from 'react';
-import AdminLayout from '@/Layouts/AdminLayout';
+import AdminLayout from '@/layouts/AdminLayout';
 import { Card } from '../../../components/ui/card';
 
 export default function Index({ products }: { products: any[] }) {
