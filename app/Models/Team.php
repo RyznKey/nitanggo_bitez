@@ -33,6 +33,7 @@ class Team extends Model
     protected function isPersonal(): Attribute
     {
         return Attribute::make(
+            get: fn ($value) => $value === true || $value === 1 || $value === '1' || $value === 'true' || $value === 't',
             set: fn ($value) => $value ? 'true' : 'false',
         );
     }

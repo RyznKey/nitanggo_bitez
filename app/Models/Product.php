@@ -18,14 +18,13 @@ class Product extends Model
     ];
 
     /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
+     * Mutator for Postgres boolean compatibility.
      */
-    protected function casts(): array
+    protected function isActive(): \Illuminate\Database\Eloquent\Casts\Attribute
     {
-        return [
-            'is_active' => 'boolean',
-        ];
+        return \Illuminate\Database\Eloquent\Casts\Attribute::make(
+            get: fn ($value) => $value === true || $value === 1 || $value === '1' || $value === 'true' || $value === 't',
+            set: fn ($value) => $value ? 'true' : 'false',
+        );
     }
 }

@@ -52,7 +52,17 @@ class User extends Authenticatable implements PasskeyUser
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'two_factor_confirmed_at' => 'datetime',
-            'is_admin' => 'boolean',
         ];
+    }
+
+    /**
+     * Mutator for Postgres boolean compatibility.
+     */
+    protected function isAdmin(): \Illuminate\Database\Eloquent\Casts\Attribute
+    {
+        return \Illuminate\Database\Eloquent\Casts\Attribute::make(
+            get: fn ($value) => $value === true || $value === 1 || $value === '1' || $value === 'true' || $value === 't',
+            set: fn ($value) => $value ? 'true' : 'false',
+        );
     }
 }
