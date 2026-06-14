@@ -87,21 +87,21 @@ return;
     const cartItemsText = cart.map(item => `- ${item.name} (${item.quantity} pcs) - ${formatRupiah(item.priceNumber * item.quantity)}`).join('\n');
     const waMessage = `Halo Nitanggo Bitez! Saya ingin memesan:
 
-🛒 *DETAIL PESANAN*
+*DETAIL PESANAN*
 ${cartItemsText}
 
 Catatan: ${formData.catatan || '-'}
 
-👤 *INFORMASI PEMESAN*
+*INFORMASI PEMESAN*
 Nama: ${formData.namaLengkap}
 WA: ${formData.whatsapp}
 Status: ${isMember ? 'Member' : 'Non-Member'}
 
-🚚 *PENGIRIMAN*
+*PENGIRIMAN*
 Metode: ${formData.metodePengambilan}
 ${formData.metodePengambilan === 'Delivery' ? `Alamat: ${formData.alamatPengiriman}` : ''}
 
-💰 *RINGKASAN PEMBAYARAN*
+*RINGKASAN PEMBAYARAN*
 Subtotal: ${formatRupiah(subtotal)}
 Ongkir: ${formatRupiah(ongkir)}
 *Total Pembayaran: ${formatRupiah(totalPembayaran)}*
