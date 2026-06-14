@@ -1,8 +1,13 @@
 <?php
 
 Route::get('/migrate-db-force', function () {
-    \Illuminate\Support\Facades\Artisan::call('migrate:fresh', ['--force' => true, '--seed' => true]);
-    return 'Migrated and seeded successfully!';
+    try {
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+        \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
+        return '<pre>' . \Illuminate\Support\Facades\Artisan::output() . '</pre>';
+    } catch (\Exception $e) {
+        return '<pre>Error: ' . $e->getMessage() . '</pre>';
+    }
 });
 
 use App\Http\Controllers\Admin\AuthController;
