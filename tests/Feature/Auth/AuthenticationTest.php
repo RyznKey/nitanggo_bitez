@@ -21,7 +21,7 @@ test('users can authenticate using the login screen', function () {
     ]);
 
     $this->assertAuthenticated();
-    $response->assertRedirect(route('dashboard'));
+    $response->assertRedirect(route('home'));
 });
 
 test('passkey login response redirects to the current team dashboard', function () {
