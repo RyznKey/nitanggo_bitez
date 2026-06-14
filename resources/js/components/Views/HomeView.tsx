@@ -38,12 +38,12 @@ export default function HomeView({ isActive, setCurrentView }: HomeViewProps) {
 
             {/* ====== 1. HERO SECTION ====== */}
             {/* Menggunakan padding kecil di mobile (pt-8 pb-12) dan membesar di desktop (lg:pt-16 lg:pb-24) */}
-            <section className="relative max-w-7xl mx-auto px-4 sm:px-6 pt-8 pb-12 lg:pt-16 lg:pb-24 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center z-10">
+            <section className="relative max-w-7xl mx-auto px-4 sm:px-6 pt-28 pb-12 lg:pt-16 lg:pb-24 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center z-10">
                 
                 {/* Visual Utama: Di HP tampil di ATAS (order-1), di Desktop pindah ke KANAN (lg:order-2) */}
                 <div className="relative flex justify-center items-center order-1 lg:order-2 animate-float-1 w-full">
                     {/* Piring diatur menggunakan max-w bertahap agar mengikuti lebar layar smartphone */}
-                    <div className="relative w-full max-w-[280px] sm:max-w-[420px] lg:max-w-[480px] aspect-[4/3] bg-[#FBC6C1] rounded-[40px/30px] sm:rounded-[100px/60px] rotate-[-4deg] shadow-xl shadow-[#4A3B32]/5 flex items-center justify-center p-3 sm:p-4 transition-transform duration-500 hover:scale-105">
+                    <div className="relative w-full max-w-70 sm:max-w-105 lg:max-w-120 aspect-4/3 bg-[#FBC6C1] rounded-[40px/30px] sm:rounded-[100px/60px] rotate-[-4deg] shadow-xl shadow-[#4A3B32]/5 flex items-center justify-center p-3 sm:p-4 transition-transform duration-500 hover:scale-105">
                         <div className="absolute inset-1.5 sm:inset-2 border border-white/40 rounded-[35px/25px] sm:rounded-[90px/50px]"></div>
                         <img 
                             src="/assets/hero_dessert.png" 

@@ -385,3 +385,145 @@ dashboard.head = (args: { current_team: string | number } | [current_team: strin
         })
     
     dashboard.form = dashboardForm
+/**
+ * @see routes/web.php:52
+ * @route '/materi-premium'
+ */
+export const materi = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: materi.url(options),
+    method: 'get',
+})
+
+materi.definition = {
+    methods: ["get","head"],
+    url: '/materi-premium',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+ * @see routes/web.php:52
+ * @route '/materi-premium'
+ */
+materi.url = (options?: RouteQueryOptions) => {
+    return materi.definition.url + queryParams(options)
+}
+
+/**
+ * @see routes/web.php:52
+ * @route '/materi-premium'
+ */
+materi.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: materi.url(options),
+    method: 'get',
+})
+/**
+ * @see routes/web.php:52
+ * @route '/materi-premium'
+ */
+materi.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: materi.url(options),
+    method: 'head',
+})
+
+    /**
+ * @see routes/web.php:52
+ * @route '/materi-premium'
+ */
+    const materiForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: materi.url(options),
+        method: 'get',
+    })
+
+            /**
+ * @see routes/web.php:52
+ * @route '/materi-premium'
+ */
+        materiForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: materi.url(options),
+            method: 'get',
+        })
+            /**
+ * @see routes/web.php:52
+ * @route '/materi-premium'
+ */
+        materiForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: materi.url({
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    materi.form = materiForm
+/**
+ * @see routes/web.php:59
+ * @route '/upgrade-akun'
+ */
+export const upgrade = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: upgrade.url(options),
+    method: 'get',
+})
+
+upgrade.definition = {
+    methods: ["get","head"],
+    url: '/upgrade-akun',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+ * @see routes/web.php:59
+ * @route '/upgrade-akun'
+ */
+upgrade.url = (options?: RouteQueryOptions) => {
+    return upgrade.definition.url + queryParams(options)
+}
+
+/**
+ * @see routes/web.php:59
+ * @route '/upgrade-akun'
+ */
+upgrade.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: upgrade.url(options),
+    method: 'get',
+})
+/**
+ * @see routes/web.php:59
+ * @route '/upgrade-akun'
+ */
+upgrade.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: upgrade.url(options),
+    method: 'head',
+})
+
+    /**
+ * @see routes/web.php:59
+ * @route '/upgrade-akun'
+ */
+    const upgradeForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: upgrade.url(options),
+        method: 'get',
+    })
+
+            /**
+ * @see routes/web.php:59
+ * @route '/upgrade-akun'
+ */
+        upgradeForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: upgrade.url(options),
+            method: 'get',
+        })
+            /**
+ * @see routes/web.php:59
+ * @route '/upgrade-akun'
+ */
+        upgradeForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: upgrade.url({
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    upgrade.form = upgradeForm

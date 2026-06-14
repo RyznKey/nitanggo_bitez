@@ -8,7 +8,7 @@ import HomeView from '../components/Views/HomeView';
 import MenuView from '../components/Views/MenuView';
 import MembershipView from '../components/Views/MembershipView';
 import AboutView from '../components/Views/AboutView';
-import OrderGuideView from '../components/Views/OrderGuideView';
+// import OrderGuideView from '../components/Views/OrderGuideView';
 
 // Export Type agar bisa diakses oleh MembershipView 
 export type OrderHistoryItem = {
@@ -121,7 +121,6 @@ export default function Welcome() {
                     />
                     
                     <AboutView isActive={currentView === 'view-about'} />
-                    <OrderGuideView isActive={currentView === 'view-order'} />
                 </main>
 
                 {/* Komponen Footer */}
