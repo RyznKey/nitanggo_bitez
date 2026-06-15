@@ -282,7 +282,7 @@ home.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     
     home.form = homeForm
 /**
- * @see routes/web.php:65
+ * @see routes/web.php:74
  * @route '/{current_team}/dashboard'
  */
 export const dashboard = (args: { current_team: string | number } | [current_team: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -296,7 +296,7 @@ dashboard.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
- * @see routes/web.php:65
+ * @see routes/web.php:74
  * @route '/{current_team}/dashboard'
  */
 dashboard.url = (args: { current_team: string | number } | [current_team: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -323,7 +323,7 @@ dashboard.url = (args: { current_team: string | number } | [current_team: string
 }
 
 /**
- * @see routes/web.php:65
+ * @see routes/web.php:74
  * @route '/{current_team}/dashboard'
  */
 dashboard.get = (args: { current_team: string | number } | [current_team: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -331,7 +331,7 @@ dashboard.get = (args: { current_team: string | number } | [current_team: string
     method: 'get',
 })
 /**
- * @see routes/web.php:65
+ * @see routes/web.php:74
  * @route '/{current_team}/dashboard'
  */
 dashboard.head = (args: { current_team: string | number } | [current_team: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -340,7 +340,7 @@ dashboard.head = (args: { current_team: string | number } | [current_team: strin
 })
 
     /**
- * @see routes/web.php:65
+ * @see routes/web.php:74
  * @route '/{current_team}/dashboard'
  */
     const dashboardForm = (args: { current_team: string | number } | [current_team: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -349,7 +349,7 @@ dashboard.head = (args: { current_team: string | number } | [current_team: strin
     })
 
             /**
- * @see routes/web.php:65
+ * @see routes/web.php:74
  * @route '/{current_team}/dashboard'
  */
         dashboardForm.get = (args: { current_team: string | number } | [current_team: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -357,7 +357,7 @@ dashboard.head = (args: { current_team: string | number } | [current_team: strin
             method: 'get',
         })
             /**
- * @see routes/web.php:65
+ * @see routes/web.php:74
  * @route '/{current_team}/dashboard'
  */
         dashboardForm.head = (args: { current_team: string | number } | [current_team: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -372,7 +372,7 @@ dashboard.head = (args: { current_team: string | number } | [current_team: strin
     
     dashboard.form = dashboardForm
 /**
- * @see routes/web.php:83
+ * @see routes/web.php:97
  * @route '/checkout'
  */
 export const checkout = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -386,7 +386,7 @@ checkout.definition = {
 } satisfies RouteDefinition<["post"]>
 
 /**
- * @see routes/web.php:83
+ * @see routes/web.php:97
  * @route '/checkout'
  */
 checkout.url = (options?: RouteQueryOptions) => {
@@ -394,7 +394,7 @@ checkout.url = (options?: RouteQueryOptions) => {
 }
 
 /**
- * @see routes/web.php:83
+ * @see routes/web.php:97
  * @route '/checkout'
  */
 checkout.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -403,7 +403,7 @@ checkout.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 })
 
     /**
- * @see routes/web.php:83
+ * @see routes/web.php:97
  * @route '/checkout'
  */
     const checkoutForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -412,7 +412,7 @@ checkout.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     })
 
             /**
- * @see routes/web.php:83
+ * @see routes/web.php:97
  * @route '/checkout'
  */
         checkoutForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

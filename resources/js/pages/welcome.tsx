@@ -12,7 +12,7 @@ import MenuView from '../components/Views/MenuView';
 export default function Welcome() {
     const { auth, products, promo, orders, defaultView, heroImage, signatureImage, membershipImage, hampersImage, deliveryFee } = usePage<any>().props;
     const user = auth?.user;
-    
+
     const [currentView, setCurrentView] = useState(defaultView || 'view-home');
     const progressCount = user?.purchases_count || 0;
     const maxProgress = 5;
@@ -31,7 +31,7 @@ export default function Welcome() {
 
             {/* Global Layout Wrapper (Menggantikan styling `body` dari CSS) */}
             <div className="relative flex flex-col min-h-screen font-sans text-[#3d2f26] bg-[#fcf8f2]">
-                
+
                 {/* Background Blobs Converted to Tailwind Arbitrary Values */}
                 <div className="absolute w-100 h-100 rounded-full -z-10 blur-[40px] -top-[100px] -left-[100px] bg-[radial-gradient(circle,rgba(245,185,43,0.1)_0%,rgba(252,248,242,0)_70%)] pointer-events-none"></div>
                 <div className="absolute w-100 h-100 rounded-full -z-10 blur-[40px] top-[300px] -right-[100px] bg-[radial-gradient(circle,rgba(245,185,43,0.1)_0%,rgba(252,248,242,0)_70%)] pointer-events-none"></div>
@@ -67,8 +67,7 @@ export default function Welcome() {
                         progressCount={progressCount}
                         maxProgress={maxProgress}
                     />
-                    
-                    <AboutView isActive={currentView === 'view-about'} />
+
                 </main>
 
                 {/* Komponen Footer */}
