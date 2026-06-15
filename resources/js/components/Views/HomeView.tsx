@@ -44,10 +44,72 @@ export default function HomeView({ isActive, setCurrentView, heroImage, signatur
 
             {/* ====== 1. HERO SECTION ====== */}
             {/* Menggunakan padding kecil di mobile (pt-24 pb-12) dan membesar di desktop (lg:pt-32 lg:pb-24) untuk kompensasi fixed navbar */}
-            <section className="relative max-w-7xl mx-auto px-4 sm:px-6 pt-24 pb-12 lg:pt-32 lg:pb-24 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center z-10">
-                
-                {/* Visual Utama: Di HP tampil di ATAS (order-1), di Desktop pindah ke KANAN (lg:order-2) */}
-                <div className="relative flex justify-center items-center order-1 lg:order-2 animate-float-1 w-full">
+            <div className="relative min-h-screen bg-[#FFFDF6] overflow-hidden font-sans pt-12 md:pt-20">
+      
+      {/* Background Shapes & Decorations */}
+      {/* Kurva kuning besar di sebelah kiri */}
+      <div className="absolute top-0 left-0 w-[80%] md:w-[45%] h-[80%] md:h-full bg-[#FFF1C6] rounded-br-[100px] md:rounded-br-[250px] -z-10"></div>
+      
+      {/* Ikon Keju & Sparkles Kiri (Placeholder / CSS) */}
+      <div className="absolute top-10 left-10 text-[#F6C344] opacity-80 hidden md:block">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20ZM12,6a6,6,0,1,0,6,6A6,6,0,0,0,12,6Zm0,10a4,4,0,1,1,4-4A4,4,0,0,1,12,16Z"/>
+        </svg>
+      </div>
+
+      <div className="absolute top-1/4 left-[5%] md:left-[10%] text-[#F6C344]">
+         {/* Garis-garis kecil di sebelah kiri tulisan ALL ABOUT */}
+         <div className="flex flex-col gap-2 transform -rotate-12">
+            <span className="w-4 h-1.5 bg-[#F6C344] rounded-full block"></span>
+            <span className="w-3 h-1.5 bg-[#F6C344] rounded-full block ml-2"></span>
+         </div>
+      </div>
+
+      <div className="absolute top-[15%] left-[35%] md:left-[38%] text-[#F6C344]">
+        {/* Bintang / Sparkle */}
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+           <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
+        </svg>
+      </div>
+
+      <div className="absolute top-[45%] left-[35%] md:left-[36%] text-[#F6C344]">
+         {/* Garis-garis kecil di sebelah kanan tulisan CHEESE */}
+         <div className="flex flex-col gap-2 transform rotate-12 items-end">
+            <span className="w-4 h-1.5 bg-[#F6C344] rounded-full block"></span>
+            <span className="w-3 h-1.5 bg-[#F6C344] rounded-full block mr-2"></span>
+         </div>
+      </div>
+
+
+      {/* Main Hero Content */}
+      <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-10 lg:gap-0 z-10 pb-20">
+        
+        {/* Kolom Kiri: Teks */}
+        <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left pt-10">
+          <h1 className="text-6xl sm:text-7xl lg:text-[100px] font-black text-[#4E3424] tracking-tight leading-none mb-4" style={{ fontFamily: "'Fredoka One', 'Comic Sans MS', cursive" }}>
+            Nitanggo
+          </h1>
+          
+          <h2 className="text-5xl sm:text-6xl lg:text-[75px] font-black text-[#EBB336] leading-[1.1] mb-8" style={{ fontFamily: "'Fredoka One', 'Comic Sans MS', cursive" }}>
+            ALL ABOUT <br /> CHEESE
+          </h2>
+          
+          {/* Garis Pembatas dengan Hati */}
+          <div className="flex items-center justify-center lg:justify-start gap-4 w-full max-w-[320px] mb-6">
+            <div className="h-[2px] bg-[#D7C9B8] flex-1"></div>
+            <svg className="w-5 h-5 text-[#EBB336]" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+            </svg>
+            <div className="h-[2px] bg-[#D7C9B8] flex-1"></div>
+          </div>
+          
+          <p className="text-xs sm:text-sm font-bold tracking-[0.2em] text-[#4E3424] uppercase">
+            CREAMY • PREMIUM • DELICIOUS
+          </p>
+        </div>
+
+        {/* Kolom Kanan: Gambar Dessert */}
+        <div className="relative flex justify-center items-center order-1 lg:order-2 animate-float-1 w-full">
                     {/* Piring diatur menggunakan max-w bertahap agar mengikuti lebar layar smartphone */}
                     <div className="relative w-full max-w-[280px] sm:max-w-[420px] lg:max-w-[480px] aspect-[4/3] bg-[#F8C83B] rounded-[40px] sm:rounded-[80px] rotate-[-4deg] shadow-xl shadow-[#4A3B32]/5 flex items-center justify-center p-3 sm:p-4 transition-transform duration-500 hover:scale-105">
                         <div className="absolute inset-1.5 sm:inset-2 border border-white/40 rounded-[32px] sm:rounded-[70px]"></div>
@@ -59,35 +121,53 @@ export default function HomeView({ isActive, setCurrentView, heroImage, signatur
                     </div>
                 </div>
 
-                {/* Konten Teks: Di HP tampil di BAWAH gambar (order-2), di Desktop pindah ke KIRI (lg:order-1) */}
-                <div className="space-y-4 sm:space-y-6 text-center lg:text-left order-2 lg:order-1">
-                    <span className="inline-block bg-[#FDF1D5] border border-[#F8C83B] text-[#D49800] text-[10px] sm:text-xs font-bold px-3 py-1 sm:px-4 sm:py-1.5 rounded-full tracking-wider uppercase">
-                        🍰 DESSERT PREMIUM RASA LOYALITAS
-                    </span>
-                    {/* Font size bertahap dari text-3xl sampai text-6xl */}
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#4A3B32] leading-[1.2] lg:leading-[1.15] tracking-tight">
-                        Rasakan Sensasi <br />
-                        <span className="text-[#D49800]">Dessert Box</span> Terbaik & Creamy
-                    </h1>
-                    <p className="text-sm sm:text-base md:text-lg text-[#7A6A60] max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                        Nitanggo Bitez menyajikan aneka Nyicheeze, cake berkualitas tinggi yang dibuat dengan cinta untuk menemani momen manismu.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-2">
-                        <button 
-                            onClick={() => setCurrentView('view-menu')}
-                            className="w-full sm:w-auto text-center px-8 py-3.5 bg-[#F8C83B] text-white font-bold rounded-2xl shadow-md shadow-[#E07A72]/20 transition-all duration-300 hover:bg-[#eab308] hover:-translate-y-0.5 cursor-pointer"
-                        >
-                            Lihat Menu Populer
-                        </button>
-                        <button 
-                            onClick={() => setCurrentView('view-membership')}
-                            className="w-full sm:w-auto text-center px-8 py-3.5 bg-white text-[#D49800] font-bold rounded-2xl border-2 border-[#F8C83B] shadow-sm transition-all duration-300 hover:bg-[#FDF1D5] hover:-translate-y-0.5 cursor-pointer"
-                        >
-                            Gabung Membership
-                        </button>
-                    </div>
-                </div>
-            </section>
+      </section>
+
+      {/* Bottom Section: NYICHEEZE Info Box */}
+      <section className="relative z-20 bg-white rounded-t-[40px] lg:rounded-t-[60px] px-6 py-12 lg:py-16 mt-[-40px] lg:mt-[-80px] shadow-[0_-15px_40px_rgba(0,0,0,0.02)]">
+        <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
+          
+          {/* Judul NYICHEEZE dengan Aksen Garis Kuning */}
+          <div className="flex items-center justify-center gap-4 lg:gap-6 mb-6">
+            {/* Garis Aksen Kiri */}
+            <div className="flex flex-col gap-1.5 items-end transform -rotate-[20deg] text-[#F5C243]">
+               <svg width="24" height="8" viewBox="0 0 24 8" fill="currentColor"><rect width="24" height="4" rx="2"/></svg>
+               <svg width="32" height="8" viewBox="0 0 32 8" fill="currentColor"><rect width="32" height="4" rx="2"/></svg>
+               <svg width="24" height="8" viewBox="0 0 24 8" fill="currentColor"><rect width="24" height="4" rx="2"/></svg>
+            </div>
+            
+            <h2 className="text-4xl lg:text-[50px] font-black text-[#4E3424] tracking-wide" style={{ fontFamily: "'Fredoka One', 'Comic Sans MS', cursive" }}>
+              NYICHEEZE
+            </h2>
+
+            {/* Garis Aksen Kanan */}
+            <div className="flex flex-col gap-1.5 items-start transform rotate-[20deg] text-[#F5C243]">
+               <svg width="24" height="8" viewBox="0 0 24 8" fill="currentColor"><rect width="24" height="4" rx="2"/></svg>
+               <svg width="32" height="8" viewBox="0 0 32 8" fill="currentColor"><rect width="32" height="4" rx="2"/></svg>
+               <svg width="24" height="8" viewBox="0 0 24 8" fill="currentColor"><rect width="24" height="4" rx="2"/></svg>
+            </div>
+          </div>
+
+          {/* Paragraf Deskripsi */}
+          <p className="text-[#4E3424] text-sm lg:text-[16px] leading-[1.8] mb-8 max-w-[800px] font-medium">
+            Nyicheeze adalah dessert yang memadukan gurihnya cream cheese premium 
+            dengan kelembutan biskuit, disajikan dalam cube-cup sehingga siap santap 
+            dan mudah dibawa kemana saja. Setiap suapan menghadirkan 
+            sensasi manis-gurih yang lumer di mulut.
+          </p>
+
+          {/* Tombol Learn More */}
+          <button className="inline-flex items-center justify-center gap-2 bg-[#FEE27B] hover:bg-[#F5C243] text-[#4E3424] font-bold text-sm lg:text-base px-8 py-3.5 rounded-2xl transition-colors duration-300">
+            Learn more
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </button>
+          
+        </div>
+      </section>
+
+    </div>
 
             {/* ====== 2. FEATURE BADGES ROW ====== */}
             {/* Di HP baris berbaris ke bawah (grid-cols-1), di tablet ke samping (md:grid-cols-3) */}
