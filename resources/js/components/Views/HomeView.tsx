@@ -70,7 +70,7 @@ export default function HomeView({ isActive, setCurrentView, heroImage, signatur
                         <span className="text-[#D49800]">Dessert Box</span> Terbaik & Creamy
                     </h1>
                     <p className="text-sm sm:text-base md:text-lg text-[#7A6A60] max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                        Nitanggo Bitez menyajikan aneka Nyicheeze, cake, dan minuman segar berkualitas tinggi yang dibuat dengan cinta untuk menemani momen manismu.
+                        Nitanggo Bitez menyajikan aneka Nyicheeze, cake berkualitas tinggi yang dibuat dengan cinta untuk menemani momen manismu.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-2">
                         <button 
@@ -140,7 +140,7 @@ export default function HomeView({ isActive, setCurrentView, heroImage, signatur
                     <div className="space-y-3 text-center md:text-left order-2">
                         <h3 className="text-2xl sm:text-3xl font-extrabold text-[#4A3B32]">Nyicheeze & Cake Signature</h3>
                         <p className="text-sm sm:text-base text-[#7A6A60] leading-relaxed">
-                            Nikmati kelembutan krim keju berlapis premium berpadu dengan biskuit renyah dan buah segar pilihan di setiap lapisan wadah saji kami.
+                            Nikmati kelembutan krim keju berlapis premium berpadu dengan biskuit pilihan di setiap lapisan wadah saji kami.
                         </p>
                     </div>
                 </section>
@@ -158,7 +158,7 @@ export default function HomeView({ isActive, setCurrentView, heroImage, signatur
                     <div className="space-y-3 text-center md:text-left order-2 md:order-1">
                         <h3 className="text-2xl sm:text-3xl font-extrabold text-[#4A3B32]">Gabung Member Nitanggo & Dapatkan Reward Spesial!</h3>
                         <p className="text-sm sm:text-base text-[#7A6A60] leading-relaxed">
-                            Kumpulkan progres poin otomatis setiap kali Anda berbelanja. Dapatkan bonus langsung berupa <span className="font-bold text-[#D49800]">2 Minuman Gratis</span> setelah melakukan 5 pembelian pertama!
+                            kumpulkan point  sebanyak banyaknya untuk mengikuti event promo yang mendatang. Dapatkan bonus langsung berupa <span className="font-bold text-[#D49800]">2 Minuman Gratis</span> Setiap pembelian 5 produk
                         </p>
                         <div className="pt-2">
                             <button 
@@ -182,7 +182,7 @@ export default function HomeView({ isActive, setCurrentView, heroImage, signatur
                     <div className="space-y-3 text-center md:text-left order-2">
                         <h3 className="text-2xl sm:text-3xl font-extrabold text-[#4A3B32]">Hantaran & Momen Manismu</h3>
                         <p className="text-sm sm:text-base text-[#7A6A60] leading-relaxed">
-                            Nitanggo Bitez siap memeriahkan hari ulang tahun, pesta pernikahan, atau kumpul keluarga Anda melalui paket hampers dan box kustom yang didesain cantik penuh estetika.
+                            Nitanggo Bitez siap memeriahkan hari ulang tahun, pesta pernikahan, atau kumpul keluarga Anda melalui paket celebration cake / Custom cake dan box kustom yang didesain cantik penuh estetika.
                         </p>
                     </div>
                 </section>

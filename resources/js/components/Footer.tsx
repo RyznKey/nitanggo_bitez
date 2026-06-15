@@ -12,6 +12,9 @@ export default function Footer({ setCurrentView }: { setCurrentView: (v: string)
                         <div className="font-extrabold text-[1.1rem] leading-[1.1] text-[#2B2118] uppercase">
                             NITANGGO<br /><span className="font-medium">BITEZ</span>
                         </div>
+                        <div className="font-extrabold text-[1.1rem] leading-[1.1] text-[#2B2118] uppercase">
+                            NITANGGO<br /><span className="font-medium">BITEZ</span>
+                        </div>
                     </div>
                     <p className="text-[0.95rem] leading-relaxed text-[#796C63] m-0 pr-4">
                         Dessert homemade yang dibuat dengan cinta untuk menemani manismu.
@@ -68,7 +71,7 @@ export default function Footer({ setCurrentView }: { setCurrentView: (v: string)
 
                 {/* Outlet Kami */}
                 <div>
-                    <h4 className="text-[1rem] font-extrabold mb-5 text-[#2B2118] uppercase tracking-[0.5px]">Outlet Kami</h4>
+                    <h4 className="text-[1rem] font-extrabold mb-5 text-[#2B2118] uppercase tracking-[0.5px]">Mitra Kami</h4>
                     <ul className="list-none p-0 m-0 flex flex-col gap-4">
                         <li className="flex items-start gap-3">
                             <div className="mt-1 bg-[#FDF1D5] p-1.5 rounded-full shrink-0">

@@ -38,8 +38,7 @@ export default function AboutView({ isActive }: { isActive: boolean }) {
                         Tentang <span className="text-[#D49800]">Nyicheeze</span>
                     </h2>
                     <p className="text-lg sm:text-xl text-[#7A6A60] leading-relaxed">
-                        Nyicheeze adalah dessert yang memadukan gurihnya cream cheese premium dengan kelembutan biskuit, 
-                        disajikan dalam cube-cup sehingga siap santap dan mudah dibawa kemana saja.
+                        Nitanggo Bitez merupakan usaha kuliner yang menghadirkan dessert homemade berkualitas dengan cita rasa premium. Produk unggulan kami, Nyicheeze, dibuat dari cream cheese pilihan yang dipadukan dengan lapisan biskuit renyah sehingga menghasilkan perpaduan rasa manis, gurih, dan lembut dalam setiap gigitan. Kami berkomitmen untuk menyajikan produk yang higienis, berkualitas, dan dapat dinikmati oleh semua kalangan. Dengan kemasan praktis dan berbagai varian rasa, Nitanggo Bitez hadir untuk menemani setiap momen spesialmu. 
                     </p>
                 </div>
 
