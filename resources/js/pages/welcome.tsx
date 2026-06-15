@@ -73,6 +73,8 @@ export default function Welcome() {
 
                 {/* Komponen Footer */}
                 <Footer setCurrentView={setCurrentView} />
+                <Footer setCurrentView={setCurrentView} />
+
             </div>
         </>
     );

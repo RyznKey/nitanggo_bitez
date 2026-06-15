@@ -39,9 +39,8 @@ export default function MembershipView({
                     </div>
                     
                     <h1 className="text-5xl md:text-7xl font-extrabold text-[#2B2118] leading-[1.1] tracking-tight mb-2">
-                        Buy 5,<br/>
-                        Get 2 Drinks<br/>
-                        <span className="text-[#F8C83B]">FREE!</span>
+                        Hello <br/>
+                        <span className="text-[#F8C83B] mt-1.5">Bitezs</span>
                     </h1>
                     
 
@@ -73,7 +72,7 @@ export default function MembershipView({
                     {/* Progress Area */}
                     <div>
                         <div className="flex justify-between items-end mb-4">
-                            <h3 className="font-bold text-[#2B2118] text-sm">Progress Member Kamu</h3>
+                            <h3 className="font-bold text-[#2B2118] text-sm">challenge for new member </h3>
                             <span className="text-[#2B2118] font-bold text-xs">{currentProgress} / {maxProgress} Pembelian</span>
                         </div>
                         
@@ -156,7 +155,7 @@ export default function MembershipView({
                         <div className="text-center">
                             <div className="w-12 h-12 mx-auto bg-[#FDF1D5] rounded-full flex items-center justify-center text-xl mb-3 shadow-inner">🧋</div>
                             <h4 className="font-bold text-[#2B2118] text-sm mb-1 leading-tight">Buy 5 Get<br/>2 Drinks FREE</h4>
-                            <p className="text-[10px] text-[#7A6A60]">Dapatkan 2 minuman gratis setiap 5 pembelian.</p>
+                            <p className="text-[10px] text-[#7A6A60]">Dapatkan 2 minuman gratis setiap 5 pembelian. Berlaku Kelipatan</p>
                         </div>
                         <div className="text-center">
                             <div className="w-12 h-12 mx-auto bg-[#FDF1D5] rounded-full flex items-center justify-center text-xl mb-3 shadow-inner">🎁</div>
@@ -165,12 +164,12 @@ export default function MembershipView({
                         </div>
                         <div className="text-center">
                             <div className="w-12 h-12 mx-auto bg-[#FDF1D5] rounded-full flex items-center justify-center text-xl mb-3 shadow-inner">🎂</div>
-                            <h4 className="font-bold text-[#2B2118] text-sm mb-1 leading-tight">Reward<br/>Ulang Tahun</h4>
+                            <h4 className="font-bold text-[#2B2118] text-sm mb-1 leading-tight">Celebration<br/>treatment</h4>
                             <p className="text-[10px] text-[#7A6A60]">Kejutan spesial di hari ulang tahunmu!</p>
                         </div>
                         <div className="text-center">
                             <div className="w-12 h-12 mx-auto bg-[#FDF1D5] rounded-full flex items-center justify-center text-xl mb-3 shadow-inner">🏅</div>
-                            <h4 className="font-bold text-[#2B2118] text-sm mb-1 leading-tight">Poin Tidak<br/>Kedaluwarsa</h4>
+                            <h4 className="font-bold text-[#2B2118] text-sm mb-1 leading-tight">Setiap Pembelian<br/>Akan Mendapatkan Poin</h4>
                             <p className="text-[10px] text-[#7A6A60]">Progress pembelianmu tersimpan selamanya.</p>
                         </div>
                     </div>
@@ -302,14 +301,9 @@ export default function MembershipView({
                         Syarat & Ketentuan
                     </h3>
                     <ul className="space-y-3 text-[#7A6A60] text-sm md:text-base leading-relaxed pl-5 list-decimal marker:font-bold marker:text-[#F8C83B]">
-                        <li className="pl-2">Setiap pembelian produk mendapatkan 1 stamp.</li>
-                        <li className="pl-2">Reward dapat diklaim setelah mencapai 5 stamp.</li>
-                        <li className="pl-2">Reward berupa 2 minuman GRATIS.</li>
-                        <li className="pl-2">Stamp berlaku selama 30 hari sejak stamp pertama diperoleh.</li>
-                        <li className="pl-2">Setelah reward diklaim, jumlah stamp akan kembali ke 0.</li>
-                        <li className="pl-2">Reward tidak dapat diuangkan atau dipindahtangankan.</li>
-                        <li className="pl-2">Jenis minuman mengikuti ketersediaan menu Nitanggo Bitez.</li>
-                        <li className="pl-2">Nitanggo Bitez berhak mengubah program membership sewaktu-waktu dengan pemberitahuan sebelumnya.</li>
+                        <li className="pl-2">Setiap pembelian produk mendapatkan 3 stamp.</li>
+                        <li className="pl-2">setiap pembelian 5 produk Gratis 2 minuman yang tersedia</li>
+                        <li className="pl-2">Setelah reward di claim maka point akan berkurang sejumlah point yang dihabiskan</li>
                     </ul>
                 </div>
 
