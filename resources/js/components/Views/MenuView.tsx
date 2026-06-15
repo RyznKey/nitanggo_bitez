@@ -9,7 +9,7 @@ type MenuViewProps = {
     deliveryFee?: number;
 };
 
-    // Menampilkan menu dinamis dari database
+// Menampilkan menu dinamis dari database
 export default function MenuView({
     isActive,
     className,
@@ -41,7 +41,7 @@ export default function MenuView({
 
     const isMember = !!user;
     const isEligibleForDiscount = isMember && !!promo?.is_active;
-    
+
     const formatRupiah = (angka: number) =>
         `Rp${new Intl.NumberFormat('id-ID').format(angka)}`;
 
@@ -66,8 +66,8 @@ export default function MenuView({
 
     const handleCartOpen = () => {
         if (cart.length === 0) {
-return;
-}
+            return;
+        }
 
         setIsFormOpen(true);
     };
@@ -130,21 +130,21 @@ Saya akan melakukan pembayaran menggunakan QRIS. Mohon konfirmasinya ya!`;
     return (
         <div
             className={`/* Base Styles */ w-full flex-col gap-10 transition-all duration-500 ease-in-out ${isActive ? 'flex translate-y-0 opacity-100' : 'hidden translate-y-4 opacity-0'} ${className} px-[5%] pt-32 pb-20 ${isFormOpen ? 'relative z-[10000]' : ''}`}
-            // style={{ height: '100%', ...style }}
+        // style={{ height: '100%', ...style }}
         >
             {/* TAMPILAN HEADER */}
             <div className="text-center">
                 <span
                     className="p-2.5 px-6 inline-block rounded-full border border-[rgba(245,185,43,0.25)] bg-(--primary-light) text-center text-3xl font-extrabold tracking-[0.5px] text-(--dark)"
-                    // style={{ padding: '0.5rem 1.5rem', marginBottom: '1rem' }}
+                // style={{ padding: '0.5rem 1.5rem', marginBottom: '1rem' }}
                 >
-                    DAFTAR MENU
+                    Varian Best Seller Nitanggo Bitez
                 </span>
-                <h3
+                {/* <h3
                     className={`text-[2.2rem] font-extrabold text-espresso ${className} text-shadow-xl`}
                 >
                     Varian Best Seller Nitanggo Bitez
-                </h3>
+                </h3> */}
                 {isEligibleForDiscount && (
                     <div className="mt-2 text-sm md:text-base font-semibold text-[#D49800] bg-[#FDF1D5] inline-block px-4 py-1.5 rounded-full">
                         Yeay! {promo?.name || 'Promo Spesial'} aktif untuk Member. Diskon {promo?.discount}%! 🎉
@@ -155,12 +155,12 @@ Saya akan melakukan pembayaran menggunakan QRIS. Mohon konfirmasinya ya!`;
             {/* TAMPILAN GRID & KARTU MENU (FULL TAILWIND) */}
             <div
                 className="grid grid-cols-1 gap-7.5 px-[5%] py-0 sm:grid-cols-2 md:grid-cols-3"
-                // style={{ maxWidth: '90%', margin: '0 auto' , paddingTop: '1rem', paddingBottom: '1rem' }}
+            // style={{ maxWidth: '90%', margin: '0 auto' , paddingTop: '1rem', paddingBottom: '1rem' }}
             >
                 {products.length === 0 ? (
                     <div className="col-span-full text-center text-gray-500">Belum ada menu yang tersedia.</div>
                 ) : products.map((item, index) => (
-                    <div 
+                    <div
                         key={index}
                         className="group relative flex flex-col overflow-hidden rounded-3xl border border-white/60 bg-white/70 backdrop-blur-xl shadow-lg transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl hover:border-yellow-200"
                     >
@@ -191,7 +191,7 @@ Saya akan melakukan pembayaran menggunakan QRIS. Mohon konfirmasinya ya!`;
                             {/* Overlay Gradient for Image Bottom */}
                             <div className="absolute bottom-2 left-2 right-2 h-1/2 bg-gradient-to-t from-black/50 to-transparent rounded-b-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                         </div>
-                        
+
                         {/* Card Body */}
                         <div className="flex grow flex-col p-6 pt-5">
                             <h4 className="mb-2 text-xl font-extrabold text-[#3d2f26] capitalize">
@@ -200,7 +200,7 @@ Saya akan melakukan pembayaran menggunakan QRIS. Mohon konfirmasinya ya!`;
                             <p className="mb-6 grow text-sm leading-relaxed text-gray-500 line-clamp-3">
                                 {item.description}
                             </p>
-                            
+
                             {/* Card Footer */}
                             <div className="mt-auto flex items-end justify-between border-t border-gray-100 pt-5">
                                 <div className="flex flex-col">
@@ -311,7 +311,7 @@ Saya akan melakukan pembayaran menggunakan QRIS. Mohon konfirmasinya ya!`;
                                         </button>
                                     ))}
                                 </div>
-                                
+
                                 {formData.metodePengambilan === 'Delivery' && (
                                     <div className="animate-fadeIn mt-2">
                                         <textarea
@@ -332,9 +332,9 @@ Saya akan melakukan pembayaran menggunakan QRIS. Mohon konfirmasinya ya!`;
                                 <h3 className="mb-4 text-xs font-bold text-gray-400 uppercase tracking-wider">Scan QRIS</h3>
                                 <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 w-full shadow-sm">
                                     <p className="text-xs text-gray-500 mb-3">Silakan scan kode QRIS di bawah ini untuk membayar pesanan Anda.</p>
-                                    <img 
-                                        src="/assets/qris.jpeg" 
-                                        alt="QRIS Nitanggo Bitez" 
+                                    <img
+                                        src="/assets/qris.jpeg"
+                                        alt="QRIS Nitanggo Bitez"
                                         className="w-full max-w-[200px] h-auto mx-auto rounded-lg"
                                         onError={(e) => {
                                             (e.target as HTMLImageElement).src = '/assets/produk.png';
@@ -354,11 +354,10 @@ Saya akan melakukan pembayaran menggunakan QRIS. Mohon konfirmasinya ya!`;
                                 href={(!formData.namaLengkap || !formData.whatsapp) ? '#' : waLink}
                                 target={(!formData.namaLengkap || !formData.whatsapp) ? '_self' : '_blank'}
                                 rel="noopener noreferrer"
-                                className={`w-full flex justify-center py-3.5 rounded-xl font-bold text-yellow-950 transition-all ${
-                                    (!formData.namaLengkap || !formData.whatsapp) 
-                                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
-                                        : 'bg-gradient-to-r from-yellow-400 to-yellow-500 hover:shadow-[0_8px_20px_rgba(250,204,21,0.4)] hover:-translate-y-0.5'
-                                }`}
+                                className={`w-full flex justify-center py-3.5 rounded-xl font-bold text-yellow-950 transition-all ${(!formData.namaLengkap || !formData.whatsapp)
+                                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                    : 'bg-gradient-to-r from-yellow-400 to-yellow-500 hover:shadow-[0_8px_20px_rgba(250,204,21,0.4)] hover:-translate-y-0.5'
+                                    }`}
                                 onClick={(e) => {
                                     if (!formData.namaLengkap || !formData.whatsapp) {
                                         e.preventDefault();
@@ -376,8 +375,8 @@ Saya akan melakukan pembayaran menggunakan QRIS. Mohon konfirmasinya ya!`;
                                             pickup_method: formData.metodePengambilan,
                                             delivery_address: formData.alamatPengiriman,
                                             notes: formData.catatan
-                                        }, { 
-                                            preserveScroll: true, 
+                                        }, {
+                                            preserveScroll: true,
                                             preserveState: true,
                                             onSuccess: () => {
                                                 setCart([]);
@@ -397,7 +396,7 @@ Saya akan melakukan pembayaran menggunakan QRIS. Mohon konfirmasinya ya!`;
             {/* FLOATING CART BUTTON */}
             {!isFormOpen && cart.length > 0 && (
                 <div className="fixed bottom-6 left-0 right-0 z-40 flex justify-center px-4 animate-fade-in pointer-events-none">
-                    <button 
+                    <button
                         onClick={handleCartOpen}
                         className="pointer-events-auto flex items-center gap-4 bg-gray-900 text-white px-6 py-4 rounded-full shadow-[0_10px_25px_rgba(0,0,0,0.3)] hover:scale-105 hover:bg-gray-800 transition-all duration-300"
                     >
@@ -434,12 +433,12 @@ Saya akan melakukan pembayaran menggunakan QRIS. Mohon konfirmasinya ya!`;
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                             </svg>
                         </div>
-                        
+
                         <h3 className="text-2xl font-extrabold text-[#2B2118] mb-2">Hore! Pesanan Tercatat 🎉</h3>
                         <p className="text-gray-500 text-sm mb-8 leading-relaxed">
                             Pesanan Anda telah berhasil masuk ke sistem kami. Silakan cek jendela obrolan WhatsApp Anda untuk mengirimkan bukti QRIS.
                         </p>
-                        
+
                         <button
                             onClick={() => setShowSuccessModal(false)}
                             className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 text-yellow-950 font-bold py-3.5 rounded-2xl hover:scale-105 transition-transform shadow-md"
