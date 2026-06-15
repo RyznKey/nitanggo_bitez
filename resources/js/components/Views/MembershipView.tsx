@@ -265,7 +265,7 @@ export default function MembershipView({
                                 <>
                                     Saatnya menukarkan<br/>
                                     <span className="text-xl font-black">Reward Kamu!</span><br/>
-                                    Dapatkan 2 Drinks FREE
+                                    Dapatkan 2 Drinks FREE!
                                 </>
                             ) : (
                                 <>
