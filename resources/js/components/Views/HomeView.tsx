@@ -157,12 +157,12 @@ export default function HomeView({ isActive, setCurrentView, heroImage, signatur
                         </p>
 
                         {/* Tombol Learn More */}
-                        <button className="inline-flex items-center justify-center gap-2 bg-[#FEE27B] hover:bg-[#F5C243] text-[#4E3424] font-bold text-sm lg:text-base px-8 py-3.5 rounded-2xl transition-colors duration-300">
+                        {/* <button className="inline-flex items-center justify-center gap-2 bg-[#FEE27B] hover:bg-[#F5C243] text-[#4E3424] font-bold text-sm lg:text-base px-8 py-3.5 rounded-2xl transition-colors duration-300">
                             Learn more
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
-                        </button>
+                        </button> */}
 
                     </div>
                 </section>
@@ -290,7 +290,7 @@ export default function HomeView({ isActive, setCurrentView, heroImage, signatur
                             </div>
                             <h3 className="text-xl sm:text-2xl font-bold text-[#4A3B32] mb-3">Pilih Varian</h3>
                             <p className="text-sm sm:text-base text-[#7A6A60] leading-relaxed">
-                                Telusuri halaman <strong>Menu</strong> kami dan temukan dessert box atau minuman segar favorit Anda.
+                                Jelajahi halaman <strong>Menu</strong> kami dan pilih varian rasa sesuai selera.
                             </p>
                         </div>
 
@@ -304,7 +304,7 @@ export default function HomeView({ isActive, setCurrentView, heroImage, signatur
                             </div>
                             <h3 className="text-xl sm:text-2xl font-bold text-[#4A3B32] mb-3">Pesan & Bayar</h3>
                             <p className="text-sm sm:text-base text-[#7A6A60] leading-relaxed">
-                                Klik tombol <strong>Pesan</strong>, isi data, dan selesaikan pembayaran dengan mudah menggunakan QRIS.
+                                Tambahkan produk ke keranjang, isi data pesanan, dan selesaikan pembayaran dengan mudah.
                             </p>
                         </div>
 
@@ -317,9 +317,9 @@ export default function HomeView({ isActive, setCurrentView, heroImage, signatur
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                 </svg>
                             </div>
-                            <h3 className="text-xl sm:text-2xl font-bold text-[#4A3B32] mb-3">Nikmati Langsung</h3>
+                            <h3 className="text-xl sm:text-2xl font-bold text-[#4A3B32] mb-3">Nikmati Pesananmu</h3>
                             <p className="text-sm sm:text-base text-[#7A6A60] leading-relaxed">
-                                Kunjungi outlet kami di <strong>Margonda atau UI Depok</strong> untuk menikmati pesanan Anda, atau tunggu di rumah!
+                                Ambil pesanan di mitra Nitanggo Bitez atau pilih layanan antar untuk menikmati dessert favoritmu dengan lebih praktis.
                             </p>
                         </div>
                     </div>
