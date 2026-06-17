@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { Menu, X, LayoutDashboard, Package, Wallet, Users, Gift, ShoppingCart, Settings } from 'lucide-react';
+import { Menu, X, LayoutDashboard, Package, Wallet, Users, Gift, ShoppingCart, Settings, Archive } from 'lucide-react';
 import React, { useState } from 'react';
 
 export default function AdminLayout({ children, title }: { children: React.ReactNode, title?: string }) {
@@ -9,6 +9,7 @@ export default function AdminLayout({ children, title }: { children: React.React
     const navLinks = [
         { name: 'Dashboard', href: '/admin/dashboard', active: url === '/admin/dashboard', icon: <LayoutDashboard size={20} /> },
         { name: 'Pesanan', href: '/admin/orders', active: url.startsWith('/admin/orders'), icon: <ShoppingCart size={20} /> },
+        { name: 'Inventori', href: '/admin/inventory', active: url.startsWith('/admin/inventory'), icon: <Archive size={20} /> },
         { name: 'Produk', href: '/admin/products', active: url.startsWith('/admin/products'), icon: <Package size={20} /> },
         { name: 'Arus Kas', href: '/admin/transactions', active: url.startsWith('/admin/transactions'), icon: <Wallet size={20} /> },
         { name: 'Pelanggan', href: '/admin/customers', active: url.startsWith('/admin/customers'), icon: <Users size={20} /> },

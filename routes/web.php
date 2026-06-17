@@ -54,6 +54,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Admin Protected Routes
     Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/inventory', [\App\Http\Controllers\Admin\InventoryController::class, 'index'])->name('inventory.index');
+        Route::get('/inventory/export', [\App\Http\Controllers\Admin\InventoryController::class, 'export'])->name('inventory.export');
+        Route::post('/inventory/add-stock', [\App\Http\Controllers\Admin\InventoryController::class, 'addStock'])->name('inventory.add-stock');
         Route::resource('products', ProductController::class);
         Route::resource('transactions', TransactionController::class);
         Route::resource('orders', OrderController::class)->only(['index', 'update']);

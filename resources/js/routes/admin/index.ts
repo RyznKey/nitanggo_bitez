@@ -1,4 +1,5 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../wayfinder'
+import inventory from './inventory'
 import products from './products'
 import transactions from './transactions'
 import orders from './orders'
@@ -218,6 +219,7 @@ logout.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 const admin = {
     login: Object.assign(login, login),
 dashboard: Object.assign(dashboard, dashboard),
+inventory: Object.assign(inventory, inventory),
 products: Object.assign(products, products),
 transactions: Object.assign(transactions, transactions),
 orders: Object.assign(orders, orders),
